@@ -12,7 +12,7 @@ export default function Home() {
         We are fullstack
       </h1>
       <main
-        className="bg-white/30 dark:bg-neutral-900/30 rounded-3xl shadow-xl px-8 py-12 w-full max-w-lg border border-white/20 dark:border-neutral-800 backdrop-blur-md animate-fadein"
+        className="bg-white/30 dark:bg-neutral-900/30 rounded-3xl shadow-xl px-8 py-12 w-full max-w-lg border backdrop-blur-md animate-fadein"
         style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}
       >
         <p className="mb-8 text-lg text-neutral-700/80 dark:text-neutral-300/80 text-center tracking-wide">
