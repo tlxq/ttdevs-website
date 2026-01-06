@@ -29,23 +29,37 @@ export default function ContactModal({ person, onClose }: ContactModalProps) {
     e.preventDefault();
     setStatus("sending");
 
-    // TODO: Backend API call will go here
-    console.log("Form submission (frontend ready):", {
-      to: person.email,
-      from: formData.email,
-      name: formData.name,
-      message: formData.message,
-    });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: person.email,
+          name: formData.name,
+          email: formData.email,
+          message: formData,
+        }),
+      });
 
-    // Simulate API delay
-    setTimeout(() => {
-      setStatus("success");
-      setTimeout(() => {
-        onClose();
-        setStatus("idle");
-        setFormData({ name: "", email: "", message: "" });
-      }, 2000);
-    }, 1000);
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setTimeout(() => {
+          onClose();
+          setStatus("idle");
+          setFormData({ name: "", email: "", message: "" });
+        }, 2000);
+      } else {
+        console.error("Error", data.error);
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 3000);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 3000);
+    }
   };
 
   return (
