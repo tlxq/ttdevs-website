@@ -5,8 +5,6 @@ const repo = "ttdevs-website";
 const nextConfig: NextConfig = {
   output: "export",
   images: { unoptimized: true },
-  basePath: `/${repo}`,
-  assetPrefix: `/${repo}/`,
 };
 
 export default nextConfig;
