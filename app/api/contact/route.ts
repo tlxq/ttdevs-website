@@ -55,7 +55,6 @@ function escapeHtml(input: string) {
 }
 
 function getRecipientEmail(key: RecipientKey) {
-  // No hardcoded emails: read from env
   if (key === "tom") return process.env.CONTACT_TO_TOM_EMAIL;
   if (key === "therese") return process.env.CONTACT_TO_THERESE_EMAIL;
   return undefined;
@@ -96,7 +95,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -108,6 +106,14 @@ export async function POST(request: NextRequest) {
     if (!process.env.RESEND_API_KEY) {
       return NextResponse.json(
         { error: "Server not configured (missing RESEND_API_KEY)" },
+        { status: 500 }
+      );
+    }
+
+    const from = process.env.RESEND_FROM_EMAIL;
+    if (!from) {
+      return NextResponse.json(
+        { error: "Server not configured (missing RESEND_FROM_EMAIL)" },
         { status: 500 }
       );
     }
@@ -124,10 +130,6 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
-    const from =
-      process.env.RESEND_FROM_EMAIL ??
-      "TTDevs Contact Form <onboarding@resend.dev>";
 
     const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -178,10 +180,8 @@ export async function POST(request: NextRequest) {
       `,
     });
 
-    // Resend returns { data, error, ... }
     if (sendResult.error) {
       console.error("Resend send error:", sendResult.error);
-      console.log("Using FROM:", JSON.stringify(from));
       return NextResponse.json(
         { error: "Failed to send email", details: sendResult.error },
         { status: 502 }
