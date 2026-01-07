@@ -181,6 +181,7 @@ export async function POST(request: NextRequest) {
     // Resend returns { data, error, ... }
     if (sendResult.error) {
       console.error("Resend send error:", sendResult.error);
+      console.log("Using FROM:", JSON.stringify(from));
       return NextResponse.json(
         { error: "Failed to send email", details: sendResult.error },
         { status: 502 }
