@@ -180,6 +180,7 @@ export async function POST(request: NextRequest) {
 
     // Resend returns { data, error, ... }
     if (sendResult.error) {
+      console.error("Resend send error:", sendResult.error);
       return NextResponse.json(
         { error: "Failed to send email", details: sendResult.error },
         { status: 502 }
