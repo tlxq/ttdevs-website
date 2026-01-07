@@ -13,7 +13,7 @@ type ContactPayload = {
   company?: string;
 };
 
-// Minimal in-memory rate limit (good baseline; resets on cold starts)
+// Minimal in-memory rate limit (baseline; resets on cold starts)
 const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
 const RATE_LIMIT_MAX = 5; // per IP per window
 const ipHits = new Map<string, { count: number; windowStart: number }>();
@@ -62,7 +62,6 @@ function getRecipientEmail(key: RecipientKey) {
 }
 
 function getRecipientName(key: RecipientKey) {
-  // Names are not secrets; ok to keep in code. If you want, you can env these too.
   return key === "tom" ? "Tom" : "Therese";
 }
 
@@ -80,7 +79,7 @@ export async function POST(request: NextRequest) {
 
     const body = (await request.json()) as Partial<ContactPayload>;
 
-    // Honeypot: if filled, silently accept (treat as spam)
+    // Honeypot: if filled, silently accept (spam)
     if ((body.company ?? "").trim().length > 0) {
       return NextResponse.json({ success: true }, { status: 200 });
     }
@@ -113,11 +112,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Recommended: verified domain in Resend, e.g. "TTDevs <contact@ttdevs.com>"
-    const from =
-      process.env.RESEND_FROM_EMAIL ??
-      "TTDevs Contact Form <onboarding@resend.dev>";
-
     const to = getRecipientEmail(recipientKey);
     if (!to) {
       return NextResponse.json(
@@ -131,6 +125,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const from =
+      process.env.RESEND_FROM_EMAIL ??
+      "TTDevs Contact Form <onboarding@resend.dev>";
+
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const recipientName = getRecipientName(recipientKey);
@@ -138,7 +136,7 @@ export async function POST(request: NextRequest) {
     const safeEmail = escapeHtml(email);
     const safeMessage = escapeHtml(message).replace(/\n/g, "<br>");
 
-    const result = await resend.emails.send({
+    const sendResult = await resend.emails.send({
       from,
       to: [to],
       replyTo: email,
@@ -180,13 +178,25 @@ export async function POST(request: NextRequest) {
       `,
     });
 
+    // Resend returns { data, error, ... }
+    if (sendResult.error) {
+      return NextResponse.json(
+        { error: "Failed to send email", details: sendResult.error },
+        { status: 502 }
+      );
+    }
+
     return NextResponse.json(
-      { success: true, id: result.data?.id },
+      {
+        success: true,
+        message: "Email sent successfully",
+        id: sendResult.data?.id,
+      },
       { status: 200 }
     );
-  } catch (err: any) {
+  } catch (error: any) {
     return NextResponse.json(
-      { error: "Failed to send email", details: err?.message ?? "Unknown" },
+      { error: "Failed to send email", details: error?.message ?? "Unknown" },
       { status: 500 }
     );
   }
