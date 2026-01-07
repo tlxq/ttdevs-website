@@ -14,14 +14,14 @@ export default function Home() {
   const [lenis, setLenis] = useState<Lenis | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState<{
+    recipientKey: "tom" | "therese";
     name: string;
-    email: string;
   } | null>(null);
 
   useScrollSnap(lenis);
 
-  const openModal = (name: string, email: string) => {
-    setSelectedPerson({ name, email });
+  const openModal = (recipientKey: "tom" | "therese", displayName: string) => {
+    setSelectedPerson({ recipientKey, name: displayName });
     setShowModal(true);
     if (lenis) lenis.stop();
   };

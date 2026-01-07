@@ -2,11 +2,23 @@ import RevealOnScroll from "../../lib/RevealOnScroll";
 import ContactCard from "./ContactCard";
 
 interface ContactSectionProps {
-  onContactClick: (name: string, email: string) => void;
+  onContactClick: (
+    recipientKey: "tom" | "therese",
+    displayName: string
+  ) => void;
 }
 
-const teamMembers = [
+const teamMembers: Array<{
+  recipientKey: "tom" | "therese";
+  name: string;
+  role: string;
+  email: string; // display only (not used for sending)
+  bio: string;
+  avatar: string;
+  color: string;
+}> = [
   {
+    recipientKey: "tom",
     name: "Tom",
     role: "Frontend Developer",
     email: "tom@ttdevs.com",
@@ -15,6 +27,7 @@ const teamMembers = [
     color: "from-blue-500 to-cyan-500",
   },
   {
+    recipientKey: "therese",
     name: "Therese",
     role: "Backend Developer",
     email: "therese@ttdevs.com",
@@ -46,9 +59,11 @@ export default function ContactSection({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {teamMembers.map((member) => (
             <ContactCard
-              key={member.email}
+              key={member.recipientKey}
               {...member}
-              onContactClick={onContactClick}
+              onContactClick={(recipientKey, displayName) =>
+                onContactClick(recipientKey, displayName)
+              }
             />
           ))}
         </div>

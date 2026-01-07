@@ -1,16 +1,21 @@
 import { EnvelopeIcon, SparklesIcon } from "@heroicons/react/24/outline";
 
 interface ContactCardProps {
+  recipientKey: "tom" | "therese";
   name: string;
-  email: string;
+  email: string; // display only
   role: string;
   bio: string;
   avatar: string;
   color: string;
-  onContactClick: (name: string, email: string) => void;
+  onContactClick: (
+    recipientKey: "tom" | "therese",
+    displayName: string
+  ) => void;
 }
 
 export default function ContactCard({
+  recipientKey,
   name,
   email,
   role,
@@ -23,7 +28,7 @@ export default function ContactCard({
     <div className="group relative">
       {/* Glow effect on hover */}
       <div
-        className={`absolute -inset-0. 5 bg-gradient-to-r ${color} rounded-2xl blur opacity-0 group-hover:opacity-75 transition duration-500`}
+        className={`absolute -inset-0.5 bg-gradient-to-r ${color} rounded-2xl blur opacity-0 group-hover:opacity-75 transition duration-500`}
       ></div>
 
       {/* Card content */}
@@ -45,6 +50,8 @@ export default function ContactCard({
               <SparklesIcon className="w-4 h-4" />
               {role}
             </p>
+            {/* Optional display of email */}
+            <p className="text-white/60 text-xs mt-1">{email}</p>
           </div>
         </div>
 
@@ -55,7 +62,7 @@ export default function ContactCard({
 
         {/* Contact button */}
         <button
-          onClick={() => onContactClick(name, email)}
+          onClick={() => onContactClick(recipientKey, name)}
           className={`w-full bg-gradient-to-r ${color} hover:shadow-lg hover:shadow-emerald-500/50 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group-hover:scale-[1.02]`}
         >
           <EnvelopeIcon className="w-5 h-5" />

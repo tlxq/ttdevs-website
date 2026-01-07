@@ -1,14 +1,96 @@
-import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+type RecipientKey = "tom" | "therese";
+
+type ContactPayload = {
+  recipientKey: RecipientKey;
+  name: string;
+  email: string;
+  message: string;
+
+  // honeypot - must remain empty
+  company?: string;
+};
+
+// Minimal in-memory rate limit (good baseline; resets on cold starts)
+const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
+const RATE_LIMIT_MAX = 5; // per IP per window
+const ipHits = new Map<string, { count: number; windowStart: number }>();
+
+function getClientIp(req: NextRequest) {
+  const xff = req.headers.get("x-forwarded-for");
+  if (!xff) return "unknown";
+  return xff.split(",")[0]?.trim() || "unknown";
+}
+
+function rateLimit(ip: string) {
+  const now = Date.now();
+  const entry = ipHits.get(ip);
+
+  if (!entry) {
+    ipHits.set(ip, { count: 1, windowStart: now });
+    return { ok: true as const };
+  }
+
+  if (now - entry.windowStart > RATE_LIMIT_WINDOW_MS) {
+    ipHits.set(ip, { count: 1, windowStart: now });
+    return { ok: true as const };
+  }
+
+  if (entry.count >= RATE_LIMIT_MAX) return { ok: false as const };
+
+  entry.count += 1;
+  ipHits.set(ip, entry);
+  return { ok: true as const };
+}
+
+function escapeHtml(input: string) {
+  return input
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function getRecipientEmail(key: RecipientKey) {
+  // No hardcoded emails: read from env
+  if (key === "tom") return process.env.CONTACT_TO_TOM_EMAIL;
+  if (key === "therese") return process.env.CONTACT_TO_THERESE_EMAIL;
+  return undefined;
+}
+
+function getRecipientName(key: RecipientKey) {
+  // Names are not secrets; ok to keep in code. If you want, you can env these too.
+  return key === "tom" ? "Tom" : "Therese";
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const { to, name, email, message } = await request.json();
+    const ip = getClientIp(request);
 
-    // Validate inputs
-    if (!to || !name || !email || !message) {
+    const limited = rateLimit(ip);
+    if (!limited.ok) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again shortly." },
+        { status: 429 }
+      );
+    }
+
+    const body = (await request.json()) as Partial<ContactPayload>;
+
+    // Honeypot: if filled, silently accept (treat as spam)
+    if ((body.company ?? "").trim().length > 0) {
+      return NextResponse.json({ success: true }, { status: 200 });
+    }
+
+    const recipientKey = body.recipientKey;
+    const name = (body.name ?? "").trim();
+    const email = (body.email ?? "").trim();
+    const message = (body.message ?? "").trim();
+
+    if (!recipientKey || !name || !email || !message) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -24,97 +106,87 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send email via Resend
-    const data = await resend.emails.send({
-      from: "TTdevs Contact Form <onboarding@resend.dev>", // Will change after domain verification
-      to: to,
+    if (!process.env.RESEND_API_KEY) {
+      return NextResponse.json(
+        { error: "Server not configured (missing RESEND_API_KEY)" },
+        { status: 500 }
+      );
+    }
+
+    // Recommended: verified domain in Resend, e.g. "TTDevs <contact@ttdevs.com>"
+    const from =
+      process.env.RESEND_FROM_EMAIL ??
+      "TTDevs Contact Form <onboarding@resend.dev>";
+
+    const to = getRecipientEmail(recipientKey);
+    if (!to) {
+      return NextResponse.json(
+        {
+          error:
+            recipientKey === "tom"
+              ? "Server not configured (missing CONTACT_TO_TOM_EMAIL)"
+              : "Server not configured (missing CONTACT_TO_THERESE_EMAIL)",
+        },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    const recipientName = getRecipientName(recipientKey);
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeMessage = escapeHtml(message).replace(/\n/g, "<br>");
+
+    const result = await resend.emails.send({
+      from,
+      to: [to],
       replyTo: email,
-      subject: `New message from ${name}`,
+      subject: `New message for ${recipientName} from ${name}`,
       html: `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <style>
-              body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-                line-height: 1.6;
-                color: #333;
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 20px;
-              }
-              .header {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                padding: 30px;
-                border-radius:  10px 10px 0 0;
-                text-align: center;
-              }
-              .content {
-                background: #f9f9f9;
-                padding: 30px;
-                border-radius: 0 0 10px 10px;
-              }
-              .field {
-                margin-bottom: 20px;
-              }
-              .label {
-                font-weight: bold;
-                color: #667eea;
-                margin-bottom: 5px;
-              }
-              .value {
-                background: white;
-                padding: 15px;
-                border-radius: 5px;
-                border-left: 3px solid #667eea;
-              }
-              .footer {
-                text-align: center;
-                margin-top: 20px;
-                color: #999;
-                font-size: 12px;
-              }
-            </style>
-          </head>
-          <body>
-            <div class="header">
-              <h1>📬 New Contact Form Submission</h1>
-            </div>
-            <div class="content">
-              <div class="field">
-                <div class="label">From: </div>
-                <div class="value">${name}</div>
-              </div>
-              
-              <div class="field">
-                <div class="label">Email:</div>
-                <div class="value"><a href="mailto:${email}">${email}</a></div>
-              </div>
-              
-              <div class="field">
-                <div class="label">Message: </div>
-                <div class="value">${message.replace(/\n/g, "<br>")}</div>
-              </div>
-            </div>
-            <div class="footer">
-              <p>This email was sent from the TTdevs contact form</p>
-            </div>
-          </body>
-        </html>
+<!doctype html>
+<html>
+  <head>
+    <meta charSet="utf-8" />
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; line-height: 1.6; color: #111827; max-width: 640px; margin: 0 auto; padding: 20px; }
+      .box { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; background: #f9fafb; }
+      .label { font-weight: 700; margin-top: 12px; }
+      .value { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; }
+      a { color: #2563eb; text-decoration: none; }
+      .muted { color: #6b7280; font-size: 12px; margin-top: 14px; }
+    </style>
+  </head>
+  <body>
+    <h2>New Contact Form Submission</h2>
+    <div class="box">
+      <div class="label">To</div>
+      <div class="value">${escapeHtml(recipientName)} &lt;${escapeHtml(
+        to
+      )}&gt;</div>
+
+      <div class="label">From</div>
+      <div class="value">${safeName} &lt;<a href="mailto:${safeEmail}">${safeEmail}</a>&gt;</div>
+
+      <div class="label">Message</div>
+      <div class="value">${safeMessage}</div>
+    </div>
+
+    <div class="muted">Sent from ttdevs.com • Client IP (approx): ${escapeHtml(
+      ip
+    )}</div>
+  </body>
+</html>
       `,
     });
 
-    console.log("Email sent successfully:", data);
-
     return NextResponse.json(
-      { success: true, message: "Email sent successfully", id: data.id },
+      { success: true, id: result.data?.id },
       { status: 200 }
     );
-  } catch (error: any) {
-    console.error("Error sending email:", error);
+  } catch (err: any) {
     return NextResponse.json(
-      { error: "Failed to send email", details: error.message },
+      { error: "Failed to send email", details: err?.message ?? "Unknown" },
       { status: 500 }
     );
   }
