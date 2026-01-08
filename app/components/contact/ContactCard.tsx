@@ -3,7 +3,6 @@ import { EnvelopeIcon, SparklesIcon } from "@heroicons/react/24/outline";
 interface ContactCardProps {
   recipientKey: "tom" | "therese";
   name: string;
-  email: string; // display only
   role: string;
   bio: string;
   avatar: string;
@@ -17,7 +16,6 @@ interface ContactCardProps {
 export default function ContactCard({
   recipientKey,
   name,
-  email,
   role,
   bio,
   avatar,
