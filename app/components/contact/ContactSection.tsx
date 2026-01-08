@@ -12,7 +12,6 @@ const teamMembers: Array<{
   recipientKey: "tom" | "therese";
   name: string;
   role: string;
-  email: string; // display only (not used for sending)
   bio: string;
   avatar: string;
   color: string;
@@ -21,7 +20,6 @@ const teamMembers: Array<{
     recipientKey: "tom",
     name: "Tom",
     role: "Frontend Developer",
-    email: "tom@ttdevs.com",
     bio: "Crafting beautiful user experiences with modern web technologies",
     avatar: "T",
     color: "from-blue-500 to-cyan-500",
@@ -30,7 +28,6 @@ const teamMembers: Array<{
     recipientKey: "therese",
     name: "Therese",
     role: "Backend Developer",
-    email: "therese@ttdevs.com",
     bio: "Building robust and scalable server architectures",
     avatar: "T",
     color: "from-purple-500 to-pink-500",
