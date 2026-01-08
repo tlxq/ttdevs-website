@@ -49,7 +49,7 @@ export default function ContactCard({
               {role}
             </p>
             {/* Optional display of email */}
-            <p className="text-white/60 text-xs mt-1">{email}</p>
+  
           </div>
         </div>
 
