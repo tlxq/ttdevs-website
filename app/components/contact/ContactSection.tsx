@@ -48,8 +48,7 @@ export default function ContactSection({
             Get in Touch
           </h2>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Have a project in mind? We'd love to hear from you. Reach out to our
-            team.
+            Have a project in mind? Love to hear from you. Reach out to us
           </p>
         </div>
 

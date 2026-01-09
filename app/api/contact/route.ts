@@ -196,9 +196,16 @@ export async function POST(request: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error
+        ? error.message
+        : typeof error === "string"
+        ? error
+        : "Unknown";
+
     return NextResponse.json(
-      { error: "Failed to send email", details: error?.message ?? "Unknown" },
+      { error: "Failed to send email", details: message },
       { status: 500 }
     );
   }
