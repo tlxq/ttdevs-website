@@ -52,10 +52,17 @@ function colorAt(stops: Stop[], p: number) {
 export default function ScrollGradient({ lenis }: { lenis: Lenis | null }) {
   useEffect(() => {
     const stops: Stop[] = [
-      { at: 0.0, a: [47, 7, 67], b: [65, 41, 90] }, // purple
-      { at: 0.33, a: [15, 32, 39], b: [44, 83, 100] }, // teal/blue
-      { at: 0.66, a: [58, 28, 113], b: [255, 175, 123] }, // warm
-      { at: 1.0, a: [10, 10, 10], b: [40, 40, 40] }, // dark
+      // Top of page: mostly dark #1B262C blending to #0F4C75
+      { at: 0.0, a: [27, 38, 44], b: [15, 76, 117] }, // 1B262C -> 0F4C75
+
+      // Middle: move towards #3282B8 and add some BBE1FA tint
+      { at: 0.5, a: [15, 76, 117], b: [50, 130, 184] }, // 0F4C75 -> 3282B8
+
+      // Lower-middle: lighter, with a hint of BBE1FA
+      { at: 0.8, a: [50, 130, 184], b: [187, 225, 250] }, // 3282B8 -> BBE1FA
+
+      // Bottom: gently darken back towards 0F4C75 so it loops nicely
+      { at: 1.0, a: [27, 38, 44], b: [15, 76, 117] }, // 1B262C -> 0F4C75
     ];
 
     const setFromScrollY = (scrollY: number) => {
@@ -72,13 +79,16 @@ export default function ScrollGradient({ lenis }: { lenis: Lenis | null }) {
     setFromScrollY(lenis ? lenis.scroll : window.scrollY);
 
     if (lenis) {
-      const handler = ({ scroll }: { scroll: number }) =>
-        setFromScrollY(scroll);
-      // Lenis supports .on("scroll", fn)
+      const handler = ({ scroll }: { scroll: number }) => setFromScrollY(scroll);
+
+      // @ts-ignore – Lenis has an event emitter API
       lenis.on("scroll", handler);
 
       return () => {
-        // Lenis "off" typings vary; destroy is handled in SmoothScroll cleanup.
+        // Some Lenis builds support off, some don't; it's okay since
+        // lenis.destroy() is called in SmoothScroll cleanup
+        // @ts-ignore
+        lenis.off?.("scroll", handler);
       };
     } else {
       const onScroll = () => setFromScrollY(window.scrollY);

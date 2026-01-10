@@ -18,7 +18,7 @@ export default function Home() {
     name: string;
   } | null>(null);
 
-  useScrollSnap(lenis);
+  useScrollSnap(lenis); // if this feels too much, just remove this line
 
   const openModal = (recipientKey: "tom" | "therese", displayName: string) => {
     setSelectedPerson({ recipientKey, name: displayName });
@@ -34,6 +34,7 @@ export default function Home() {
 
   return (
     <SmoothScroll onLenis={setLenis}>
+      {/* Drives the gradient with scroll (optional but nice) */}
       <ScrollGradient lenis={lenis} />
 
       <div className="w-full">
@@ -42,9 +43,7 @@ export default function Home() {
         <Footer />
       </div>
 
-      {showModal && selectedPerson && (
-        <ContactModal person={selectedPerson} onClose={closeModal} />
-      )}
+      {showModal && selectedPerson && <ContactModal person={selectedPerson} onClose={closeModal} />}
     </SmoothScroll>
   );
 }

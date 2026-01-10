@@ -4,9 +4,7 @@ import Lenis from "lenis";
 import { useEffect } from "react";
 
 function getSections(): HTMLElement[] {
-  return Array.from(
-    document.querySelectorAll<HTMLElement>("section[data-snap]")
-  );
+  return Array.from(document.querySelectorAll<HTMLElement>("section[data-snap]"));
 }
 
 function nearestSectionIndex(sections: HTMLElement[], y: number) {
@@ -43,7 +41,10 @@ export function useScrollSnap(lenis: Lenis | null) {
     };
 
     const onWheel = (e: WheelEvent) => {
-      // Only snap for deliberate wheel moves; trackpads often send tiny deltas
+      // OPTIONAL: if you feel snap is too aggressive, you can early-return here
+      // return; // <- disables snap but keeps Lenis
+
+      // Only snap for deliberate wheel moves; ignore tiny deltas (trackpads)
       if (Math.abs(e.deltaY) < 12) return;
       if (locked) return;
 
@@ -51,10 +52,7 @@ export function useScrollSnap(lenis: Lenis | null) {
       const idx = nearestSectionIndex(sections, currentY);
 
       const goingDown = e.deltaY > 0;
-      const nextIdx = Math.max(
-        0,
-        Math.min(sections.length - 1, idx + (goingDown ? 1 : -1))
-      );
+      const nextIdx = Math.max(0, Math.min(sections.length - 1, idx + (goingDown ? 1 : -1)));
 
       if (nextIdx === idx) return;
 

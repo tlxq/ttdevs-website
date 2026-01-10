@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #1b262c; /* darkest from palette */
+  --foreground: #f9fafb;
 
-  /* dynamic scroll gradient vars (JS updates these) */
-  --bg-a: rgb(47 7 67);
-  --bg-b: rgb(65 41 90);
+  /* ScrollGradient will animate these, but we set nice defaults here */
+  --bg-a: #1b262c; /* top: near-hero */
+  --bg-b: #3282b8; /* mid: lighter blue */
+  --bg-c: #0f4c75; /* bottom: deep blue */
 }
 
 @theme inline {
@@ -18,8 +19,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1b262c;
+    --foreground: #f9fafb;
   }
 }
 
@@ -32,8 +33,40 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 
-  /* One single background that morphs continuously => no seams */
-  background: linear-gradient(120deg, var(--bg-a), var(--bg-b));
-  transition: background 120ms linear;
+  /* One big gradient using your palette */
+  background:
+    radial-gradient(circle at 20% 0%, rgba(187, 225, 250, 0.22), transparent 55%),
+    /* BBE1FA highlight */
+    radial-gradient(circle at 80% 40%, rgba(50, 130, 184, 0.18), transparent 55%),
+    /* 3282B8 glow */
+    linear-gradient(
+        180deg,
+        var(--bg-a) 0%,
+        /* ~1B262C */ var(--bg-b) 50%,
+        /* ~3282B8 */ var(--bg-c) 100% /* ~0F4C75 */
+      );
+
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
   overflow-x: hidden;
+
+  transition: background 200ms linear;
+}
+
+/* Let the body gradient show through everything */
+section {
+  background: transparent;
+}
+
+@keyframes heroGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

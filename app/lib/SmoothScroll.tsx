@@ -15,12 +15,16 @@ export default function SmoothScroll({
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
 
-    // If user prefers reduced motion, don't force smooth scrolling
-    if (reduceMotion) return;
+    // Respect prefers-reduced-motion
+    if (reduceMotion) {
+      onLenis?.(null as unknown as Lenis); // nothing to wire
+      return;
+    }
 
     const lenis = new Lenis({
       duration: 1.1,
       smoothWheel: true,
+      smoothTouch: false,
     });
 
     onLenis?.(lenis);
