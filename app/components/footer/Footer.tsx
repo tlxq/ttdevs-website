@@ -2,7 +2,7 @@ import RevealOnScroll from "../../lib/RevealOnScroll";
 
 export default function Footer() {
   return (
-    <section data-snap className="flex min-h-screen flex-col px-4">
+    <section data-snap className="flex min-h-screen flex-col px-4 py-16">
       {/* centered content */}
       <div className="flex flex-1 items-center justify-center pb-24">
         <RevealOnScroll className="w-full max-w-2xl">

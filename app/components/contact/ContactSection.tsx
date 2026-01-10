@@ -19,7 +19,7 @@ const teamMembers: Array<{
     role: "Frontend Developer",
     bio: "Crafting beautiful user experiences with modern web technologies",
     avatar: "T",
-    color: "from-blue-500 to-cyan-500",
+    color: "from-tt-blue to-tt-ice",
   },
   {
     recipientKey: "therese",
@@ -33,12 +33,17 @@ const teamMembers: Array<{
 
 export default function ContactSection({ onContactClick }: ContactSectionProps) {
   return (
-    <section data-snap className="flex min-h-screen items-center justify-center px-4 py-20">
-      <RevealOnScroll className="w-full max-w-6xl">
+    <section
+      data-snap
+      className="relative flex min-h-screen items-center justify-center px-4 py-20"
+    >
+      <RevealOnScroll className="relative w-full max-w-6xl">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-5xl font-bold text-white md:text-6xl">Get in Touch</h2>
-          <p className="mx-auto max-w-2xl text-lg text-white/70">
-            Have a project in mind? Love to hear from you. Reach out to us
+          <h2 className="text-tt-ice mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">
+            Get in Touch
+          </h2>
+          <p className="text-tt-ice/70 mx-auto max-w-2xl text-lg">
+            Have a project in mind? We’d love to hear from you. Reach out to us.
           </p>
         </div>
 
