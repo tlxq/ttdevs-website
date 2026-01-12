@@ -41,7 +41,7 @@ body {
     "Segoe UI",
     sans-serif;
 
-  /*   background:
+  background:
     radial-gradient(circle at 20% 0%, rgba(187, 225, 250, 0.22), transparent 55%),
     radial-gradient(circle at 80% 40%, rgba(50, 130, 184, 0.18), transparent 55%),
     linear-gradient(180deg, var(--bg-a) 0%, var(--bg-b) 50%, var(--bg-c) 100%);
@@ -51,11 +51,25 @@ body {
   background-repeat: no-repeat;
   overflow-x: hidden;
 
-  transition: background 200ms linear; */
+  transition: background 200ms linear;
 }
 
+/* Remove solid overlay that caused the bottom line */
 section[data-snap] {
-  background: linear-gradient(180deg, rgba(15, 76, 117, 0.8));
+  background: transparent;
+}
+
+/* Animated gradient for hero text only */
+@keyframes heroGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @layer utilities {
@@ -92,18 +106,7 @@ section[data-snap] {
   }
 
   .tt-hero-gradient-text {
-    @apply from-tt-ice via-tt-blue to-tt-ice relative inline-block bg-gradient-to-r bg-[length:250%_auto] bg-clip-text text-transparent;
-  }
-
-  @keyframes heroGradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+    @apply from-tt-ice via-tt-blue to-tt-ice relative inline-block bg-gradient-to-r bg-[length:200%_auto] bg-clip-text text-transparent;
+    animation: heroGradient 6s ease-in-out infinite;
   }
 }

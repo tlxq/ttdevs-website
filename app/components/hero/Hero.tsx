@@ -1,3 +1,4 @@
+import Image from "next/image";
 import RevealOnScroll from "../../lib/RevealOnScroll";
 
 export default function Hero() {
@@ -11,20 +12,23 @@ export default function Hero() {
       </div>
 
       <RevealOnScroll className="relative w-full max-w-4xl text-center">
-        {/* Pill badge */}
-        <div className="tt-pill mb-6">
-          <span className="tt-pill-dot" />
-          TTdevs · Fullstack Studio · Frontend · Backend
-        </div>
+        <Image
+          src="/android-chrome-192x192.png"
+          alt="TTdevs logo"
+          width={192}
+          height={192}
+          className="mx-auto mb-6"
+          priority
+        />
 
         {/* Main heading with animated gradient text */}
         <h1 className="mb-6 text-4xl font-extrabold tracking-tight text-balance md:text-6xl lg:text-7xl">
-          <span className="tt-hero-gradient-text animate-[heroGradient_6s_ease-in-out_infinite]">
+          <span className="tt-hero-gradient-text">
             Building thoughtful digital experiences from idea to launch.
           </span>
         </h1>
 
-        {/* Subcopy */}
+        {/* Subcopy – static color */}
         <p className="text-tt-ice/80 mx-auto max-w-2xl text-lg text-balance md:text-xl">
           We combine clean architecture with polished interfaces to ship fast, reliable web products
           — without sacrificing craft.
