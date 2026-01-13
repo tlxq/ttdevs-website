@@ -32,12 +32,14 @@ export const metadata: Metadata = {
 
 export default function UXLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-gray-50 text-gray-900">
+    <div className="flex min-h-screen flex-col bg-gray-50 text-gray-900 md:flex-row">
+      {/* Mobile: top bar + drawer; Desktop: sidebar */}
       <UXSidebarNav />
 
-      <div className="flex min-h-screen flex-1 flex-col">
-        <main className="flex-1 px-10 py-12">
-          <div className="max-w-3xl">{children}</div>
+      <div className="flex min-h-[calc(100vh-48px)] flex-1 flex-col md:min-h-screen">
+        <main className="flex-1 px-4 py-4 sm:px-5 md:px-10 md:py-12">
+          {/* Full width on mobile, constrained on md+ */}
+          <div className="w-full md:mx-auto md:max-w-3xl">{children}</div>
         </main>
       </div>
     </div>
