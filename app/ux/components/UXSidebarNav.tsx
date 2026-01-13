@@ -23,7 +23,9 @@ export default function UXSidebarNav() {
       {/* MOBILE TOP BAR – only when menu is closed */}
       {!mobileMenuOpen && (
         <div className="sticky top-0 z-40 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 md:hidden">
-          <h3 className="text-sm font-semibold tracking-wide text-gray-500 uppercase">UX</h3>
+          <h3 className="text-sm font-semibold tracking-wide text-gray-500 uppercase">
+            F25D | UX-Kurs
+          </h3>
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
@@ -66,7 +68,9 @@ export default function UXSidebarNav() {
       >
         <div className="flex h-full flex-col p-6">
           <div className="mb-6 flex items-center justify-between">
-            <h3 className="text-sm font-semibold tracking-wide text-gray-500 uppercase">UX</h3>
+            <h3 className="text-sm font-semibold tracking-wide text-gray-500 uppercase">
+              F25D | UX
+            </h3>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -125,7 +129,9 @@ export default function UXSidebarNav() {
       <nav className="sticky top-0 hidden h-screen w-56 shrink-0 self-start border-r border-gray-200 bg-white md:block">
         <div className="flex h-full flex-col p-6">
           <div className="flex-1">
-            <h3 className="mb-6 text-sm font-semibold tracking-wide text-gray-500 uppercase">UX</h3>
+            <h3 className="mb-6 text-sm font-semibold tracking-wide text-gray-500 uppercase">
+              F25D | UX{" "}
+            </h3>
 
             <ul className="space-y-1 text-sm">
               {navItems.map((item) => {

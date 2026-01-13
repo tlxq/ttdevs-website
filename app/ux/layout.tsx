@@ -37,7 +37,7 @@ export default function UXLayout({ children }: { children: React.ReactNode }) {
       <UXSidebarNav />
 
       <div className="flex min-h-[calc(100vh-48px)] flex-1 flex-col md:min-h-screen">
-        <main className="flex-1 px-4 py-4 sm:px-5 md:px-10 md:py-12">
+        <main className="flex-1 px-4 py-4 sm:px-5 md:px-10 md:py-1">
           {/* Full width on mobile, constrained on md+ */}
           <div className="w-full md:mx-auto md:max-w-3xl">{children}</div>
         </main>

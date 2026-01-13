@@ -3,7 +3,7 @@ import UXPageLayout from "./components/UXPageLayout";
 export default function UXPage() {
   return (
     <UXPageLayout
-      title="UX – Skolarbete"
+      title="ÖVERSIKT"
       intro="Denna sida samlar mitt arbete inom UX, inklusive övningar, reflektioner och UX deliverables."
     >
       <section className="space-y-4">
