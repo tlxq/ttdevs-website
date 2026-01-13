@@ -115,7 +115,7 @@ export default function UXSidebarNav() {
             </ul>
           </div>
 
-          <div className="mt-auto border-t border-gray-200 pt-6">
+          <div className="mt-auto border-t border-gray-200">
             <Footer variant="sidebar" />
           </div>
         </div>

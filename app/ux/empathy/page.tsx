@@ -1,14 +1,11 @@
+import UXPageLayout from "../components/UXPageLayout";
+
 export default function EmpathyPage() {
   return (
-    <article className="space-y-10">
-      <header className="space-y-3">
-        <h1 className="text-2xl font-bold">Empatisering</h1>
-        <p className="text-gray-600">
-          Här empatiserar jag med användare inom en vald domän och beskriver användartyper, behov
-          och pain points som påverkar designbeslut.
-        </p>
-      </header>
-
+    <UXPageLayout
+      title="Empatisering"
+      intro="Här empatiserar jag med användare inom en vald domän och beskriver användartyper, behov och pain points som påverkar designbeslut."
+    >
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">Vald domän / verktyg</h2>
         <p className="text-gray-700">
@@ -54,6 +51,6 @@ export default function EmpathyPage() {
           intervjua/testa för att veta mer?)
         </p>
       </section>
-    </article>
+    </UXPageLayout>
   );
 }

@@ -1,14 +1,11 @@
+import UXPageLayout from "../components/UXPageLayout";
+
 export default function TheoryPage() {
   return (
-    <article className="space-y-10">
-      <header className="space-y-3">
-        <h1 className="text-2xl font-bold">UX & Empati</h1>
-        <p className="text-gray-600">
-          Här sammanfattar jag varför det är viktigt att förstå användaren, varför vi empatiserar
-          och hur man kan göra det i praktiken.
-        </p>
-      </header>
-
+    <UXPageLayout
+      title="UX & Empati"
+      intro="Här sammanfattar jag varför det är viktigt att förstå användaren, varför vi empatiserar och hur man kan göra det i praktiken."
+    >
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">Varför ska vi förstå användaren?</h2>
         <ul className="list-disc space-y-1 pl-5 text-gray-700">
@@ -46,6 +43,6 @@ export default function TheoryPage() {
           är tydliga blir det också tydligt vad som är “viktigt” och vad som bara är “kul att ha”.
         </p>
       </section>
-    </article>
+    </UXPageLayout>
   );
 }

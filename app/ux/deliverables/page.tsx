@@ -1,14 +1,12 @@
+import UXPageLayout from "../components/UXPageLayout";
+
 export default function DeliverablesPage() {
   return (
-    <article className="space-y-10">
-      <header className="space-y-3">
-        <h1 className="text-2xl font-bold">UX Deliverables</h1>
-        <p className="text-gray-600">
-          Här samlar jag förklaringar och exempel på vanliga UX deliverables och designdokument,
-          samt varför de är viktiga i en designprocess.
-        </p>
-      </header>
-
+    <UXPageLayout
+      title="UX Deliverables"
+      intro="Här samlar jag förklaringar och exempel på vanliga UX deliverables och designdokument,
+samt varför de är viktiga i en designprocess."
+    >
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">Vad är en UX deliverable?</h2>
         <p className="text-gray-700">
@@ -74,6 +72,6 @@ export default function DeliverablesPage() {
           bygger något på ett visst sätt.
         </p>
       </section>
-    </article>
+    </UXPageLayout>
   );
 }

@@ -1,14 +1,12 @@
+import UXPageLayout from "../components/UXPageLayout";
+
 export default function DomainsPage() {
   return (
-    <article className="space-y-10">
-      <header className="space-y-3">
-        <h1 className="text-2xl font-bold">Kunskapsdomäner</h1>
-        <p className="text-gray-600">
-          Här jämför jag vad som krävs om man bygger en vanlig hemsida (information/marknadsföring)
-          jämfört med en plattform eller ett verktyg (funktion/arbete) inom en kunskapsdomän.
-        </p>
-      </header>
-
+    <UXPageLayout
+      title="Kunskapsdomäner"
+      intro="Här jämför jag vad som krävs om man bygger en vanlig hemsida (information/marknadsföring)
+jämfört med en plattform eller ett verktyg (funktion/arbete) inom en kunskapsdomän."
+    >
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">Vald domän</h2>
         <p className="text-gray-700">
@@ -65,6 +63,6 @@ export default function DomainsPage() {
         <h2 className="text-lg font-semibold">Reflektion</h2>
         <p className="text-gray-700">Kommer snart...</p>
       </section>
-    </article>
+    </UXPageLayout>
   );
 }

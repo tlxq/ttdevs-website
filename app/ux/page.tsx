@@ -1,14 +1,11 @@
+import UXPageLayout from "./components/UXPageLayout";
+
 export default function UXPage() {
   return (
-    <article className="space-y-10">
-      <header className="space-y-4">
-        <h1 className="text-3xl font-bold tracking-tight">UX – Skolarbete</h1>
-        <p className="text-gray-600">
-          Denna sida samlar mitt arbete inom UX, inklusive övningar, reflektioner och UX
-          deliverables.
-        </p>
-      </header>
-
+    <UXPageLayout
+      title="UX – Skolarbete"
+      intro="Denna sida samlar mitt arbete inom UX, inklusive övningar, reflektioner och UX deliverables."
+    >
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">Om projektet</h2>
         <p>
@@ -35,6 +32,6 @@ export default function UXPage() {
           kursens övningar.
         </p>
       </section>
-    </article>
+    </UXPageLayout>
   );
 }
