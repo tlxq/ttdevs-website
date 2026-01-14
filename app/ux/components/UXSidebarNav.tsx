@@ -12,6 +12,7 @@ const navItems = [
   { href: "/ux/empathy", label: "Empatisering" },
   { href: "/ux/theory", label: "UX & Empati" },
   { href: "/ux/deliverables", label: "Deliverables" },
+  { href: "/ux/quiz", label: "Quiz" },
 ];
 
 export default function UXSidebarNav() {
