@@ -47,7 +47,7 @@ export default function Quiz() {
         <h2 className="mb-3 text-center text-xl font-bold">UX Quiz</h2>
         <input
           type="text"
-          placeholder="Vad heter du?"
+          placeholder="Ange ett namn"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
           className="mb-3 w-full rounded border px-2 py-1"
