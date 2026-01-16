@@ -1,11 +1,9 @@
 import UXPageLayout from "../components/UXPageLayout";
-
 type EcosystemItem = {
   concept: string;
   description: string;
   resource?: { label: string; href: string };
 };
-
 const ecosystemItems: EcosystemItem[] = [
   {
     concept: "UX (User Experience)",
@@ -106,8 +104,57 @@ const ecosystemItems: EcosystemItem[] = [
       href: "https://www.youtube.com/watch?v=ZtFgXMBtNcY",
     },
   },
+  {
+    concept: "flödesdiagram",
+    description:
+      "En visuell representation av processer och flöden inom en system, användarflöde eller arbetsprocess. Hjälper till att visualisera steg, beslut och alternativ i en process.",
+  },
+  {
+    concept: "wireframe",
+    description:
+      "En grundläggande visuell representation av en webbplats eller app. Inkluderar layout, struktur och placering av element utan färg eller detaljer.",
+  },
+  {
+    concept: "mockup",
+    description:
+      "En visuell representation av en webbplats eller app med färg, typografi och layout. Många gånger används för att visa hur produkten kommer att se ut i slutänden.",
+  },
+  {
+    concept: "prototyp",
+    description:
+      "En fungerande modell av en produkt eller tjänst. Kan vara en enkel skiss eller en interaktiv version som simulerar användarflöden.",
+  },
+  {
+    concept: "user journey map",
+    description:
+      "En visuell representation av en användares upplevelse när de interagerar med en produkt eller tjänst. Inkluderar olika steg, känslor och kontext.",
+  },
+  {
+    concept: "moodboard",
+    description:
+      "En visuell sammanfattning av en designkampagn eller projekt. Inkluderar färger, bilder, text och andra visuella element som inspirerar till en visuell identitet.",
+  },
+  {
+    concept: "färgtema",
+    description:
+      "En samling färger som används i en design. Färgtema hjälper till att skapa en konsistent och harmonisk visuell identitet.",
+  },
+  {
+    concept: "designsystem",
+    description:
+      "En samling komponenter, regler och principer som används för att skapa en konsistent och skalbar design. Inkluderar färg, typografi, layout och komponenter.",
+  },
+  {
+    concept: "grafisk profil",
+    description:
+      "En samling visuella element som representerar en organisation eller produkt. Inkluderar logotyp, färg, typografi och bildspråk.",
+  },
+  {
+    concept: "gestalt principles",
+    description:
+      "Designprinciper som hjälper till att skapa en intuitiv och logisk upplevelse. Inkluderar principer som proximitet, likhet och fokus.",
+  },
 ];
-
 export default function EcosystemPage() {
   return (
     <UXPageLayout
@@ -115,14 +162,6 @@ export default function EcosystemPage() {
       intro="Tabellen nedan är baserad på begrepp som vi bör känna till."
     >
       <article className="space-y-8">
-        <header className="space-y-3">
-          <h1 className="text-2xl font-bold">Begrepp & förklaringar</h1>
-          <p className="text-gray-600">
-            Jag länkar vidare till kortare youtube klipp eller artiklar för att få en överskådlig
-            bild av vad varje begrepp betyder.
-          </p>
-        </header>
-
         <div className="overflow-x-auto">
           <table className="w-full border-collapse border border-gray-300 text-sm">
             <thead className="bg-gray-100">
@@ -136,7 +175,6 @@ export default function EcosystemPage() {
                 <th className="border border-gray-300 px-3 py-2 text-left font-semibold">Resurs</th>
               </tr>
             </thead>
-
             <tbody>
               {ecosystemItems.map((item, index) => (
                 <tr key={item.concept} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
@@ -163,7 +201,6 @@ export default function EcosystemPage() {
             </tbody>
           </table>
         </div>
-
         <section className="space-y-2">
           <h2 className="text-lg font-semibold">Reflektion</h2>
           <p className="text-gray-700">Kommer snart.</p>
