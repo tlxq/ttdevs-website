@@ -1,22 +1,23 @@
 @import "tailwindcss";
 
+/* Theme tokens */
 @theme inline {
   --color-tt-navy-dark: #1b262c;
   --color-tt-navy: #0f4c75;
   --color-tt-blue: #3282b8;
   --color-tt-ice: #bbe1fa;
+
   --color-background: var(--color-tt-navy-dark);
   --color-foreground: #f9fafb;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+/* Base design tokens */
 :root {
   --background: var(--color-tt-navy-dark);
   --foreground: #f9fafb;
-  --bg-a: var(--color-tt-navy-dark);
-  --bg-b: var(--color-tt-blue);
-  --bg-c: var(--color-tt-navy);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,6 +27,7 @@
   }
 }
 
+/* Layout */
 html,
 body {
   height: 100%;
@@ -41,58 +43,18 @@ body {
     "Segoe UI",
     sans-serif;
 
-  background:
-    radial-gradient(circle at 20% 0%, rgba(187, 225, 250, 0.22), transparent 55%),
-    radial-gradient(circle at 80% 40%, rgba(50, 130, 184, 0.18), transparent 55%),
-    linear-gradient(180deg, var(--bg-a) 0%, var(--bg-b) 50%, var(--bg-c) 100%);
-
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
+  /* Flat fallback; main gradient lives in RootLayout wrapper */
+  background: #0f4c75;
   overflow-x: hidden;
-
-  transition: background 200ms linear;
 }
 
-/* Remove solid overlay that caused the bottom line */
+/* Sections stay transparent so they sit on the global gradient */
 section[data-snap] {
   background: transparent;
 }
 
-/* Animated gradient for hero text only */
-@keyframes heroGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
+/* Minimal custom utilities actually used */
 @layer utilities {
-  .tt-blob-primary {
-    @apply bg-tt-navy/40 absolute rounded-full blur-3xl;
-  }
-
-  .tt-blob-secondary {
-    @apply bg-tt-blue/40 absolute rounded-full blur-3xl;
-  }
-
-  .tt-blob-accent {
-    @apply bg-tt-ice/20 absolute rounded-full blur-3xl;
-  }
-
-  .tt-pill {
-    @apply border-tt-ice/30 bg-tt-navy-dark/70 text-tt-ice/80 inline-flex items-center gap-2 rounded-full border px-4 py-1 text-xs font-medium backdrop-blur;
-  }
-
-  .tt-pill-dot {
-    @apply bg-tt-ice shadow-[0_0_12px_theme(colors.tt-ice)] h-2 w-2 rounded-full;
-  }
-
   .tt-scroll-hint {
     @apply text-tt-ice/60 flex flex-col items-center gap-2 text-xs;
   }
@@ -103,10 +65,5 @@ section[data-snap] {
 
   .tt-scroll-dot {
     @apply bg-tt-ice/70 h-full w-full animate-bounce rounded-full;
-  }
-
-  .tt-hero-gradient-text {
-    @apply from-tt-ice via-tt-blue to-tt-ice relative inline-block bg-gradient-to-r bg-[length:200%_auto] bg-clip-text text-transparent;
-    animation: heroGradient 6s ease-in-out infinite;
   }
 }

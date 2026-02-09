@@ -33,7 +33,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div className="min-h-screen bg-[radial-gradient(circle_at_20%_0%,rgba(187,225,250,0.22),transparent_55%),radial-gradient(circle_at_80%_40%,rgba(50,130,184,0.18),transparent_55%),linear-gradient(180deg,#0f4c75_0%,#1b262c_100%)]">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

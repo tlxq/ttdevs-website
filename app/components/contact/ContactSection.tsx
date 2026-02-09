@@ -1,18 +1,23 @@
 import RevealOnScroll from "../../lib/RevealOnScroll";
 import ContactCard from "./ContactCard";
 
+type RecipientKey = "tom" | "therese";
+
 interface ContactSectionProps {
-  onContactClick: (recipientKey: "tom" | "therese", displayName: string) => void;
+  onContactClick: (recipientKey: RecipientKey, displayName: string) => void;
 }
 
-const teamMembers: Array<{
-  recipientKey: "tom" | "therese";
+interface TeamMember {
+  recipientKey: RecipientKey;
   name: string;
   role: string;
   bio: string;
   avatar: string;
+  /** Tailwind gradient for the card accent */
   color: string;
-}> = [
+}
+
+const TEAM_MEMBERS: TeamMember[] = [
   {
     recipientKey: "tom",
     name: "Tom",
@@ -34,28 +39,26 @@ const teamMembers: Array<{
 export default function ContactSection({ onContactClick }: ContactSectionProps) {
   return (
     <section
+      id="contact"
       data-snap
       className="relative flex min-h-screen items-center justify-center px-4 py-20"
     >
+      {/* Soft connection with the hero above */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#0F4C75]/60 to-transparent" />
+
       <RevealOnScroll className="relative w-full max-w-6xl">
-        <div className="mb-12 text-center">
+        <header className="mb-12 text-center">
           <h2 className="text-tt-ice mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">
             Get in Touch
           </h2>
           <p className="text-tt-ice/70 mx-auto max-w-2xl text-lg">
             Have a project in mind? We’d love to hear from you. Reach out to us.
           </p>
-        </div>
+        </header>
 
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
-          {teamMembers.map((member) => (
-            <ContactCard
-              key={member.recipientKey}
-              {...member}
-              onContactClick={(recipientKey, displayName) =>
-                onContactClick(recipientKey, displayName)
-              }
-            />
+          {TEAM_MEMBERS.map((member) => (
+            <ContactCard key={member.recipientKey} {...member} onContactClick={onContactClick} />
           ))}
         </div>
       </RevealOnScroll>
