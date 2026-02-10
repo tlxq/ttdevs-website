@@ -131,7 +131,7 @@ function ResultItem({ title, subtitle, href }: { title: string; subtitle: string
 
   if (href) {
     return (
-      <Link href={href} className={styles.item}>
+      <Link href={href} className={styles.item} aria-label={`${title} - ${subtitle}`}>
         {content}
       </Link>
     );
