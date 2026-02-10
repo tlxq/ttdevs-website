@@ -173,3 +173,13 @@
 :root[data-wc-mode="hifi"] .ctaRow {
   border-radius: 8px;
 }
+
+/* Hide lofi-only elements in hifi mode */
+:root[data-wc-mode="hifi"] [data-lofi-only] {
+  display: none !important;
+}
+
+/* Hide hifi-only elements in lofi mode */
+:root[data-wc-mode="lofi"] [data-hifi-only] {
+  display: none !important;
+}
