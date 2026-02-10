@@ -85,9 +85,12 @@
 
 .bubble,
 .bubbleBig {
-  height: 22px;
+  min-height: 22px;
   border-radius: 6px;
   background: linear-gradient(90deg, var(--wc-wire), rgba(255, 255, 255, 0.55));
+  display: flex;
+  align-items: center;
+  padding: 0;
 }
 
 .bubble {
@@ -96,7 +99,47 @@
 
 .bubbleBig {
   width: 160px;
-  height: 40px;
+  min-height: 40px;
+}
+
+.bubbleText {
+  display: none;
+}
+
+/* Hifi mode: Show text and adjust bubble styling */
+:root[data-wc-mode="hifi"] .bubble,
+:root[data-wc-mode="hifi"] .bubbleBig {
+  width: auto;
+  max-width: 240px;
+  min-width: 80px;
+  padding: 10px 14px;
+  background: var(--wc-surface);
+  border: 1px solid var(--wc-border);
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+:root[data-wc-mode="hifi"] .bubbleText {
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--wc-text);
+}
+
+:root[data-wc-mode="hifi"] .msgRowLeft .bubble,
+:root[data-wc-mode="hifi"] .msgRowLeft .bubbleBig {
+  background: color-mix(in srgb, var(--wc-header) 70%, var(--wc-surface) 30%);
+  border-color: var(--wc-border);
+}
+
+:root[data-wc-mode="hifi"] .msgRowRight .bubble,
+:root[data-wc-mode="hifi"] .msgRowRight .bubbleBig {
+  background: var(--wc-cta);
+  border-color: var(--wc-cta);
+}
+
+:root[data-wc-mode="hifi"] .msgRowRight .bubbleText {
+  color: var(--wc-cta-text);
 }
 
 /* Composer */
@@ -155,12 +198,6 @@
 :root[data-wc-mode="hifi"] .backBtn {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.5);
-}
-
-:root[data-wc-mode="hifi"] .bubble,
-:root[data-wc-mode="hifi"] .bubbleBig {
-  border-radius: 14px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 :root[data-wc-mode="hifi"] .sendBtn {

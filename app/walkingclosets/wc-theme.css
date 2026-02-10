@@ -5,10 +5,12 @@
   /* stage/backdrop outside phone */
   --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #1c1c28 0%, #0b0b0f 55%, #07070a 100%);
 
-  /* inside phone */
   --wc-bg: #ffffff;
   --wc-surface: #ffffff;
-  --wc-surface-2: #f5f5f5;
+  --wc-surface-2: #f9fafb;
+  --wc-header: #d9d9d9;
+  --wc-wire: #d9d9d9;
+  --wc-accent: #9e9e9e;
 
   /* wireframes (should mainly be used in LOFI) */
   --wc-wire: #d9d9d9;
@@ -46,9 +48,12 @@ Text dark: #1E1E1E
 :root[data-wc-theme="linda"] {
   --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #fffdf0 0%, #fffbde 55%, #ffdb91 115%);
 
-  --wc-bg: #fffdf0;
-  --wc-surface: #ffffff;
+  --wc-bg: #fffdf0; /* Neutral/BG */
+  --wc-surface: #fffdf0;
   --wc-surface-2: #fffbde;
+  --wc-header: #fffbde; /* Primary */
+  --wc-wire: #ffc388; /* Accent for wireframes */
+  --wc-accent: #ffdb91;
 
   /* keep wire as “warm light accent” but don’t use it for large hi-fi fills */
   --wc-wire: #ffc388;
@@ -76,7 +81,12 @@ Text dark: #798478
   --wc-surface: #ffffff;
   --wc-surface-2: #f6f0ea;
 
-  --wc-wire: #ffffff;
+  --wc-bg: #f6f0ea;
+  --wc-surface: #f6f0ea;
+  --wc-surface-2: #ebe5df;
+  --wc-header: #c9ada1;
+  --wc-wire: #ffffff; /* For wireframes */
+  --wc-accent: #c9ada1;
 
   --wc-text: #2b2f2b;
   --wc-muted: rgba(43, 47, 43, 0.55);
@@ -97,9 +107,12 @@ Text dark: #2F3437
 :root[data-wc-theme="tom"] {
   --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #fefae0 0%, #e9edc9 55%, #faedcd 125%);
 
-  --wc-bg: #fefae0;
-  --wc-surface: #ffffff;
-  --wc-surface-2: #faedcd;
+  --wc-bg: #fefae0; /* primary BG */
+  --wc-surface: #fefae0;
+  --wc-surface-2: #f9f5d5;
+  --wc-header: #faedcd; /* accent */
+  --wc-wire: #e9edc9; /* For wireframes */
+  --wc-accent: #faedcd;
 
   --wc-wire: #e9edc9;
 
@@ -122,9 +135,13 @@ Text dark: #2F3E42 (but we’ll use light text on dark bg)
 :root[data-wc-theme="alexander"] {
   --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #2f3e42 0%, #1f2a2d 55%, #0f1416 100%);
 
-  --wc-bg: #2f3e42;
-  --wc-surface: #36494d;
-  --wc-surface-2: #40585c;
+  /* Keep phone light for readability (use E6E3DF as the surface) */
+  --wc-bg: #e6e3df;
+  --wc-surface: #e6e3df;
+  --wc-surface-2: #dbd8d4;
+  --wc-header: #7c918c;
+  --wc-wire: #84a59d; /* For wireframes */
+  --wc-accent: #7c918c;
 
   --wc-wire: #7c918c;
 
@@ -134,7 +151,24 @@ Text dark: #2F3E42 (but we’ll use light text on dark bg)
   --wc-border: rgba(230, 227, 223, 0.18);
   --wc-icon: #e6e3df;
 
-  --wc-accent: #99e2b5;
-  --wc-cta: #99e2b5;
-  --wc-cta-text: #0f1416;
+/* ========== Lofi ==========
+Current grey wireframe */
+:root[data-wc-theme="lofi"] {
+  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #1c1c28 0%, #0b0b0f 55%, #07070a 100%);
+
+  --wc-bg: #ffffff;
+  --wc-surface: #ffffff;
+  --wc-surface-2: #f9fafb;
+  --wc-header: #d9d9d9;
+  --wc-wire: #d9d9d9;
+  --wc-accent: #9e9e9e;
+
+  --wc-cta: #9e9e9e;
+  --wc-cta-text: #111827;
+
+  --wc-text: #111827;
+  --wc-muted: #6b7280;
+
+  --wc-border: #e5e7eb;
+  --wc-icon: #111827;
 }

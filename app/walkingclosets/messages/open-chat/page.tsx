@@ -23,14 +23,14 @@ export default function ChatDetailPage() {
         </header>
 
         <main className={styles.chat} aria-label="Messages">
-          <Msg side="left" />
-          <Msg side="left" />
-          <Msg side="right" />
-          <Msg side="left" />
-          <Msg side="right" />
-          <Msg side="left" big />
-          <Msg side="left" />
-          <Msg side="right" />
+          <Msg side="left" text="Hej! Är klänningen fortfarande tillgänglig?" />
+          <Msg side="left" text="Jag är intresserad av att hyra den till ett bröllop" />
+          <Msg side="right" text="Hej Anna! Ja, den är tillgänglig 😊" />
+          <Msg side="left" text="Vad kul! Vilket datum tänkte du?" />
+          <Msg side="right" text="Nästa lördag, den 15:e" />
+          <Msg side="left" big text="Perfekt! Då kan jag boka den åt dig. Priset är 450 kr för helgen. Vill du ha leverans eller kan du hämta själv?" />
+          <Msg side="left" text="Swish fungerar bra?" />
+          <Msg side="right" text="Jag kan hämta själv! Swish är toppen 👍" />
         </main>
 
         <footer className={styles.composer} aria-label="Message composer">
@@ -52,11 +52,13 @@ export default function ChatDetailPage() {
   );
 }
 
-function Msg({ side, big }: { side: "left" | "right"; big?: boolean }) {
+function Msg({ side, big, text }: { side: "left" | "right"; big?: boolean; text?: string }) {
   return (
     <div className={side === "left" ? styles.msgRowLeft : styles.msgRowRight}>
       {side === "left" && <div className={styles.msgAvatar} aria-hidden="true" />}
-      <div className={big ? styles.bubbleBig : styles.bubble} aria-hidden="true" />
+      <div className={big ? styles.bubbleBig : styles.bubble} aria-hidden="true">
+        <span className={styles.bubbleText} data-hifi-only="true">{text}</span>
+      </div>
       {side === "right" && <div className={styles.msgAvatar} aria-hidden="true" />}
     </div>
   );
