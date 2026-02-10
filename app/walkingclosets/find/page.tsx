@@ -104,10 +104,21 @@ export default function FindPage() {
             <h3 className={styles.resultsHeading} aria-live="polite">
               {gpsStatus === "success" ? "Nära dig" : "Closets i Stockholm"}
             </h3>
-            <ResultItem title="Södermalm - Stockholm" subtitle="15 Walking Closets tillgängliga, 2.3 km bort" />
-            <ResultItem title="Vasastan - Stockholm" subtitle="8 Walking Closets tillgängliga, 3.1 km bort" />
-            <ResultItem title="Östermalm - Stockholm" subtitle="12 Walking Closets tillgängliga, 4.5 km bort" />
-            <ResultItem title="Gamla Stan - Stockholm" subtitle="6 Walking Closets tillgängliga, 1.8 km bort" />
+            <Link href="/walkingclosets/kasse/1" className={styles.itemLink}>
+              <ResultItem title="VintageKassen" subtitle="32 medlemmar i kön, 2.3 km bort" />
+            </Link>
+            <Link href="/walkingclosets/kasse/1" className={styles.itemLink}>
+              <ResultItem title="ModernCloset" subtitle="18 medlemmar i kön, 3.1 km bort" />
+            </Link>
+            <Link href="/walkingclosets/kasse/1" className={styles.itemLink}>
+              <ResultItem title="StreetStyle Hub" subtitle="25 medlemmar i kön, 4.5 km bort" />
+            </Link>
+            <Link href="/walkingclosets/kasse/create" className={styles.createLink}>
+              <div className={styles.createItem}>
+                <div className={styles.createIcon}>+</div>
+                <div className={styles.createText}>Skapa din egen kasse</div>
+              </div>
+            </Link>
           </div>
         </section>
 

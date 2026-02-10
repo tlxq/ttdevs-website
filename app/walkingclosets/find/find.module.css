@@ -178,6 +178,60 @@
   line-height: 1.25;
 }
 
+/* Item links for hifi mode */
+.itemLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.itemLink:hover {
+  opacity: 0.8;
+}
+
+/* Create link */
+.createLink {
+  display: block;
+  text-decoration: none;
+  margin-top: 16px;
+}
+
+.createItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 2px dashed var(--wc-border);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--wc-cta) 5%, transparent);
+  transition: all 0.2s;
+}
+
+.createLink:hover .createItem {
+  border-color: var(--wc-cta);
+  background: color-mix(in srgb, var(--wc-cta) 10%, transparent);
+}
+
+.createIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--wc-cta);
+  color: var(--wc-cta-text);
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.createText {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--wc-text);
+}
+
 /* GPS Button Wrapper */
 .gpsButtonWrap {
   background: var(--wc-surface);

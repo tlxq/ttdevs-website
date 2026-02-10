@@ -1,0 +1,296 @@
+.screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--wc-surface);
+}
+
+/* Header */
+.header {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--wc-border);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--wc-text);
+  margin: 0 0 12px;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  width: 14px;
+  height: 14px;
+  color: #fbbf24;
+}
+
+.ratingCount {
+  font-size: 12px;
+  color: var(--wc-muted);
+}
+
+.membersRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.memberAvatars {
+  display: flex;
+  margin-left: -6px;
+}
+
+.memberAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--wc-wire);
+  border: 2px solid var(--wc-surface);
+  margin-left: -6px;
+}
+
+.memberAvatar:first-child {
+  margin-left: 0;
+}
+
+.membersButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--wc-header);
+  border: 1px solid var(--wc-border);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.membersButton:hover {
+  opacity: 0.85;
+}
+
+.membersIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--wc-icon);
+}
+
+.memberCount {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--wc-text);
+}
+
+/* Feed */
+.feed {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 18px;
+}
+
+/* Lofi blocks */
+.lofiBlock {
+  height: 120px;
+  background: var(--wc-wire);
+  border: 1px solid var(--wc-border);
+  margin-bottom: 14px;
+}
+
+/* Hifi feed cards */
+.feedCard {
+  background: var(--wc-surface);
+  border: 1px solid var(--wc-border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.feedHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.feedAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--wc-wire);
+}
+
+.feedMeta {
+  flex: 1;
+}
+
+.feedAuthor {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--wc-text);
+  margin-bottom: 2px;
+}
+
+.feedTime {
+  font-size: 11px;
+  color: var(--wc-muted);
+}
+
+.feedText {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--wc-text);
+  margin: 0;
+}
+
+/* CTA Row */
+.ctaRow {
+  display: flex;
+  gap: 10px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--wc-border);
+  background: var(--wc-surface);
+}
+
+.ctaButton {
+  flex: 1;
+  height: 42px;
+  background: var(--wc-cta);
+  color: var(--wc-cta-text);
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.ctaButton:hover {
+  opacity: 0.9;
+}
+
+.ctaSecondary {
+  flex: 1;
+  height: 42px;
+  background: var(--wc-header);
+  color: var(--wc-text);
+  border: 1px solid var(--wc-border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ctaSecondary:hover {
+  opacity: 0.9;
+}
+
+.ctaIcon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Action buttons */
+.actionRow {
+  display: flex;
+  gap: 10px;
+  padding: 8px 18px 12px;
+  background: var(--wc-surface);
+}
+
+.actionBtn {
+  flex: 1;
+  height: 36px;
+  background: transparent;
+  color: var(--wc-muted);
+  border: 1px solid var(--wc-border);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.actionBtn:hover {
+  background: color-mix(in srgb, var(--wc-icon) 5%, transparent);
+}
+
+/* Bottom sheet content */
+.sheetText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--wc-text);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sheetButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sheetBtnPrimary,
+.sheetBtnDanger,
+.sheetBtnSecondary {
+  height: 44px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  border: none;
+}
+
+.sheetBtnPrimary {
+  background: var(--wc-cta);
+  color: var(--wc-cta-text);
+}
+
+.sheetBtnDanger {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.sheetBtnSecondary {
+  background: transparent;
+  color: var(--wc-muted);
+  border: 1px solid var(--wc-border);
+}
+
+.sheetBtnPrimary:hover,
+.sheetBtnDanger:hover {
+  opacity: 0.9;
+}
+
+.sheetBtnSecondary:hover {
+  background: color-mix(in srgb, var(--wc-icon) 5%, transparent);
+}
+
+/* ========== MODE SWITCHING ========== */
+/* Hide lofi-only elements in hifi mode */
+:root[data-wc-mode="hifi"] [data-lofi-only] {
+  display: none !important;
+}
+
+/* Hide hifi-only elements in lofi mode */
+:root[data-wc-mode="lofi"] [data-hifi-only] {
+  display: none !important;
+}
