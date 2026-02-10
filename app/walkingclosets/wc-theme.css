@@ -22,12 +22,12 @@
 /* ========== Linda ==========
    Linda: #EEEFDE, #FFFDF0, #FFDB91, #FFC388, #8F0000, #1E1E1E */
 :root[data-wc-theme="linda"] {
-  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #fffdf0 0%, #ffdb91 55%, #8f0000 145%);
+  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #fffdf0 0%, #ffdb91 55%, #ffa780 145%);
   --wc-surface: #eeefde;
   --wc-header: #fffdf0;
   --wc-wire: #ffc388;
 
-  --wc-cta: #8f0000;
+  --wc-cta: #ffa780;
   --wc-cta-text: #fffdf0;
 
   --wc-text: #1e1e1e;
@@ -73,12 +73,12 @@
 /* ========== Alexander ==========
    Alexander: #FBF5F3, #DAC4F7, #1E1E1E, #F5F914 (x3) */
 :root[data-wc-theme="alexander"] {
-  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #dac4f7 0%, #fbf5f3 55%, #f5f914 145%);
-  --wc-surface: #fbf5f3;
-  --wc-header: #dac4f7;
+  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #dac4f7 0%, #fbf5f3 55%, #99e2b5 145%);
+  --wc-surface: #2f3e42;
+  --wc-header: #7c918c;
   --wc-wire: rgba(30, 30, 30, 0.12);
 
-  --wc-cta: #f5f914;
+  --wc-cta: #99e2b5;
   --wc-cta-text: #1e1e1e;
 
   --wc-text: #1e1e1e;
