@@ -104,8 +104,9 @@ export default function SignupPage() {
               disabled={isSubmitting}
             />
 
-            <label className={styles.checkboxLabel}>
+            <label className={styles.checkboxLabel} htmlFor="terms">
               <input
+                id="terms"
                 type="checkbox"
                 className={styles.checkbox}
                 disabled={isSubmitting}

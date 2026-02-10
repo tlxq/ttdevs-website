@@ -101,7 +101,7 @@ export default function FindPage() {
           
           {/* Hifi items with real content */}
           <div data-hifi-only="true">
-            <h3 className={styles.resultsHeading}>
+            <h3 className={styles.resultsHeading} aria-live="polite">
               {gpsStatus === "success" ? "Nära dig" : "Closets i Stockholm"}
             </h3>
             <ResultItem title="Södermalm - Stockholm" subtitle="15 Walking Closets tillgängliga, 2.3 km bort" />
