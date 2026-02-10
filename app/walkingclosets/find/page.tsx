@@ -104,6 +104,7 @@ export default function FindPage() {
             <h3 className={styles.resultsHeading} aria-live="polite">
               {gpsStatus === "success" ? "Nära dig" : "Closets i Stockholm"}
             </h3>
+            <ResultItem title="VintageKassen" subtitle="32 medlemmar, 4.5 stjärnor · Södermalm" href="/walkingclosets/kasse/1" />
             <ResultItem title="Södermalm - Stockholm" subtitle="15 Walking Closets tillgängliga, 2.3 km bort" />
             <ResultItem title="Vasastan - Stockholm" subtitle="8 Walking Closets tillgängliga, 3.1 km bort" />
             <ResultItem title="Östermalm - Stockholm" subtitle="12 Walking Closets tillgängliga, 4.5 km bort" />
@@ -117,14 +118,24 @@ export default function FindPage() {
   );
 }
 
-function ResultItem({ title, subtitle }: { title: string; subtitle: string }) {
-  return (
-    <div className={styles.item}>
+function ResultItem({ title, subtitle, href }: { title: string; subtitle: string; href?: string }) {
+  const content = (
+    <>
       <div className={styles.itemIcon} aria-hidden="true" />
       <div className={styles.itemText}>
         <div className={styles.itemTitle}>{title}</div>
         <div className={styles.itemSub}>{subtitle}</div>
       </div>
-    </div>
+    </>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className={styles.item}>
+        {content}
+      </Link>
+    );
+  }
+
+  return <div className={styles.item}>{content}</div>;
 }
