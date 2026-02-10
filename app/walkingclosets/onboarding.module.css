@@ -1,0 +1,101 @@
+.screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 28px;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+  color: #111;
+}
+
+.hero {
+  margin-top: 26px;
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1.15 / 1; /* makes it slightly wider like the wireframe */
+  background: #d9d9d9;
+  display: grid;
+  place-items: center;
+}
+
+.heroIcon {
+  position: relative;
+  width: 96px;
+  height: 74px;
+}
+
+.heroDot {
+  position: absolute;
+  top: -6px;
+  left: 8px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 1.5px solid #333;
+  background: transparent;
+}
+
+.heroBag {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 96px;
+  height: 54px;
+  border: 1.5px solid #333;
+  border-top: 0;
+  border-radius: 26px 26px 18px 18px;
+  transform: rotate(0deg);
+}
+
+/* Add a small “handle” curve impression */
+.heroBag::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 18px;
+  width: 58px;
+  height: 30px;
+  border: 1.5px solid #333;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 999px;
+}
+
+.indicators {
+  margin-top: 22px;
+  display: flex;
+  gap: 14px;
+}
+
+.indicator {
+  width: 34px;
+  height: 2px;
+  background: #cfcfcf;
+  border-radius: 999px;
+}
+
+.primaryButton {
+  margin-top: 28px;
+  width: 180px;
+  height: 44px;
+  background: #9e9e9e;
+  color: #111;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.skip {
+  margin-top: 18px;
+  font-size: 11px;
+  color: #333;
+  text-decoration: underline;
+}
