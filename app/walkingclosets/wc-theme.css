@@ -1,5 +1,5 @@
 /* WalkingClosets theme tokens + palettes
-   Imported only by app/walkingclosets/layout.tsx */
+   Imported by app/walkingclosets/layout.tsx */
 
 :root {
   /* default = lofi */
@@ -20,75 +20,99 @@
 }
 
 /* ========== Linda ==========
-   Linda: #EEEFDE, #FFFDF0, #FFDB91, #FFC388, #8F0000, #1E1E1E */
+Primär: #FFFBDE
+Neutral/BG: #FFFDF0
+Accents: #FFDB91 #FFC388 #FFA780
+Text dark: #1E1E1E
+*/
 :root[data-wc-theme="linda"] {
-  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #fffdf0 0%, #ffdb91 55%, #ffa780 145%);
-  --wc-surface: #eeefde;
-  --wc-header: #fffdf0;
-  --wc-wire: #ffc388;
+  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #fffdf0 0%, #ffdb91 55%, #ffa780 125%);
 
-  --wc-cta: #ffa780;
-  --wc-cta-text: #fffdf0;
+  --wc-surface: #fffdf0; /* Neutral/BG */
+  --wc-header: #fffbde; /* Primary */
+  --wc-wire: #ffc388; /* Accent */
+
+  --wc-cta: #ffa780; /* Accent */
+  --wc-cta-text: #1e1e1e;
 
   --wc-text: #1e1e1e;
   --wc-muted: rgba(30, 30, 30, 0.65);
+
   --wc-border: rgba(30, 30, 30, 0.14);
   --wc-icon: #1e1e1e;
 }
 
 /* ========== Thelma ==========
-   Thelma: #F6F0EA, #4D6A6D, #000000, #C9ADA1, #FFFFFF, #798478 */
+Neutral/BG: #F6F0EA
+Accents: #000000 #C9ADA1 #FFFFFF
+Text dark: #798478
+*/
 :root[data-wc-theme="thelma"] {
-  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #4d6a6d 0%, #798478 55%, #000000 145%);
+  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #f6f0ea 0%, #c9ada1 55%, #798478 135%);
+
   --wc-surface: #f6f0ea;
   --wc-header: #c9ada1;
-  --wc-wire: rgba(77, 106, 109, 0.22);
+  --wc-wire: #ffffff;
 
-  --wc-cta: #4d6a6d;
+  --wc-cta: #000000;
   --wc-cta-text: #ffffff;
 
-  --wc-text: #000000;
-  --wc-muted: rgba(0, 0, 0, 0.6);
-  --wc-border: rgba(0, 0, 0, 0.14);
-  --wc-icon: #000000;
+  --wc-text: #798478;
+  --wc-muted: rgba(121, 132, 120, 0.78);
+
+  --wc-border: rgba(121, 132, 120, 0.22);
+  --wc-icon: #798478;
 }
 
 /* ========== Tom ==========
-   Tom: #FEFAE0, #CCD5AE, #2F3437, #E9EDC9, #FAEDCD, #D4A373 */
+Primary/BG: #FEFAE0
+Accents: #CCD5AE #E9EDC9 #FAEDCD #D4A373
+Text dark: #2F3437
+*/
 :root[data-wc-theme="tom"] {
-  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #fefae0 0%, #faedcd 55%, #d4a373 145%);
-  --wc-surface: #fefae0;
-  --wc-header: #faedcd;
-  --wc-wire: #e9edc9;
+  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #fefae0 0%, #faedcd 55%, #d4a373 135%);
 
-  --wc-cta: #d4a373;
+  --wc-surface: #fefae0; /* primary BG */
+  --wc-header: #faedcd; /* accent */
+  --wc-wire: #e9edc9; /* accent */
+
+  --wc-cta: #ccd5ae; /* accent */
   --wc-cta-text: #2f3437;
 
   --wc-text: #2f3437;
   --wc-muted: rgba(47, 52, 55, 0.62);
+
   --wc-border: rgba(47, 52, 55, 0.14);
   --wc-icon: #2f3437;
 }
 
 /* ========== Alexander ==========
-   Alexander: #FBF5F3, #DAC4F7, #1E1E1E, #F5F914 (x3) */
+Primary/BG: #2F3E42
+Accents: #7C918C #99E2B5 #84A59D #E6E3DF
+Text dark: #2F3E42
+*/
 :root[data-wc-theme="alexander"] {
-  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #dac4f7 0%, #fbf5f3 55%, #99e2b5 145%);
-  --wc-surface: #2f3e42;
+  --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #2f3e42 0%, #7c918c 60%, #99e2b5 130%);
+
+  /* Keep phone light for readability (use E6E3DF as the surface) */
+  --wc-surface: #e6e3df;
   --wc-header: #7c918c;
-  --wc-wire: rgba(30, 30, 30, 0.12);
+  --wc-wire: #84a59d;
 
+  /* CTA: use the bright mint */
   --wc-cta: #99e2b5;
-  --wc-cta-text: #1e1e1e;
+  --wc-cta-text: #2f3e42;
 
-  --wc-text: #1e1e1e;
-  --wc-muted: rgba(30, 30, 30, 0.62);
-  --wc-border: rgba(30, 30, 30, 0.16);
-  --wc-icon: #1e1e1e;
+  /* Text dark (as you specified) */
+  --wc-text: #2f3e42;
+  --wc-muted: rgba(47, 62, 66, 0.65);
+
+  --wc-border: rgba(47, 62, 66, 0.16);
+  --wc-icon: #2f3e42;
 }
 
 /* ========== Lofi ==========
-   Lofi is your current grey wireframe (same as default) */
+Current grey wireframe */
 :root[data-wc-theme="lofi"] {
   --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #1c1c28 0%, #0b0b0f 55%, #07070a 100%);
 

@@ -6,6 +6,10 @@ import styles from "./ThemeSwitcher.module.css";
 const THEMES = ["linda", "thelma", "tom", "alexander", "lofi"] as const;
 type Theme = (typeof THEMES)[number];
 
+function modeForTheme(t: Theme) {
+  return t === "lofi" ? "lofi" : "hifi";
+}
+
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState<Theme>("lofi");
 
@@ -13,12 +17,17 @@ export default function ThemeSwitcher() {
     const stored = window.localStorage.getItem("wc-theme") as Theme | null;
     const initial: Theme = stored ?? "lofi";
     setTheme(initial);
+
     document.documentElement.dataset.wcTheme = initial;
+    document.documentElement.dataset.wcMode = modeForTheme(initial);
   }, []);
 
   function apply(next: Theme) {
     setTheme(next);
+
     document.documentElement.dataset.wcTheme = next;
+    document.documentElement.dataset.wcMode = modeForTheme(next);
+
     window.localStorage.setItem("wc-theme", next);
   }
 
