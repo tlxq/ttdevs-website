@@ -2,7 +2,8 @@
 
 import { ChevronLeftIcon, HeartIcon, PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { useParams, useState } from "next/navigation";
+import { useParams } from "next/navigation";
+import { useState } from "react";
 import PhoneFrame from "../../../components/PhoneFrame";
 import TabBar from "../../../components/TabBar";
 import styles from "./comments.module.css";
