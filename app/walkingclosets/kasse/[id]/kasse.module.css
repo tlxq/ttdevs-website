@@ -3,6 +3,8 @@
   display: flex;
   flex-direction: column;
   background: var(--wc-surface);
+  position: relative;
+  overflow: hidden;
 }
 
 /* Header */

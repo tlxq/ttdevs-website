@@ -143,86 +143,86 @@ export default function KassePage() {
         </div>
 
         <TabBar active="find" />
+
+        {/* Bottom sheets - Hifi only */}
+        <BottomSheet
+          isOpen={joinSheetOpen}
+          onClose={() => setJoinSheetOpen(false)}
+          title="Gå med i kön"
+        >
+          <div className={styles.sheetText}>
+            Vill du gå med i kassen och ställa dig i kön?
+          </div>
+          <div className={styles.sheetButtons}>
+            <button
+              type="button"
+              className={styles.sheetBtnPrimary}
+              onClick={handleJoinQueue}
+            >
+              Ja, gå med
+            </button>
+            <button
+              type="button"
+              className={styles.sheetBtnSecondary}
+              onClick={() => setJoinSheetOpen(false)}
+            >
+              Avbryt
+            </button>
+          </div>
+        </BottomSheet>
+
+        <BottomSheet
+          isOpen={leaveSheetOpen}
+          onClose={() => setLeaveSheetOpen(false)}
+          title="Lämna kassen"
+        >
+          <div className={styles.sheetText}>
+            Är du säker på att du vill lämna kassen?
+          </div>
+          <div className={styles.sheetButtons}>
+            <button
+              type="button"
+              className={styles.sheetBtnDanger}
+              onClick={handleLeaveKasse}
+            >
+              Ja, lämna
+            </button>
+            <button
+              type="button"
+              className={styles.sheetBtnSecondary}
+              onClick={() => setLeaveSheetOpen(false)}
+            >
+              Avbryt
+            </button>
+          </div>
+        </BottomSheet>
+
+        <BottomSheet
+          isOpen={skipSheetOpen}
+          onClose={() => setSkipSheetOpen(false)}
+          title="Hoppa över nästa"
+        >
+          <div className={styles.sheetText}>
+            Är du säker på att du vill hoppa över nästa kasse?
+          </div>
+          <div className={styles.sheetButtons}>
+            <button
+              type="button"
+              className={styles.sheetBtnPrimary}
+              onClick={handleSkipNext}
+            >
+              Ja, hoppa över
+            </button>
+            <button
+              type="button"
+              className={styles.sheetBtnSecondary}
+              onClick={() => setSkipSheetOpen(false)}
+            >
+              Avbryt
+            </button>
+          </div>
+        </BottomSheet>
       </div>
-
-      {/* Bottom sheets - Hifi only */}
-      <BottomSheet
-        isOpen={joinSheetOpen}
-        onClose={() => setJoinSheetOpen(false)}
-        title="Gå med i kön"
-      >
-        <div className={styles.sheetText}>
-          Vill du gå med i kassen och ställa dig i kön?
-        </div>
-        <div className={styles.sheetButtons}>
-          <button
-            type="button"
-            className={styles.sheetBtnPrimary}
-            onClick={handleJoinQueue}
-          >
-            Ja, gå med
-          </button>
-          <button
-            type="button"
-            className={styles.sheetBtnSecondary}
-            onClick={() => setJoinSheetOpen(false)}
-          >
-            Avbryt
-          </button>
-        </div>
-      </BottomSheet>
-
-      <BottomSheet
-        isOpen={leaveSheetOpen}
-        onClose={() => setLeaveSheetOpen(false)}
-        title="Lämna kassen"
-      >
-        <div className={styles.sheetText}>
-          Är du säker på att du vill lämna kassen?
-        </div>
-        <div className={styles.sheetButtons}>
-          <button
-            type="button"
-            className={styles.sheetBtnDanger}
-            onClick={handleLeaveKasse}
-          >
-            Ja, lämna
-          </button>
-          <button
-            type="button"
-            className={styles.sheetBtnSecondary}
-            onClick={() => setLeaveSheetOpen(false)}
-          >
-            Avbryt
-          </button>
-        </div>
-      </BottomSheet>
-
-      <BottomSheet
-        isOpen={skipSheetOpen}
-        onClose={() => setSkipSheetOpen(false)}
-        title="Hoppa över nästa"
-      >
-        <div className={styles.sheetText}>
-          Är du säker på att du vill hoppa över nästa kasse?
-        </div>
-        <div className={styles.sheetButtons}>
-          <button
-            type="button"
-            className={styles.sheetBtnPrimary}
-            onClick={handleSkipNext}
-          >
-            Ja, hoppa över
-          </button>
-          <button
-            type="button"
-            className={styles.sheetBtnSecondary}
-            onClick={() => setSkipSheetOpen(false)}
-          >
-            Avbryt
-          </button>
-        </div>
-      </BottomSheet>
     </PhoneFrame>
   );
 }
