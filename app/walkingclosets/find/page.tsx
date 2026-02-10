@@ -1,10 +1,37 @@
+"use client";
 import { ChevronLeftIcon, MagnifyingGlassIcon, MapPinIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { useState } from "react";
 import PhoneFrame from "../components/PhoneFrame";
 import TabBar from "../components/TabBar";
 import styles from "./find.module.css";
 
 export default function FindPage() {
+  const [gpsStatus, setGpsStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [coordinates, setCoordinates] = useState<{ lat: number; lon: number } | null>(null);
+
+  const handleUseLocation = () => {
+    // Guard for SSR
+    if (typeof navigator === "undefined" || !navigator.geolocation) {
+      setGpsStatus("error");
+      return;
+    }
+
+    setGpsStatus("loading");
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        setCoordinates({ lat, lon });
+        setGpsStatus("success");
+      },
+      () => {
+        setGpsStatus("error");
+      }
+    );
+  };
+
   return (
     <PhoneFrame title="Hitta kassar">
       <div className={styles.screen}>
@@ -32,7 +59,11 @@ export default function FindPage() {
             {/* Lofi: simple map label */}
             <div className={styles.mapLabel} data-lofi-only="true">Lorem ipsum</div>
             {/* Hifi: GPS location text */}
-            <div className={styles.mapLabel} data-hifi-only="true">Din kasse är här</div>
+            <div className={styles.mapLabel} data-hifi-only="true">
+              {gpsStatus === "success" && coordinates
+                ? `Din position: ${coordinates.lat.toFixed(4)}, ${coordinates.lon.toFixed(4)}`
+                : "Din kasse är här"}
+            </div>
             <div className={styles.gpsIndicator} data-hifi-only="true" aria-hidden="true" />
           </div>
 
@@ -40,6 +71,23 @@ export default function FindPage() {
             <MapPinIcon className={styles.locateIcon} aria-hidden="true" />
           </div>
         </section>
+
+        {/* GPS Button - Hi-fi only */}
+        <div className={styles.gpsButtonWrap} data-hifi-only="true">
+          <button
+            type="button"
+            className={styles.gpsButton}
+            onClick={handleUseLocation}
+            disabled={gpsStatus === "loading"}
+          >
+            {gpsStatus === "loading" ? "Hämtar position..." : "Använd min plats"}
+          </button>
+          {gpsStatus === "error" && (
+            <div className={styles.gpsError} role="alert" aria-live="polite">
+              Kunde inte hämta din plats. Kontrollera att du har aktiverat platstjänster.
+            </div>
+          )}
+        </div>
 
         {/* Results list */}
         <section className={styles.results} aria-label="Closets list">
@@ -53,6 +101,9 @@ export default function FindPage() {
           
           {/* Hifi items with real content */}
           <div data-hifi-only="true">
+            <h3 className={styles.resultsHeading} aria-live="polite">
+              {gpsStatus === "success" ? "Nära dig" : "Closets i Stockholm"}
+            </h3>
             <ResultItem title="Södermalm - Stockholm" subtitle="15 Walking Closets tillgängliga, 2.3 km bort" />
             <ResultItem title="Vasastan - Stockholm" subtitle="8 Walking Closets tillgängliga, 3.1 km bort" />
             <ResultItem title="Östermalm - Stockholm" subtitle="12 Walking Closets tillgängliga, 4.5 km bort" />
