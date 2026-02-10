@@ -1,0 +1,133 @@
+.screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  background: var(--wc-header);
+  padding: 12px 8px 10px;
+  border-bottom: 1px solid var(--wc-border);
+}
+
+.headerTitle {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wc-text);
+  margin-bottom: 10px;
+}
+
+.searchRow {
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  gap: 10px;
+  align-items: center;
+}
+
+.searchPill {
+  height: 28px;
+  background: var(--wc-surface);
+  border: 1px solid var(--wc-border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+}
+
+.searchIcon {
+  width: 14px;
+  height: 14px;
+  color: var(--wc-icon);
+  opacity: 0.65;
+}
+
+.searchText {
+  font-size: 10px;
+  color: var(--wc-text);
+  opacity: 0.7;
+}
+
+.addBtn {
+  height: 28px;
+  width: 30px;
+  background: var(--wc-surface);
+  border: 1px solid var(--wc-border);
+  display: grid;
+  place-items: center;
+}
+
+.addIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--wc-icon);
+  opacity: 0.75;
+}
+
+/* List */
+.list {
+  flex: 1;
+  background: var(--wc-surface);
+  overflow: auto;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  padding: 10px 10px;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid var(--wc-border);
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--wc-wire);
+}
+
+.rowText {
+  display: grid;
+  gap: 2px;
+}
+
+.rowTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--wc-text);
+}
+
+.rowSub {
+  font-size: 10px;
+  color: var(--wc-text);
+  opacity: 0.65;
+}
+
+/* Delete row (wireframe block) */
+.deleteRow {
+  display: grid;
+  grid-template-columns: 1fr 56px;
+  border-top: 1px solid var(--wc-border);
+  border-bottom: 1px solid var(--wc-border);
+}
+
+.deleteLeft {
+  padding: 10px 10px;
+  background: var(--wc-surface);
+}
+
+.deleteBtn {
+  background: var(--wc-wire);
+  display: grid;
+  place-items: center;
+}
+
+.trashIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--wc-icon);
+  opacity: 0.75;
+}

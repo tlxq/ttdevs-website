@@ -10,7 +10,7 @@
   margin: 0;
   font-size: 22px;
   font-weight: 500;
-  color: #111;
+  color: var(--wc-text);
 }
 
 .hero {
@@ -18,9 +18,10 @@
   width: 100%;
   max-width: 280px;
   aspect-ratio: 1.15 / 1; /* makes it slightly wider like the wireframe */
-  background: #d9d9d9;
+  background: var(--wc-wire);
   display: grid;
   place-items: center;
+  border: 1px solid var(--wc-border);
 }
 
 .heroIcon {
@@ -36,8 +37,9 @@
   width: 14px;
   height: 14px;
   border-radius: 999px;
-  border: 1.5px solid #333;
+  border: 1.5px solid var(--wc-icon);
   background: transparent;
+  opacity: 0.9;
 }
 
 .heroBag {
@@ -46,10 +48,11 @@
   left: 0;
   width: 96px;
   height: 54px;
-  border: 1.5px solid #333;
+  border: 1.5px solid var(--wc-icon);
   border-top: 0;
   border-radius: 26px 26px 18px 18px;
   transform: rotate(0deg);
+  opacity: 0.9;
 }
 
 /* Add a small “handle” curve impression */
@@ -60,11 +63,12 @@
   left: 18px;
   width: 58px;
   height: 30px;
-  border: 1.5px solid #333;
+  border: 1.5px solid var(--wc-icon);
   border-bottom: 0;
   border-left: 0;
   border-right: 0;
   border-radius: 999px;
+  opacity: 0.9;
 }
 
 .indicators {
@@ -76,7 +80,7 @@
 .indicator {
   width: 34px;
   height: 2px;
-  background: #cfcfcf;
+  background: var(--wc-border);
   border-radius: 999px;
 }
 
@@ -84,8 +88,8 @@
   margin-top: 28px;
   width: 180px;
   height: 44px;
-  background: #9e9e9e;
-  color: #111;
+  background: var(--wc-cta);
+  color: var(--wc-cta-text);
   display: grid;
   place-items: center;
   font-weight: 600;
@@ -96,6 +100,6 @@
 .skip {
   margin-top: 18px;
   font-size: 11px;
-  color: #333;
+  color: var(--wc-muted);
   text-decoration: underline;
 }

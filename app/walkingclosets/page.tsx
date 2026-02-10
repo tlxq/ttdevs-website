@@ -1,10 +1,11 @@
 import Link from "next/link";
 import PhoneFrame from "./components/PhoneFrame";
+import ThemeSwitcher from "./components/ThemeSwitcher";
 import styles from "./onboarding.module.css";
 
 export default function WalkingClosetsOnboarding() {
   return (
-    <PhoneFrame title="Onboarding page">
+    <PhoneFrame title="Onboarding page" leftSlot={<ThemeSwitcher />}>
       <div className={styles.screen}>
         <h1 className={styles.title}>Lorem Ipsum!</h1>
 

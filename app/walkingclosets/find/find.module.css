@@ -1,0 +1,171 @@
+.screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  padding: 10px 6px 10px;
+  background: var(--wc-header);
+  border-bottom: 1px solid var(--wc-border);
+}
+
+.h1 {
+  margin: 6px 0 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--wc-text);
+}
+
+.searchRow {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.backBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--wc-surface);
+  border: 1px solid var(--wc-border);
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+}
+
+.backIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--wc-icon);
+}
+
+.searchPill {
+  height: 30px;
+  border-radius: 999px;
+  background: var(--wc-wire);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--wc-border);
+}
+
+.searchIcon {
+  width: 14px;
+  height: 14px;
+  color: var(--wc-icon);
+  opacity: 0.7;
+}
+
+.searchText {
+  font-size: 11px;
+  color: var(--wc-text);
+  opacity: 0.75;
+}
+
+/* Map */
+.mapWrap {
+  position: relative;
+  background: var(--wc-wire);
+  height: 320px;
+  border-bottom: 1px solid var(--wc-border);
+}
+
+.map {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--wc-wire) 60%, #ffffff 40%) 0%,
+    var(--wc-wire) 50%,
+    color-mix(in srgb, var(--wc-wire) 65%, #ffffff 35%) 100%
+  );
+  overflow: hidden;
+}
+
+/* fake "roads" */
+.map::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.06) 0 2px, transparent 2px 22px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.05) 0 2px, transparent 2px 28px);
+  transform: rotate(8deg);
+  opacity: 0.35;
+}
+
+.mapLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -120%);
+  font-size: 10px;
+  color: var(--wc-text);
+  background: color-mix(in srgb, var(--wc-surface) 80%, transparent);
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--wc-border);
+}
+
+/* Locate button */
+.locateBtn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--wc-surface) 92%, transparent);
+  border: 1px solid var(--wc-border);
+  display: grid;
+  place-items: center;
+}
+
+.locateIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--wc-icon);
+}
+
+/* Results list */
+.results {
+  flex: 1;
+  overflow: auto;
+  padding: 10px 6px 0;
+  background: var(--wc-surface);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 10px;
+  padding: 10px 2px;
+  border-bottom: 1px solid var(--wc-border);
+}
+
+.itemIcon {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--wc-icon);
+  opacity: 0.22;
+  margin-top: 2px;
+}
+
+.itemTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--wc-text);
+}
+
+.itemSub {
+  font-size: 10px;
+  color: var(--wc-muted);
+  margin-top: 2px;
+  line-height: 1.25;
+}

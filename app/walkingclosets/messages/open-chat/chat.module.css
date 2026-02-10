@@ -1,0 +1,151 @@
+.screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  background: var(--wc-header);
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--wc-border);
+  display: grid;
+  grid-template-columns: 26px 1fr 26px;
+  align-items: center;
+}
+
+.backBtn {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.backIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--wc-icon);
+}
+
+.headerCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.headerAvatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--wc-muted);
+  opacity: 0.35;
+}
+
+.headerName {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--wc-text);
+}
+
+/* Chat area */
+.chat {
+  flex: 1;
+  background: var(--wc-surface);
+  overflow: auto;
+  padding: 14px 10px;
+  display: grid;
+  gap: 12px;
+}
+
+.msgRowLeft,
+.msgRowRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.msgRowLeft {
+  justify-content: flex-start;
+}
+
+.msgRowRight {
+  justify-content: flex-end;
+}
+
+.msgAvatar {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--wc-wire);
+}
+
+.bubble,
+.bubbleBig {
+  height: 22px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--wc-wire), rgba(255, 255, 255, 0.55));
+}
+
+.bubble {
+  width: 110px;
+}
+
+.bubbleBig {
+  width: 160px;
+  height: 40px;
+}
+
+/* Composer */
+.composer {
+  border-top: 1px solid var(--wc-border);
+  display: grid;
+  grid-template-columns: 22px 1fr 32px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  background: var(--wc-surface);
+}
+
+.composerIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--wc-icon);
+  opacity: 0.6;
+}
+
+.inputPill {
+  height: 30px;
+  border-radius: 999px;
+  background: var(--wc-surface);
+  border: 1px solid var(--wc-border);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+}
+
+.inputText {
+  font-size: 10px;
+  color: var(--wc-text);
+  opacity: 0.7;
+}
+
+.sendBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--wc-surface);
+  border: 1px solid var(--wc-border);
+  display: grid;
+  place-items: center;
+}
+
+.sendIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--wc-icon);
+  opacity: 0.75;
+}
