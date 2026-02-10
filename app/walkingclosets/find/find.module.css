@@ -169,3 +169,29 @@
   margin-top: 2px;
   line-height: 1.25;
 }
+
+/* ========== MODE SWITCHING ========== */
+/* Enhanced styling for hifi mode */
+:root[data-wc-mode="hifi"] .searchPill {
+  border-radius: 16px;
+}
+
+:root[data-wc-mode="hifi"] .backBtn {
+  border-radius: 999px;
+}
+
+:root[data-wc-mode="hifi"] .map {
+  border-radius: 12px;
+  margin: 8px;
+}
+
+:root[data-wc-mode="hifi"] .locateBtn {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-wc-mode="hifi"] .item {
+  border-radius: 8px;
+  margin-bottom: 4px;
+  padding: 12px 6px;
+  background: color-mix(in srgb, var(--wc-surface) 98%, var(--wc-wire) 2%);
+}

@@ -47,3 +47,10 @@
   color: var(--wc-icon);
   opacity: 0.65;
 }
+
+/* ========== MODE SWITCHING ========== */
+/* Enhanced styling for hifi mode */
+:root[data-wc-mode="hifi"] .row,
+:root[data-wc-mode="hifi"] .rowDisabled {
+  border-radius: 8px;
+}

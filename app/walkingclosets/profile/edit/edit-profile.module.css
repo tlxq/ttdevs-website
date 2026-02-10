@@ -124,3 +124,15 @@
   color: var(--wc-cta-text);
   cursor: pointer;
 }
+
+/* ========== MODE SWITCHING ========== */
+/* Enhanced styling for hifi mode */
+:root[data-wc-mode="hifi"] .wireInput {
+  border: 1px solid var(--wc-border);
+  border-radius: 6px;
+}
+
+:root[data-wc-mode="hifi"] .save {
+  border-radius: 6px;
+  font-weight: 800;
+}

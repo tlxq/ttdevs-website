@@ -149,3 +149,26 @@
   color: var(--wc-icon);
   opacity: 0.75;
 }
+
+/* ========== MODE SWITCHING ========== */
+/* Enhanced styling for hifi mode */
+:root[data-wc-mode="hifi"] .backBtn {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+:root[data-wc-mode="hifi"] .bubble,
+:root[data-wc-mode="hifi"] .bubbleBig {
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+:root[data-wc-mode="hifi"] .sendBtn {
+  background: var(--wc-cta);
+  border: none;
+}
+
+:root[data-wc-mode="hifi"] .sendBtn .sendIcon {
+  opacity: 1;
+  color: var(--wc-cta-text);
+}

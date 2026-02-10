@@ -135,3 +135,29 @@
   text-decoration: underline;
   font-weight: 600;
 }
+
+/* ========== MODE SWITCHING ========== */
+/* Hide lofi-only elements in hifi mode */
+:root[data-wc-mode="hifi"] [data-lofi-only] {
+  display: none !important;
+}
+
+/* Hide hifi-only elements in lofi mode */
+:root[data-wc-mode="lofi"] [data-hifi-only] {
+  display: none !important;
+}
+
+/* Enhanced styling for hifi mode */
+:root[data-wc-mode="hifi"] .wireInput {
+  border: 1px solid var(--wc-border);
+  border-radius: 6px;
+}
+
+:root[data-wc-mode="hifi"] .cta {
+  border-radius: 6px;
+  font-weight: 800;
+}
+
+:root[data-wc-mode="hifi"] .optionRow {
+  border-radius: 6px;
+}
