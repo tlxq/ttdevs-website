@@ -131,3 +131,36 @@
   color: var(--wc-icon);
   opacity: 0.75;
 }
+
+/* ========== MODE SWITCHING ========== */
+/* Enhanced styling for hifi mode */
+:root[data-wc-mode="hifi"] .searchPill {
+  border-radius: 14px;
+}
+
+:root[data-wc-mode="hifi"] .addBtn {
+  border-radius: 8px;
+}
+
+:root[data-wc-mode="hifi"] .row {
+  margin: 4px 8px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--wc-surface) 98%, var(--wc-wire) 2%);
+  border-bottom: none;
+}
+
+:root[data-wc-mode="hifi"] .deleteRow {
+  margin: 4px 8px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Hide lofi-only elements in hifi mode */
+:root[data-wc-mode="hifi"] [data-lofi-only] {
+  display: none !important;
+}
+
+/* Hide hifi-only elements in lofi mode */
+:root[data-wc-mode="lofi"] [data-hifi-only] {
+  display: none !important;
+}

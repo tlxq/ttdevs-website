@@ -9,7 +9,8 @@ export default function MessagesPage() {
     <PhoneFrame title="Chatt">
       <div className={styles.screen}>
         <header className={styles.header}>
-          <div className={styles.headerTitle}>Meddelanden</div>
+          <div className={styles.headerTitle} data-lofi-only="true">Lorem ipsum</div>
+          <div className={styles.headerTitle} data-hifi-only="true">Meddelanden</div>
 
           <div className={styles.searchRow}>
             <div className={styles.searchPill} aria-label="Search">
@@ -27,24 +28,30 @@ export default function MessagesPage() {
           <Link className={styles.row} href="/walkingclosets/messages/open-chat">
             <div className={styles.avatar} aria-hidden="true" />
             <div className={styles.rowText}>
-              <div className={styles.rowTitle}>Lorem ipsum</div>
-              <div className={styles.rowSub}>Lorem ipsum dolor sit amet...</div>
+              <div className={styles.rowTitle} data-lofi-only="true">Lorem ipsum</div>
+              <div className={styles.rowTitle} data-hifi-only="true">Anna Svensson</div>
+              <div className={styles.rowSub} data-lofi-only="true">Lorem ipsum dolor sit amet...</div>
+              <div className={styles.rowSub} data-hifi-only="true">Hej! Är klänningen fortfarande tillgänglig?</div>
             </div>
           </Link>
 
           <Link className={styles.row} href="/walkingclosets/messages/open-chat">
             <div className={styles.avatar} aria-hidden="true" />
             <div className={styles.rowText}>
-              <div className={styles.rowTitle}>Lorem ipsum</div>
-              <div className={styles.rowSub}>Lorem ipsum dolor sit amet...</div>
+              <div className={styles.rowTitle} data-lofi-only="true">Lorem ipsum</div>
+              <div className={styles.rowTitle} data-hifi-only="true">Erik Nilsson</div>
+              <div className={styles.rowSub} data-lofi-only="true">Lorem ipsum dolor sit amet...</div>
+              <div className={styles.rowSub} data-hifi-only="true">Tack för senast! Jackan var perfekt 👌</div>
             </div>
           </Link>
 
-          {/* “Delete” highlighted row (wireframe-like) */}
+          {/* "Delete" highlighted row (wireframe-like) */}
           <div className={styles.deleteRow}>
             <div className={styles.deleteLeft}>
-              <div className={styles.rowTitle}>Lorem ipsum</div>
-              <div className={styles.rowSub}>Lorem ipsum dolor sit amet...</div>
+              <div className={styles.rowTitle} data-lofi-only="true">Lorem ipsum</div>
+              <div className={styles.rowTitle} data-hifi-only="true">Maria Andersson</div>
+              <div className={styles.rowSub} data-lofi-only="true">Lorem ipsum dolor sit amet...</div>
+              <div className={styles.rowSub} data-hifi-only="true">Kan vi boka för nästa helg?</div>
             </div>
             <div className={styles.deleteBtn} aria-hidden="true">
               <TrashIcon className={styles.trashIcon} />

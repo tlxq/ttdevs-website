@@ -15,7 +15,8 @@ export default function ChatDetailPage() {
 
           <div className={styles.headerCenter}>
             <div className={styles.headerAvatar} aria-hidden="true" />
-            <div className={styles.headerName}>Open chat</div>
+            <div className={styles.headerName} data-lofi-only="true">Lorem ipsum</div>
+            <div className={styles.headerName} data-hifi-only="true">Anna Svensson</div>
           </div>
 
           <div style={{ width: 26 }} />
@@ -36,7 +37,8 @@ export default function ChatDetailPage() {
           <FaceSmileIcon className={styles.composerIcon} aria-hidden="true" />
 
           <div className={styles.inputPill}>
-            <span className={styles.inputText}>Lorem ipsum dolor...</span>
+            <span className={styles.inputText} data-lofi-only="true">Lorem ipsum dolor...</span>
+            <span className={styles.inputText} data-hifi-only="true">Skriv ett meddelande...</span>
           </div>
 
           <div className={styles.sendBtn} aria-label="Send">

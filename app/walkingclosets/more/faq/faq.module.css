@@ -158,3 +158,28 @@
   color: var(--wc-muted);
   text-decoration: underline;
 }
+
+/* ========== MODE SWITCHING ========== */
+/* Enhanced styling for hifi mode */
+:root[data-wc-mode="hifi"] .searchPill {
+  border-radius: 14px;
+}
+
+:root[data-wc-mode="hifi"] .acc {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+:root[data-wc-mode="hifi"] .ctaRow {
+  border-radius: 8px;
+}
+
+/* Hide lofi-only elements in hifi mode */
+:root[data-wc-mode="hifi"] [data-lofi-only] {
+  display: none !important;
+}
+
+/* Hide hifi-only elements in lofi mode */
+:root[data-wc-mode="lofi"] [data-hifi-only] {
+  display: none !important;
+}

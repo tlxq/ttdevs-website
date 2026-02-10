@@ -8,17 +8,21 @@ export default function SignupPage() {
     <PhoneFrame title="Sign up page">
       <div className={styles.screen}>
         <h1 className={styles.title}>Bli medlem</h1>
-        <div className={styles.subtitle}>Create account</div>
+        <div className={styles.subtitle} data-lofi-only="true">Create account</div>
+        <div className={styles.subtitle} data-hifi-only="true">Gå med i Walking Closets idag</div>
 
         <div className={styles.form}>
           <div className={styles.fieldGroup}>
-            <label className={styles.label}>Lorem</label>
+            <label className={styles.label} data-lofi-only="true">Lorem</label>
+            <label className={styles.label} data-hifi-only="true">Namn</label>
             <div className={styles.wireInput} />
 
-            <label className={styles.label}>Lorem</label>
+            <label className={styles.label} data-lofi-only="true">Lorem</label>
+            <label className={styles.label} data-hifi-only="true">E-postadress</label>
             <div className={styles.wireInput} />
 
-            <label className={styles.label}>Lorem</label>
+            <label className={styles.label} data-lofi-only="true">Lorem</label>
+            <label className={styles.label} data-hifi-only="true">Lösenord</label>
             <div className={styles.wireInput} />
           </div>
 
@@ -26,8 +30,17 @@ export default function SignupPage() {
             className={styles.cta}
             type="button"
             onClick={() => alert("Prototype demo: Create account")}
+            data-lofi-only="true"
           >
             CTA
+          </button>
+          <button
+            className={styles.cta}
+            type="button"
+            onClick={() => alert("Prototype demo: Create account")}
+            data-hifi-only="true"
+          >
+            Skapa konto
           </button>
 
           <div className={styles.dividerRow} aria-hidden="true">
@@ -37,10 +50,10 @@ export default function SignupPage() {
           </div>
 
           <div className={styles.options}>
-            <OptionRow text="Lorem Ipsum" />
-            <OptionRow text="Lorem ipsum" />
-            <OptionRow text="Lorem ipsum" />
-            <OptionRow text="Lorem ipsum" />
+            <OptionRow lofiText="Lorem Ipsum" hifiText="Fortsätt med Google" />
+            <OptionRow lofiText="Lorem ipsum" hifiText="Fortsätt med Apple" />
+            <OptionRow lofiText="Lorem ipsum" hifiText="Fortsätt med Facebook" />
+            <OptionRow lofiText="Lorem ipsum" hifiText="Fortsätt med E-post" />
           </div>
 
           <div className={styles.footerLinks}>
@@ -57,11 +70,12 @@ export default function SignupPage() {
   );
 }
 
-function OptionRow({ text }: { text: string }) {
+function OptionRow({ lofiText, hifiText }: { lofiText: string; hifiText: string }) {
   return (
     <div className={styles.optionRow}>
       <span className={styles.optionDot} aria-hidden="true" />
-      <span className={styles.optionText}>{text}</span>
+      <span className={styles.optionText} data-lofi-only="true">{lofiText}</span>
+      <span className={styles.optionText} data-hifi-only="true">{hifiText}</span>
     </div>
   );
 }
