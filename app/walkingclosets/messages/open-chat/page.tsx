@@ -56,7 +56,7 @@ function Msg({ side, big, text }: { side: "left" | "right"; big?: boolean; text?
   return (
     <div className={side === "left" ? styles.msgRowLeft : styles.msgRowRight}>
       {side === "left" && <div className={styles.msgAvatar} aria-hidden="true" />}
-      <div className={big ? styles.bubbleBig : styles.bubble}>
+      <div className={big ? styles.bubbleBig : styles.bubble} aria-hidden="true">
         <span className={styles.bubbleText} data-hifi-only="true">{text}</span>
       </div>
       {side === "right" && <div className={styles.msgAvatar} aria-hidden="true" />}
