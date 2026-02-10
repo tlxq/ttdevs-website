@@ -46,12 +46,17 @@
 .searchPill {
   height: 30px;
   border-radius: 999px;
-  background: var(--wc-wire);
+  background: var(--wc-surface-2);
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 0 12px;
   border: 1px solid var(--wc-border);
+}
+
+/* Lofi mode: use wireframe color */
+:root[data-wc-mode="lofi"] .searchPill {
+  background: var(--wc-wire);
 }
 
 .searchIcon {
@@ -70,9 +75,14 @@
 /* Map */
 .mapWrap {
   position: relative;
-  background: var(--wc-wire);
+  background: var(--wc-surface-2);
   height: 320px;
   border-bottom: 1px solid var(--wc-border);
+}
+
+/* Lofi mode: use wireframe color */
+:root[data-wc-mode="lofi"] .mapWrap {
+  background: var(--wc-wire);
 }
 
 .map {
@@ -80,11 +90,21 @@
   inset: 0;
   background: linear-gradient(
     135deg,
+    color-mix(in srgb, var(--wc-surface-2) 60%, #ffffff 40%) 0%,
+    var(--wc-surface-2) 50%,
+    color-mix(in srgb, var(--wc-surface-2) 65%, #ffffff 35%) 100%
+  );
+  overflow: hidden;
+}
+
+/* Lofi mode: use wireframe color */
+:root[data-wc-mode="lofi"] .map {
+  background: linear-gradient(
+    135deg,
     color-mix(in srgb, var(--wc-wire) 60%, #ffffff 40%) 0%,
     var(--wc-wire) 50%,
     color-mix(in srgb, var(--wc-wire) 65%, #ffffff 35%) 100%
   );
-  overflow: hidden;
 }
 
 /* fake "roads" */
@@ -137,7 +157,7 @@
   flex: 1;
   overflow: auto;
   padding: 10px 6px 0;
-  background: var(--wc-surface);
+  background: var(--wc-bg);
 }
 
 .resultsHeading {
@@ -154,6 +174,12 @@
   gap: 10px;
   padding: 10px 2px;
   border-bottom: 1px solid var(--wc-border);
+  text-decoration: none;
+  color: inherit;
+}
+
+.item:hover {
+  opacity: 0.8;
 }
 
 .itemIcon {
@@ -180,7 +206,7 @@
 
 /* GPS Button Wrapper */
 .gpsButtonWrap {
-  background: var(--wc-surface);
+  background: var(--wc-bg);
   padding: 10px 6px;
   border-top: 1px solid var(--wc-border);
 }
@@ -238,7 +264,7 @@
   border-radius: 8px;
   margin-bottom: 4px;
   padding: 12px 6px;
-  background: color-mix(in srgb, var(--wc-surface) 98%, var(--wc-wire) 2%);
+  background: var(--wc-surface);
 }
 
 /* GPS indicator for hifi mode */

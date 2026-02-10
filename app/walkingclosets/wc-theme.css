@@ -5,12 +5,15 @@
   /* default = lofi */
   --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #1c1c28 0%, #0b0b0f 55%, #07070a 100%);
 
+  --wc-bg: #ffffff;
   --wc-surface: #ffffff;
+  --wc-surface-2: #f9fafb;
   --wc-header: #d9d9d9;
   --wc-wire: #d9d9d9;
 
   --wc-cta: #9e9e9e;
   --wc-cta-text: #111827;
+  --wc-accent: #9e9e9e;
 
   --wc-text: #111827;
   --wc-muted: #6b7280;
@@ -28,12 +31,15 @@ Text dark: #1E1E1E
 :root[data-wc-theme="linda"] {
   --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #fffdf0 0%, #ffdb91 55%, #ffa780 125%);
 
-  --wc-surface: #fffdf0; /* Neutral/BG */
+  --wc-bg: #fffdf0; /* Neutral/BG */
+  --wc-surface: #fffbde; /* Primary - lighter for cards */
+  --wc-surface-2: #fff9e6; /* Even lighter variant */
   --wc-header: #fffbde; /* Primary */
-  --wc-wire: #ffc388; /* Accent */
+  --wc-wire: #d9d9d9; /* Reserved for lofi wireframes */
 
   --wc-cta: #ffa780; /* Accent */
   --wc-cta-text: #1e1e1e;
+  --wc-accent: #ffc388; /* Secondary accent */
 
   --wc-text: #1e1e1e;
   --wc-muted: rgba(30, 30, 30, 0.65);
@@ -50,12 +56,15 @@ Text dark: #798478
 :root[data-wc-theme="thelma"] {
   --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #f6f0ea 0%, #c9ada1 55%, #798478 135%);
 
-  --wc-surface: #f6f0ea;
+  --wc-bg: #f6f0ea;
+  --wc-surface: #ffffff;
+  --wc-surface-2: #faf8f5;
   --wc-header: #c9ada1;
-  --wc-wire: #ffffff;
+  --wc-wire: #d9d9d9; /* Reserved for lofi wireframes */
 
   --wc-cta: #000000;
   --wc-cta-text: #ffffff;
+  --wc-accent: #c9ada1;
 
   --wc-text: #798478;
   --wc-muted: rgba(121, 132, 120, 0.78);
@@ -72,12 +81,15 @@ Text dark: #2F3437
 :root[data-wc-theme="tom"] {
   --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #fefae0 0%, #faedcd 55%, #d4a373 135%);
 
-  --wc-surface: #fefae0; /* primary BG */
+  --wc-bg: #fefae0; /* primary BG */
+  --wc-surface: #faedcd; /* accent - lighter for cards */
+  --wc-surface-2: #fef8e8; /* Even lighter variant */
   --wc-header: #faedcd; /* accent */
-  --wc-wire: #e9edc9; /* accent */
+  --wc-wire: #d9d9d9; /* Reserved for lofi wireframes */
 
   --wc-cta: #ccd5ae; /* accent */
   --wc-cta-text: #2f3437;
+  --wc-accent: #e9edc9;
 
   --wc-text: #2f3437;
   --wc-muted: rgba(47, 52, 55, 0.62);
@@ -95,13 +107,16 @@ Text dark: #2F3E42
   --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #2f3e42 0%, #7c918c 60%, #99e2b5 130%);
 
   /* Keep phone light for readability (use E6E3DF as the surface) */
-  --wc-surface: #e6e3df;
+  --wc-bg: #e6e3df;
+  --wc-surface: #f0eeea; /* Lighter for cards */
+  --wc-surface-2: #f5f4f2; /* Even lighter variant */
   --wc-header: #7c918c;
-  --wc-wire: #84a59d;
+  --wc-wire: #d9d9d9; /* Reserved for lofi wireframes */
 
   /* CTA: use the bright mint */
   --wc-cta: #99e2b5;
   --wc-cta-text: #2f3e42;
+  --wc-accent: #84a59d;
 
   /* Text dark (as you specified) */
   --wc-text: #2f3e42;
@@ -116,12 +131,15 @@ Current grey wireframe */
 :root[data-wc-theme="lofi"] {
   --wc-stage-bg: radial-gradient(1100px 700px at 20% 20%, #1c1c28 0%, #0b0b0f 55%, #07070a 100%);
 
+  --wc-bg: #ffffff;
   --wc-surface: #ffffff;
+  --wc-surface-2: #f9fafb;
   --wc-header: #d9d9d9;
   --wc-wire: #d9d9d9;
 
   --wc-cta: #9e9e9e;
   --wc-cta-text: #111827;
+  --wc-accent: #9e9e9e;
 
   --wc-text: #111827;
   --wc-muted: #6b7280;

@@ -1,0 +1,90 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-end;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.sheet {
+  width: 100%;
+  max-width: 390px;
+  margin: 0 auto;
+  background: var(--wc-surface);
+  border-radius: 20px 20px 0 0;
+  padding: 16px;
+  animation: slideUp 0.3s ease-out;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.handle {
+  width: 40px;
+  height: 4px;
+  background: var(--wc-muted);
+  opacity: 0.3;
+  border-radius: 999px;
+  margin: 0 auto 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--wc-text);
+  margin: 0;
+}
+
+.closeButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--wc-surface-2);
+  border: 1px solid var(--wc-border);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.closeButton:hover {
+  opacity: 0.8;
+}
+
+.closeIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--wc-icon);
+}
+
+.content {
+  color: var(--wc-text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
