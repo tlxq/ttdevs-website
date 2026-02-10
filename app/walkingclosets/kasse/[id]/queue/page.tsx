@@ -1,17 +1,19 @@
 "use client";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { use } from "react";
 import PhoneFrame from "../../../components/PhoneFrame";
 import ThemeSwitcher from "../../../components/ThemeSwitcher";
 import styles from "./queue.module.css";
 
-export default function QueuePage({ params }: { params: { id: string } }) {
+export default function QueuePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   return (
     <PhoneFrame title="Kassekön" leftSlot={<ThemeSwitcher />}>
       <div className={styles.screen}>
         {/* Header */}
         <header className={styles.header}>
-          <Link className={styles.backBtn} href={`/walkingclosets/kasse/${params.id}`} aria-label="Back to kasse">
+          <Link className={styles.backBtn} href={`/walkingclosets/kasse/${id}`} aria-label="Back to kasse">
             <ChevronLeftIcon className={styles.backIcon} aria-hidden="true" />
           </Link>
           <h1 className={styles.h1}>Kassekön</h1>
@@ -20,7 +22,7 @@ export default function QueuePage({ params }: { params: { id: string } }) {
 
         {/* Back link */}
         <div className={styles.backLinkWrap}>
-          <Link href={`/walkingclosets/kasse/${params.id}`} className={styles.backLink}>
+          <Link href={`/walkingclosets/kasse/${id}`} className={styles.backLink}>
             <span data-lofi-only="true">← Lorem</span>
             <span data-hifi-only="true">← Tillbaka</span>
           </Link>

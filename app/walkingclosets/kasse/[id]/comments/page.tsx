@@ -1,7 +1,7 @@
 "use client";
 import { ChevronLeftIcon, HeartIcon, PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, use } from "react";
 import PhoneFrame from "../../../components/PhoneFrame";
 import ThemeSwitcher from "../../../components/ThemeSwitcher";
 import styles from "./comments.module.css";
@@ -14,7 +14,8 @@ interface Comment {
   likes: number;
 }
 
-export default function CommentsPage({ params }: { params: { id: string } }) {
+export default function CommentsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [comments, setComments] = useState<Comment[]>([
     {
       id: 1,
@@ -63,7 +64,7 @@ export default function CommentsPage({ params }: { params: { id: string } }) {
         <header className={styles.header}>
           <Link
             className={styles.backBtn}
-            href={`/walkingclosets/kasse/${params.id}`}
+            href={`/walkingclosets/kasse/${id}`}
             aria-label="Back to kasse"
           >
             <ChevronLeftIcon className={styles.backIcon} aria-hidden="true" />

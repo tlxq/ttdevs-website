@@ -1,13 +1,14 @@
 "use client";
 import { ChevronLeftIcon, UserGroupIcon, ChatBubbleLeftIcon, HeartIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, use } from "react";
 import PhoneFrame from "../../components/PhoneFrame";
 import ThemeSwitcher from "../../components/ThemeSwitcher";
 import BottomSheet from "../../components/BottomSheet";
 import styles from "./kasse.module.css";
 
-export default function KassePage({ params }: { params: { id: string } }) {
+export default function KassePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [activeSheet, setActiveSheet] = useState<"skip" | "leave" | "join" | null>(null);
 
   const handleSkip = () => {
@@ -63,7 +64,7 @@ export default function KassePage({ params }: { params: { id: string } }) {
               </div>
             </div>
 
-            <Link href={`/walkingclosets/kasse/${params.id}/queue`} className={styles.hifiMembers} data-hifi-only="true">
+            <Link href={`/walkingclosets/kasse/${id}/queue`} className={styles.hifiMembers} data-hifi-only="true">
               <UserGroupIcon className={styles.memberIconHifi} aria-hidden="true" />
               <div className={styles.memberInfo}>
                 <div className={styles.memberTitle}>Medlemmar</div>
@@ -89,7 +90,7 @@ export default function KassePage({ params }: { params: { id: string } }) {
                 content="Just hittat den perfekta vintagejakkan! 🧥 Så glad att jag är med i den här kassen."
                 likes={12}
                 comments={3}
-                kasseId={params.id}
+                kasseId={id}
               />
               <FeedCardHifi
                 author="Linnea Andersson"
@@ -97,7 +98,7 @@ export default function KassePage({ params }: { params: { id: string } }) {
                 content="Tips: Kolla in den nya kollektionen från 80-talet som precis kom in!"
                 likes={8}
                 comments={5}
-                kasseId={params.id}
+                kasseId={id}
               />
               <FeedCardHifi
                 author="Sofia Berg"
@@ -105,7 +106,7 @@ export default function KassePage({ params }: { params: { id: string } }) {
                 content="Tack för en fantastisk upplevelse! Hittade massor av unika plagg."
                 likes={24}
                 comments={7}
-                kasseId={params.id}
+                kasseId={id}
               />
             </div>
           </div>
