@@ -41,6 +41,46 @@
   background: var(--wc-wire);
 }
 
+.realInput {
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--wc-border);
+  border-radius: 6px;
+  background: var(--wc-surface);
+  font-size: 12px;
+  color: var(--wc-text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.realInput:focus {
+  border-color: var(--wc-cta);
+}
+
+.realInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.checkboxText {
+  font-size: 10px;
+  color: var(--wc-muted);
+}
+
 .cta {
   margin-top: 14px;
   width: 100%;
@@ -51,6 +91,16 @@
   font-weight: 700;
   color: var(--wc-cta-text);
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.cta:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.cta:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .dividerRow {
