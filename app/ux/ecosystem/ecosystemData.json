@@ -105,7 +105,7 @@
   },
   {
     "concept": "moodboard",
-    "description": "En visuell sammanfattning av en designkampagn eller projekt. Inkluderar färger, bilder, text och andra visuella element som inspirerar till en visuell identitet."
+    "description": "En visuell sammanfattning av en designkampanj eller projekt. Inkluderar färger, bilder, text och andra visuella element som inspirerar till en visuell identitet."
   },
   {
     "concept": "färgtema",
@@ -122,5 +122,221 @@
   {
     "concept": "gestalt principles",
     "description": "Designprinciper som hjälper till att skapa en intuitiv och logisk upplevelse. Inkluderar principer som proximitet, likhet och fokus."
+  },
+  {
+    "concept": "User-Story Map",
+    "description": "En översiktlig karta som visar användarhistorier och hur de hänger ihop för att uppfylla användarens mål.",
+    "resource": {
+      "label": "Atlassian - User Story Mapping",
+      "href": "https://www.atlassian.com/agile/user-stories/user-story-mapping"
+    }
+  },
+  {
+    "concept": "Storyboard",
+    "description": "En serie skisser eller bilder som visar användarens steg genom en tjänst eller produkt. Hjälper till att förklara och visualisera användarupplevelsen.",
+    "resource": {
+      "label": "Miro - Storyboarding in UX",
+      "href": "https://miro.com/templates/storyboard/"
+    }
+  },
+  {
+    "concept": "User scenario",
+    "description": "En berättelse om hur en viss användare når sitt mål med hjälp av produkten. Fokuserar på kontext, motivation och hinder.",
+    "resource": {
+      "label": "Interaction Design Foundation: Scenarios",
+      "href": "https://www.interaction-design.org/literature/topics/scenarios"
+    }
+  },
+  {
+    "concept": "Figma",
+    "description": "Ett molnbaserat verktyg för design och prototypskapande. Används för att samarbeta i realtid och för skapa wireframes, prototyper och UI-komponenter.",
+    "resource": {
+      "label": "Figma",
+      "href": "https://www.figma.com/"
+    }
+  },
+  {
+    "concept": "CTA (Call To Action)",
+    "description": "En knapp, länk eller annat element som tydligt uppmanar användaren att göra något, t.ex. 'Köp nu', 'Signa upp', 'Ladda ner'.",
+    "resource": {
+      "label": "Interaction Design Foundation - CTA",
+      "href": "https://www.interaction-design.org/literature/topics/call-to-action"
+    }
+  },
+  {
+    "concept": "Kognitiv tröskel",
+    "description": "Graden av mental ansträngning en användare behöver för att förstå eller använda något. Låg kognitiv tröskel innebär att det är lätt att komma igång."
+  },
+  {
+    "concept": "färglära",
+    "description": "Läran om färgers betydelse, samspel och påverkan. Viktigt för kontrast, attraktionskraft och tillgänglighet.",
+    "resource": {
+      "label": "Adobe - Color Theory Basics",
+      "href": "https://www.adobe.com/creativecloud/design/discover/color-theory.html"
+    }
+  },
+  {
+    "concept": "HSB",
+    "description": "Hue (Nyans), Saturation (Mättnad), och Brightness (Ljusstyrka) – ett system för att beskriva och justera färg.",
+    "resource": {
+      "label": "Wikipedia - HSB",
+      "href": "https://sv.wikipedia.org/wiki/HSB_(f%C3%A4grymd)"
+    }
+  },
+  {
+    "concept": "HMW-frågor (How Might We)",
+    "description": "Öppna frågor för att omformulera problem till möjligheter. T.ex. 'Hur kan vi göra det enklare att ...?'",
+    "resource": {
+      "label": "IDEO U - How Might We",
+      "href": "https://www.ideou.com/blogs/inspiration/how-might-we"
+    }
+  },
+  {
+    "concept": "problem statement",
+    "description": "En tydlig och avgränsad beskrivning av vilket problem som ska lösas i projektet.",
+    "resource": {
+      "label": "design thinking: Defining the Problem",
+      "href": "https://www.interaction-design.org/literature/article/design-thinking-getting-started-with-the-problem"
+    }
+  },
+  {
+    "concept": "user stories",
+    "description": "Korta och enkla beskrivningar av önskade funktionaliteter, skrivna ur användarens perspektiv. Ex: Som besökare vill jag kunna filtrera produkter så att jag snabbt hittar rätt.",
+    "resource": {
+      "label": "Atlassian - User stories",
+      "href": "https://www.atlassian.com/agile/project-management/user-stories"
+    }
+  },
+  {
+    "concept": "microinteractions",
+    "description": "Små, enkla interaktioner i en produkt som ger feedback eller guidar användaren, t.ex. ett ljud när du skickar ett meddelande.",
+    "resource": {
+      "label": "UXPlanet - Microinteractions",
+      "href": "https://uxplanet.org/microinteractions-details-matter-4e4bf031df3d"
+    }
+  },
+  {
+    "concept": "användarvänligt",
+    "description": "En produkt som är enkel att förstå och använda, med tydlig navigation och minimal förvirring."
+  },
+  {
+    "concept": "usability",
+    "description": "Användbarhet – hur effektivt, enkelt och tillfredsställande en produkt kan användas för att uppnå mål.",
+    "resource": {
+      "label": "NNG: Definition of Usability",
+      "href": "https://www.nngroup.com/articles/usability-101-introduction-to-usability/"
+    }
+  },
+  {
+    "concept": "användbarhetstestning (usability testing)",
+    "description": "Testning av en produkts användbarhet genom att observera riktiga användare när de försöker utföra uppgifter.",
+    "resource": {
+      "label": "Usability.gov: Usability Testing",
+      "href": "https://www.usability.gov/how-to-and-tools/methods/usability-testing.html"
+    }
+  },
+  {
+    "concept": "A/B-testning",
+    "description": "En metod där två versioner jämförs för att se vilken som presterar bäst utifrån användardata.",
+    "resource": {
+      "label": "Optimizely - A/B testing",
+      "href": "https://www.optimizely.com/optimization-glossary/ab-testing/"
+    }
+  },
+  {
+    "concept": "användarintervjuer",
+    "description": "Samtalsmetodik där man samlar in djupare insikt om användares behov, beteenden och problem.",
+    "resource": {
+      "label": "Interaction Design Foundation - User Interviews",
+      "href": "https://www.interaction-design.org/literature/topics/user-interviews"
+    }
+  },
+  {
+    "concept": "card sorting",
+    "description": "En workshop-metod där användare grupperar kort med innehåll eller funktioner för att skapa logisk struktur.",
+    "resource": {
+      "label": "NNG - Card Sorting",
+      "href": "https://www.nngroup.com/articles/card-sorting-definition/"
+    }
+  },
+  {
+    "concept": "heuristic evaluation (heuristisk utvärdering)",
+    "description": "Experter granskar en produkt mot etablerade heuristiker (regler) för god användbarhet.",
+    "resource": {
+      "label": "NNG - 10 Usability Heuristics",
+      "href": "https://www.nngroup.com/articles/ten-usability-heuristics/"
+    }
+  },
+  {
+    "concept": "tillgänglighet (accessibility)",
+    "description": "Att produkter, tjänster eller webbplatser fungerar för alla – även personer med funktionsvariation. Exempelvis genom rätt kontraster, alternativtext, och tangentbordsstöd.",
+    "resource": {
+      "label": "W3C - Accessibility",
+      "href": "https://www.w3.org/WAI/fundamentals/accessibility-intro/"
+    }
+  },
+  {
+    "concept": "WCAG (Web Content Accessibility Guidelines)",
+    "description": "Internationella riktlinjer som beskriver hur webbinnehåll ska göras tillgängligt för alla användare, oavsett förmåga.",
+    "resource": {
+      "label": "WCAG standards overview",
+      "href": "https://www.w3.org/WAI/standards-guidelines/wcag/"
+    }
+  },
+  {
+    "concept": "inkluderande design (inclusive design)",
+    "description": "Ett designperspektiv som tar hänsyn till så många slags användare som möjligt – oavsett bakgrund eller förmåga.",
+    "resource": {
+      "label": "Microsoft Inclusive Design",
+      "href": "https://www.microsoft.com/design/inclusive/"
+    }
+  },
+  {
+    "concept": "responsiv design",
+    "description": "Design som automatiskt anpassar sig till användarens skärmstorlek, från mobil till desktop.",
+    "resource": {
+      "label": "Mozilla - Responsive Design",
+      "href": "https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design"
+    }
+  },
+  {
+    "concept": "mobile-first",
+    "description": "Designstrategi där man börjar designa för små skärmar och skalar uppåt.",
+    "resource": {
+      "label": "Google - Mobile-first design",
+      "href": "https://web.dev/mobile-first/"
+    }
+  },
+  {
+    "concept": "ARIA",
+    "description": "Accessible Rich Internet Applications – HTML-attribut som gör gränssnitt mer begripliga för hjälpmedel.",
+    "resource": {
+      "label": "W3C - ARIA Overview",
+      "href": "https://www.w3.org/WAI/standards-guidelines/aria/"
+    }
+  },
+  {
+    "concept": "role-attribut i HTML",
+    "description": "HTML-attributet 'role' definierar ett elements funktion i syfte att förbättra tillgängligheten."
+  },
+  {
+    "concept": "funktionsvariation",
+    "description": "En variation i fysisk, psykisk eller kognitiv förmåga – t.ex. nedsatt syn, hörsel eller rörlighet."
+  },
+  {
+    "concept": "deceptive design pattern",
+    "description": "Designmönster (även kallade dark patterns) som medvetet lurar eller manipulerar användare att göra något oönskat.",
+    "resource": {
+      "label": "Deceptive Design - Examples",
+      "href": "https://www.deceptive.design/types"
+    }
+  },
+  {
+    "concept": "Semantisk HTML",
+    "description": "Att använda HTML-element på rätt sätt för att visa innehållets betydelse – exempelvis <main>, <nav> och <article>.",
+    "resource": {
+      "label": "MDN - Semantics in HTML",
+      "href": "https://developer.mozilla.org/en-US/docs/Glossary/Semantics#semantics_in_html"
+    }
   }
 ]
