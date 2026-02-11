@@ -5,8 +5,9 @@ export type QuizQuestion = {
   correctIndex: number;
 };
 
-// 20 exempel-frågor (SV)
+// Originalfrågor + nya frågor kopplade till ux_concepts_sv.md
 export const allQuizQuestions: QuizQuestion[] = [
+  // Befintliga frågor (1–20)
   {
     id: 1,
     question: "Vad betyder UX?",
@@ -101,7 +102,7 @@ export const allQuizQuestions: QuizQuestion[] = [
   {
     id: 12,
     question: "Vad är en wireframe?",
-    options: ["Kodmall", "Enkel skiss över gränssnitt", "API-specifikation", "Bildmanus"],
+    options: ["Kodmall", "Enkel skiss över gr��nssnitt", "API-specifikation", "Bildmanus"],
     correctIndex: 1,
   },
   {
@@ -177,9 +178,121 @@ export const allQuizQuestions: QuizQuestion[] = [
     options: ["Component rerender", "User Feedback", "React Reconciliation", "Database Migration"],
     correctIndex: 1,
   },
+
+  // Nya frågor (21 och framåt) kopplade till ux_concepts_sv.md
+  {
+    id: 21,
+    question: "Vad innebär emotional design?",
+    options: [
+      "Design för att skapa känslomässig respons",
+      "Kodbaserad prestanda",
+      "Färganalys",
+      "Linjära processer",
+    ],
+    correctIndex: 0,
+  },
+  {
+    id: 22,
+    question: "Vad syftar ett designsystem till?",
+    options: [
+      "Att skapa en konsistent och skalbar design",
+      "Att sortera data",
+      "Tracker för buggar",
+      "Kodstandard för API:er",
+    ],
+    correctIndex: 0,
+  },
+  {
+    id: 23,
+    question: "Vad är syftet med WCAG?",
+    options: [
+      "Att webbplatser ska vara tillgängliga för alla",
+      "Att designa med mycket färg",
+      "Att marknadsföra UX-metoder",
+      "Att optimera servern",
+    ],
+    correctIndex: 0,
+  },
+  {
+    id: 24,
+    question: "Vad av följande beskriver tillgänglighet (accessibility)?",
+    options: [
+      "Att produkter fungerar för personer med olika förmågor",
+      "Att design är modern och snygg",
+      "Att API:er är lätta att använda",
+      "Att buggar undviks",
+    ],
+    correctIndex: 0,
+  },
+  {
+    id: 25,
+    question: "Vad är ARIA i HTML?",
+    options: [
+      "HTML-attribut för bättre tillgänglighet",
+      "Kod för serverkommunikation",
+      "Mnemonisk kod",
+      "Mobilanpassning",
+    ],
+    correctIndex: 0,
+  },
+  {
+    id: 26,
+    question: "Vad innebär 'deceptive design pattern'?",
+    options: [
+      "Design som lurar användaren att göra något oönskat",
+      "Tydlig UX-design",
+      "Färgteori",
+      "Kodoptimering",
+    ],
+    correctIndex: 0,
+  },
+  {
+    id: 27,
+    question: "Vad menas med funktionsvariation?",
+    options: [
+      "Skillnader i fysisk, psykisk eller kognitiv förmåga",
+      "Testmiljö",
+      "Projektplan",
+      "Designsystem",
+    ],
+    correctIndex: 0,
+  },
+  {
+    id: 28,
+    question: "Vad är syftet med en user journey map?",
+    options: [
+      "Att visualisera användarens upplevelse och steg",
+      "Att skapa API-dokumentation",
+      "Att välja färgpalett",
+      "Att sortera databaser",
+    ],
+    correctIndex: 0,
+  },
+  {
+    id: 29,
+    question: "Vad är en moodboard?",
+    options: [
+      "En visuell samling som inspirerar designens identitet",
+      "En kodstruktur",
+      "En process för buggrapporter",
+      "Ett testverktyg",
+    ],
+    correctIndex: 0,
+  },
+  {
+    id: 30,
+    question: "Vad är Semantisk HTML?",
+    options: [
+      "Att använda HTML-element med rätt betydelse",
+      "Extra färgskikt",
+      "Design för bara mobiler",
+      "Kod för bankapplikationer",
+    ],
+    correctIndex: 0,
+  },
 ];
 
-// 🔥 Hjälpfunktion för att slumpa ut 10 frågor per quiz
+// Hjälpfunktion för att slumpa ut X frågor per quiz
 export function getRandomQuizQuestions(count = 10): QuizQuestion[] {
   // Fisher–Yates shuffle
   const questions = allQuizQuestions.slice();
