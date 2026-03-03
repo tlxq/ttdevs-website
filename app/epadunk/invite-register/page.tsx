@@ -7,7 +7,7 @@ export default function InviteRegisterPage() {
   const [status, setStatus] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
   // Hämta token från URL
-  const apiUrl = process.env.RAIL_API_URL;
+  const apiUrl = process.env.NEXT_PUBLIC_RAIL_API_URL;
   const search = typeof window !== "undefined" ? window.location.search : "";
   const params = new URLSearchParams(search);
   const token = params.get("token") || "";
