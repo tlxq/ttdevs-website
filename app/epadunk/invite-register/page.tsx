@@ -12,8 +12,12 @@ function InviteRegisterForm() {
   const [status, setStatus] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
 
+  const usernameValid = /^[a-zA-Z0-9_]{3,32}$/.test(username);
+  const passwordValid = password.length >= 8;
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!usernameValid || !passwordValid) return;
     setLoading(true);
     setStatus(undefined);
     try {
@@ -24,7 +28,7 @@ function InviteRegisterForm() {
       });
       const data = await res.json();
       if (res.ok) {
-        setStatus("✅ Konto skapat! Du kan nu logga in i EPA-appen.");
+        setStatus("success");
       } else {
         setStatus(data.error ?? "Något gick fel!");
       }
@@ -34,86 +38,82 @@ function InviteRegisterForm() {
     setLoading(false);
   };
 
+  if (status === "success") {
+    return (
+      <main style={mainStyle}>
+        <div style={{ fontSize: 48 }}>🎉</div>
+        <h2 style={{ color: "#4caf50", marginBottom: 8 }}>Konto skapat!</h2>
+        <p style={{ color: "#555", textAlign: "center" }}>
+          Du kan nu logga in i EPA-appen på mobilen med ditt användarnamn och lösenord.
+        </p>
+      </main>
+    );
+  }
+
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "0 16px",
-      }}
-    >
-      <h1 style={{ marginBottom: 8 }}>Registrera EPA-app-konto</h1>
+    <main style={mainStyle}>
+      <h1 style={{ marginBottom: 4 }}>🚗 EPA-appen</h1>
+      <p style={{ color: "#666", marginBottom: 24, textAlign: "center" }}>
+        Skapa ditt konto för att komma igång
+      </p>
 
       {!token ? (
-        <div style={{ color: "red", margin: 16 }}>Ingen giltig invite-länk!</div>
-      ) : status?.startsWith("✅") ? (
-        <div style={{ color: "green", fontSize: 18, textAlign: "center" }}>{status}</div>
+        <div style={{ color: "red" }}>Ingen giltig invite-länk. Kontakta administratören.</div>
       ) : (
-        <form
-          onSubmit={onSubmit}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 12,
-            width: "100%",
-            maxWidth: 320,
-          }}
-        >
+        <form onSubmit={onSubmit} style={formStyle}>
+          <label style={labelStyle}>Användarnamn</label>
           <input
             required
             type="text"
-            placeholder="Välj ett användarnamn"
+            placeholder="t.ex. therese123"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             style={{
-              padding: "10px 12px",
-              borderRadius: 8,
-              border: "1px solid #ccc",
-              fontSize: 16,
+              ...inputStyle,
+              borderColor: username && !usernameValid ? "red" : "#ccc",
             }}
           />
+          {username && !usernameValid && (
+            <span style={hintStyle}>
+              3–32 tecken, endast bokstäver (a-z), siffror och understreck _
+            </span>
+          )}
+
+          <label style={{ ...labelStyle, marginTop: 16 }}>Lösenord</label>
           <input
             required
             type="password"
-            placeholder="Välj ett lösenord (minst 8 tecken)"
+            placeholder="Minst 8 tecken"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             style={{
-              padding: "10px 12px",
-              borderRadius: 8,
-              border: "1px solid #ccc",
-              fontSize: 16,
+              ...inputStyle,
+              borderColor: password && !passwordValid ? "red" : "#ccc",
             }}
           />
+          {password && !passwordValid && (
+            <span style={hintStyle}>Lösenordet måste vara minst 8 tecken</span>
+          )}
+
+          {status && status !== "success" && (
+            <div style={{ color: "red", fontSize: 14, textAlign: "center", marginTop: 8 }}>
+              {status}
+            </div>
+          )}
+
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !usernameValid || !passwordValid}
             style={{
-              padding: "12px",
-              borderRadius: 8,
-              border: "none",
-              backgroundColor: "#ffc300",
-              color: "#000",
-              fontWeight: "bold",
-              fontSize: 16,
-              cursor: loading ? "not-allowed" : "pointer",
-              opacity: loading ? 0.7 : 1,
+              ...btnStyle,
+              opacity: loading || !usernameValid || !passwordValid ? 0.5 : 1,
+              cursor: loading || !usernameValid || !passwordValid ? "not-allowed" : "pointer",
             }}
           >
-            {loading ? "Registrerar..." : "Skapa konto"}
+            {loading ? "Skapar konto..." : "Skapa konto"}
           </button>
-          {status && (
-            <div style={{ color: "red", fontSize: 14, textAlign: "center" }}>{status}</div>
-          )}
         </form>
       )}
-
-      <p style={{ fontSize: 13, marginTop: 32, color: "#888", textAlign: "center" }}>
-        När du har registrerat dig kan du logga in i EPA-appen på mobilen.
-      </p>
     </main>
   );
 }
@@ -125,3 +125,51 @@ export default function InviteRegisterPage() {
     </Suspense>
   );
 }
+
+const mainStyle: React.CSSProperties = {
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "0 16px",
+};
+
+const formStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  maxWidth: 340,
+};
+
+const labelStyle: React.CSSProperties = {
+  fontSize: 13,
+  fontWeight: 600,
+  color: "#444",
+  marginBottom: 4,
+};
+
+const inputStyle: React.CSSProperties = {
+  padding: "10px 12px",
+  borderRadius: 8,
+  border: "1.5px solid #ccc",
+  fontSize: 16,
+  outline: "none",
+};
+
+const hintStyle: React.CSSProperties = {
+  color: "red",
+  fontSize: 12,
+  marginTop: 4,
+};
+
+const btnStyle: React.CSSProperties = {
+  marginTop: 24,
+  padding: "13px",
+  borderRadius: 8,
+  border: "none",
+  backgroundColor: "#ffc300",
+  color: "#000",
+  fontWeight: "bold",
+  fontSize: 16,
+};
