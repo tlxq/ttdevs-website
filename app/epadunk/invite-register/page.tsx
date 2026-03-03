@@ -1,16 +1,15 @@
-"use client";
-import React, { useState, FormEvent, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useState, FormEvent } from "react";
 
-function InviteRegisterForm() {
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token") || "";
-  const apiUrl = process.env.NEXT_PUBLIC_RAIL_API_URL;
-
+export default function InviteRegisterPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
+  // Hämta token från URL
+  const apiUrl = process.env.RAIL_API_URL;
+  const search = typeof window !== "undefined" ? window.location.search : "";
+  const params = new URLSearchParams(search);
+  const token = params.get("token") || "";
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -76,13 +75,5 @@ function InviteRegisterForm() {
         När du har registrerat dig kan du logga in i EPA-appen på mobilen!
       </p>
     </main>
-  );
-}
-
-export default function InviteRegisterPage() {
-  return (
-    <Suspense>
-      <InviteRegisterForm />
-    </Suspense>
   );
 }
