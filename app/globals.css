@@ -379,6 +379,15 @@ body {
   .tt-person-role-badge-tom     { @apply border-tt-amber/30 bg-tt-amber/10 text-tt-amber; }
   .tt-person-role-badge-therese { @apply border-tt-orange/30 bg-tt-orange/10 text-tt-orange; }
   .tt-header-back { @apply flex items-center gap-1.5 text-sm text-tt-ice/50 transition-colors hover:text-tt-ice; }
+
+  /* About — person page variant */
+  .tt-about-person-card { @apply relative mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/8 bg-tt-deep/70 p-8 backdrop-blur-sm md:p-12; }
+  .tt-about-stat        { @apply rounded-xl border border-white/8 bg-white/4 px-3 py-2; }
+  .tt-about-stat-label  { @apply block text-xs font-semibold uppercase tracking-widest text-tt-muted; }
+  .tt-about-stat-value  { @apply mt-0.5 block text-sm font-bold text-tt-cream; }
+  .tt-role-badge-therese { @apply border-tt-orange/30 bg-tt-orange/10 text-tt-orange; }
+  .tt-card-role-therese  { @apply text-tt-orange; }
+  .tt-btn-send-therese   { @apply from-tt-orange to-tt-rose shadow-tt-orange/20 hover:shadow-tt-orange/40; }
 }
 
 

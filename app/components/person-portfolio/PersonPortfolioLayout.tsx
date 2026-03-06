@@ -8,30 +8,31 @@ import AmbientBackground from "../../lib/AmbientBackground";
 import ScrollProgressBar from "../../lib/components/ScrollProgressBar";
 import Header from "../header/Header";
 import PersonHero from "./PersonHero";
-import AboutSection from "../about/AboutSection";
-import ProjectsSection from "../projects/ProjectsSection";
-import SkillsSection from "../skills/SkillsSection";
-import ContactSection from "../contact/ContactSection";
+import PersonAboutSection from "./PersonAboutSection";
+import PersonProjectsSection from "./PersonProjectsSection";
+import PersonSkillsSection from "./PersonSkillsSection";
+import PersonContactSection from "./PersonContactSection";
 import ContactModal from "../contact/ContactModal";
 import Footer from "../footer/Footer";
+
+const PERSON_NAMES: Record<"tom" | "therese", string> = {
+  tom: "Tom",
+  therese: "Therese",
+};
 
 interface PersonPortfolioLayoutProps {
   person: "tom" | "therese";
 }
 
-/**
- * Reusable layout for individual developer portfolio pages (/tom, /therese).
- * Shares the same scroll infrastructure as PortfolioLayout but with a
- * person-specific hero and a back-link to TTdevs in the header.
- */
 export default function PersonPortfolioLayout({ person }: PersonPortfolioLayoutProps) {
   const { lenis, scrollToSection } = useSmoothScroll();
   const [selectedPerson, setSelectedPerson] = useState<SelectedPerson | null>(null);
+  const name = PERSON_NAMES[person];
 
   useScrollSnap(lenis);
 
-  function openModal(recipientKey: RecipientKey, name: string) {
-    setSelectedPerson({ recipientKey, name });
+  function openModal(recipientKey: RecipientKey, displayName: string) {
+    setSelectedPerson({ recipientKey, name: displayName });
     lenis?.stop();
   }
 
@@ -50,10 +51,10 @@ export default function PersonPortfolioLayout({ person }: PersonPortfolioLayoutP
 
         <main>
           <PersonHero person={person} scrollToSection={scrollToSection} />
-          <AboutSection />
-          <ProjectsSection />
-          <SkillsSection />
-          <ContactSection onContactClick={openModal} />
+          <PersonAboutSection person={person} />
+          <PersonProjectsSection person={person} />
+          <PersonSkillsSection person={person} />
+          <PersonContactSection person={person} name={name} onContactClick={openModal} />
         </main>
 
         <Footer />
