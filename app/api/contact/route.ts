@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-
-type RecipientKey = "tom" | "therese";
+import type { RecipientKey } from "../../lib/types";
+import { getEnv } from "../../lib/config";
 
 type ContactPayload = {
   recipientKey: RecipientKey;
@@ -55,8 +55,8 @@ function escapeHtml(input: string) {
 }
 
 function getRecipientEmail(key: RecipientKey) {
-  if (key === "tom") return process.env.CONTACT_TO_TOM_EMAIL;
-  if (key === "therese") return process.env.CONTACT_TO_THERESE_EMAIL;
+  if (key === "tom") return getEnv("CONTACT_TO_TOM_EMAIL");
+  if (key === "therese") return getEnv("CONTACT_TO_THERESE_EMAIL");
   return undefined;
 }
 
@@ -103,14 +103,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!process.env.RESEND_API_KEY) {
+    if (!getEnv("RESEND_API_KEY")) {
       return NextResponse.json(
         { error: "Server not configured (missing RESEND_API_KEY)" },
         { status: 500 }
       );
     }
 
-    const from = process.env.RESEND_FROM_EMAIL;
+    const from = getEnv("RESEND_FROM_EMAIL");
     if (!from) {
       return NextResponse.json(
         { error: "Server not configured (missing RESEND_FROM_EMAIL)" },
@@ -131,7 +131,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(getEnv("RESEND_API_KEY"));
 
     const recipientName = getRecipientName(recipientKey);
     const safeName = escapeHtml(name);

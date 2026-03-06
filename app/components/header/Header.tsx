@@ -1,41 +1,86 @@
 "use client";
 
-import type Lenis from "lenis";
-import Link from "next/link";
+import { useState } from "react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useActiveSection } from "../../lib/hooks/useActiveSection";
 
 interface HeaderProps {
-  lenis: Lenis | null;
+  scrollToSection: (id: string) => void;
 }
 
-export default function Header({ lenis }: HeaderProps) {
-  const handleContactClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
+const NAV_LINKS = [
+  { label: "About", id: "about" },
+  { label: "Projects", id: "projects" },
+  { label: "Skills", id: "skills" },
+];
 
-    const target = document.querySelector<HTMLElement>("#contact");
-    if (!target) return;
+export default function Header({ scrollToSection }: HeaderProps) {
+  const activeSection = useActiveSection();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-    if (lenis) {
-      lenis.scrollTo(target, {
-        offset: -80, // adjust to match your header height
-      });
-    } else {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  function scrollTo(id: string) {
+    setMenuOpen(false);
+    scrollToSection(id);
+  }
 
   return (
-    <header className="w-full border-b border-white/10 bg-black/60 backdrop-blur">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-        <nav className="flex items-center gap-6 text-sm font-medium">
-          <Link
-            href="#contact"
-            onClick={handleContactClick}
-            className="rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-black transition hover:bg-zinc-200"
-          >
-            Contact us
-          </Link>
+    <header className="tt-header">
+      <div className="tt-header-inner">
+        {/* Logo */}
+        <button
+          onClick={() => scrollTo("hero")}
+          className="tt-logo-btn"
+          aria-label="Back to top"
+        >
+          TTdevs
+        </button>
+
+        {/* Desktop nav */}
+        <nav aria-label="Main navigation" className="hidden items-center gap-1 md:flex">
+          {NAV_LINKS.map(({ label, id }) => (
+            <button
+              key={id}
+              onClick={() => scrollTo(id)}
+              aria-current={activeSection === id ? "true" : undefined}
+              className={activeSection === id ? "tt-nav-link-active" : "tt-nav-link"}
+            >
+              {label}
+            </button>
+          ))}
         </nav>
+
+        {/* Right side */}
+        <div className="flex items-center gap-3">
+          <button onClick={() => scrollTo("contact")} className="tt-btn-nav">
+            Contact us
+          </button>
+          <button
+            className="tt-hamburger"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <XMarkIcon className="h-5 w-5" /> : <Bars3Icon className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <nav aria-label="Mobile navigation" className="tt-header-mobile">
+          {NAV_LINKS.map(({ label, id }) => (
+            <button
+              key={id}
+              onClick={() => scrollTo(id)}
+              aria-current={activeSection === id ? "true" : undefined}
+              className={activeSection === id ? "tt-nav-link-mobile-active" : "tt-nav-link-mobile"}
+            >
+              {label}
+            </button>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }
+
