@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
-import { FadeIn, Stagger, StaggerItem } from "../../lib/components/FadeIn";
+import { FadeIn, SlideIn } from "../../lib/components/FadeIn";
 import SectionTag from "../../lib/components/SectionTag";
 
 type Status = "live" | "in-progress" | "planned";
@@ -48,7 +48,7 @@ const STATUS: Record<Status, { label: string; className: string }> = {
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="tt-section">
+    <section id="projects" data-snap className="tt-section">
       <div className="tt-container">
         <FadeIn className="tt-section-header">
           <SectionTag>What we&apos;ve built</SectionTag>
@@ -56,13 +56,17 @@ export default function ProjectsSection() {
           <p className="tt-subtext">A selection of things we&apos;ve designed, built, and shipped.</p>
         </FadeIn>
 
-        <Stagger className="tt-projects-grid">
-          {PROJECTS.map((project) => (
-            <StaggerItem key={project.title}>
+        <div className="tt-projects-grid">
+          {PROJECTS.map((project, i) => (
+            <SlideIn
+              key={project.title}
+              from={i % 3 === 0 ? "left" : i % 3 === 1 ? "up" : "right"}
+              delay={i * 0.15}
+            >
               <ProjectCard project={project} />
-            </StaggerItem>
+            </SlideIn>
           ))}
-        </Stagger>
+        </div>
       </div>
     </section>
   );
@@ -71,11 +75,12 @@ export default function ProjectsSection() {
 function ProjectCard({ project }: { project: Project }) {
   const { label, className } = STATUS[project.status];
   const isPlanned = project.status === "planned";
+  const reduced = useReducedMotion();
 
   const card = (
     <motion.div
-      whileHover={isPlanned ? {} : { y: -4, boxShadow: "var(--shadow-card-hover)" }}
-      transition={{ type: "spring", stiffness: 300, damping: 24 }}
+      whileHover={isPlanned || reduced ? {} : { y: -5, boxShadow: "var(--shadow-card-hover)" }}
+      transition={{ type: "spring", stiffness: 180, damping: 24 }}
       className={["tt-card flex h-full flex-col group", isPlanned ? "opacity-50" : ""].join(" ")}
     >
       {!isPlanned && (

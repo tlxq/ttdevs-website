@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { FadeIn, Stagger, StaggerItem } from "../../lib/components/FadeIn";
+import { motion, useReducedMotion } from "framer-motion";
+import { FadeIn, SlideIn } from "../../lib/components/FadeIn";
 import SectionTag from "../../lib/components/SectionTag";
 
 interface TeamMember {
@@ -31,7 +31,7 @@ const TEAM: TeamMember[] = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="tt-section">
+    <section id="about" data-snap className="tt-section">
       <div className="tt-container">
         <FadeIn className="tt-section-header">
           <SectionTag>The team</SectionTag>
@@ -41,41 +41,53 @@ export default function AboutSection() {
           </p>
         </FadeIn>
 
-        <Stagger className="tt-team-grid">
-          {TEAM.map((member) => (
-            <StaggerItem key={member.name}>
+        <div className="tt-team-grid">
+          {TEAM.map((member, i) => (
+            <SlideIn key={member.name} from={i % 2 === 0 ? "left" : "right"} delay={i * 0.12}>
               <MemberCard member={member} />
-            </StaggerItem>
+            </SlideIn>
           ))}
-        </Stagger>
+        </div>
       </div>
     </section>
   );
 }
 
 function MemberCard({ member }: { member: TeamMember }) {
+  const reduced = useReducedMotion();
   return (
     <motion.div
-      whileHover={{ y: -4, boxShadow: "var(--shadow-card-hover)" }}
-      transition={{ type: "spring", stiffness: 300, damping: 24 }}
+      whileHover={reduced ? {} : { y: -6, boxShadow: "var(--shadow-card-hover)" }}
+      transition={{ type: "spring", stiffness: 180, damping: 24 }}
       className="tt-card-lg group"
     >
       <div className="tt-card-glow" />
 
-      <div
+      <motion.div
         className={`tt-avatar-square mb-5 h-14 w-14 ${member.gradient}`}
+        whileHover={reduced ? {} : { scale: 1.1, rotate: 3 }}
+        transition={{ type: "spring", stiffness: 220, damping: 18 }}
         aria-hidden="true"
       >
         {member.name[0]}
-      </div>
+      </motion.div>
 
       <h3 className="tt-card-name">{member.name}</h3>
       <span className="tt-role-badge">{member.role}</span>
       <p className="mt-4 tt-body">{member.bio}</p>
 
       <div className="tt-tags-row">
-        {member.tags.map((tag) => (
-          <span key={tag} className="tt-tech-tag">{tag}</span>
+        {member.tags.map((tag, i) => (
+          <motion.span
+            key={tag}
+            className="tt-tech-tag"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 + i * 0.07, duration: 0.45 }}
+          >
+            {tag}
+          </motion.span>
         ))}
       </div>
     </motion.div>

@@ -28,7 +28,7 @@ const TEAM_MEMBERS: TeamMember[] = [
 
 export default function ContactSection({ onContactClick }: ContactSectionProps) {
   return (
-    <section id="contact" className="tt-section">
+    <section id="contact" data-snap className="tt-section">
       <div className="tt-container">
         <FadeIn className="tt-section-header">
           <SectionTag>Let&apos;s work together</SectionTag>

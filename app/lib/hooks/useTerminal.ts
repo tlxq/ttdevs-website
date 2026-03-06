@@ -13,15 +13,16 @@ export interface OutputLine {
 type RawLine = { text: string; type: LineType };
 
 const BOOT_SEQUENCE: { text: string; delay: number }[] = [
-  { text: "Initialising TTdevs portfolio v1.0.0...", delay: 200 },
-  { text: "Loading core modules.............. [  OK  ]", delay: 500 },
-  { text: "Establishing connection........... [  OK  ]", delay: 800 },
-  { text: "Mounting filesystem............... [  OK  ]", delay: 1100 },
-  { text: "System ready.", delay: 1500 },
-  { text: "", delay: 1750 },
-  { text: "▌ TTdevs — Tom & Therese, full-stack developers.", delay: 2000 },
-  { text: 'Type "help" for available commands.', delay: 2350 },
-  { text: "", delay: 2500 },
+  { text: "TTdevs OS v2.0.0 — booting...", delay: 180 },
+  { text: "Loading kernel modules.............. [  OK  ]", delay: 480 },
+  { text: "Mounting developer profiles......... [  OK  ]", delay: 820 },
+  { text: "Establishing secure connection...... [  OK  ]", delay: 1140 },
+  { text: "Running environment checks.......... [  OK  ]", delay: 1440 },
+  { text: "System ready.", delay: 1780 },
+  { text: "", delay: 2000 },
+  { text: "▌ TTdevs — Tom & Therese, full-stack developers.", delay: 2200 },
+  { text: 'Type "help" for available commands.', delay: 2580 },
+  { text: "", delay: 2720 },
 ];
 
 function processCommand(cmd: string): RawLine[] {
@@ -144,7 +145,7 @@ export function useTerminal(onStart: () => void) {
       ]);
       setInput("");
       setTransitioning(true);
-      setTimeout(onStart, 750);
+      setTimeout(onStart, 900);
       return;
     }
 

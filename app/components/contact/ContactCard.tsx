@@ -1,6 +1,7 @@
 "use client";
 
-import { EnvelopeIcon, SparklesIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { ArrowRightIcon, EnvelopeIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import type { RecipientKey, TeamMember } from "../../lib/types";
 import { Card } from "../../lib/components/Card";
 import { Button } from "../../lib/components/Button";
@@ -35,14 +36,28 @@ export default function ContactCard({
 
       <p className="mb-6 grow tt-body">{bio}</p>
 
-      <Button
-        variant="send"
-        type="button"
-        onClick={() => onContactClick(recipientKey, name)}
-      >
-        <EnvelopeIcon className="h-5 w-5" />
-        <span>Send Message</span>
-      </Button>
+      <div className="flex flex-col gap-3">
+        <Button
+          variant="send"
+          type="button"
+          onClick={() => onContactClick(recipientKey, name)}
+        >
+          <EnvelopeIcon className="h-5 w-5" />
+          <span>Send Message</span>
+        </Button>
+
+        <Link
+          href={`/${recipientKey}`}
+          className="tt-btn-portfolio-link group"
+          aria-label={`View ${name}'s portfolio`}
+        >
+          <span>View {name}&apos;s Portfolio</span>
+          <ArrowRightIcon
+            className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+            aria-hidden="true"
+          />
+        </Link>
+      </div>
     </Card>
   );
 }

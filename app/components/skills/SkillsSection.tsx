@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   SiDocker, SiFigma, SiGit, SiNextdotjs, SiNodedotjs,
   SiPostgresql, SiReact, SiRedis, SiTailwindcss, SiTypescript, SiVercel,
@@ -48,7 +48,7 @@ const SKILL_GROUPS: SkillGroup[] = [
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="tt-section">
+    <section id="skills" data-snap className="tt-section">
       <div className="tt-container">
         <FadeIn className="tt-section-header">
           <SectionTag>Tech stack</SectionTag>
@@ -69,26 +69,37 @@ export default function SkillsSection() {
 }
 
 function SkillGroupCard({ group }: { group: SkillGroup }) {
+  const reduced = useReducedMotion();
   return (
-    <div className="tt-card">
+    <motion.div
+      whileHover={reduced ? {} : { y: -4, boxShadow: "var(--shadow-card-hover)" }}
+      transition={{ type: "spring", stiffness: 180, damping: 24 }}
+      className="tt-card group"
+    >
       <h3 className="tt-skill-category">{group.category}</h3>
       <ul className="space-y-2.5" role="list">
         {group.skills.map(({ name, Icon }, i) => (
           <motion.li
             key={name}
-            initial={{ opacity: 0, x: -16 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.07, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            whileHover={{ x: 4 }}
+            transition={{ delay: i * 0.1, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={reduced ? {} : { x: 5 }}
             className="tt-skill-row"
           >
-            <Icon className={`h-5 w-5 shrink-0 ${group.color}`} aria-hidden="true" />
+            <motion.span
+              whileHover={reduced ? {} : { rotate: [0, -12, 12, -6, 0], scale: 1.2 }}
+              transition={{ duration: 0.55, ease: "easeInOut" }}
+              className="shrink-0"
+            >
+              <Icon className={`h-5 w-5 ${group.color}`} aria-hidden="true" />
+            </motion.span>
             <span className="tt-skill-name">{name}</span>
           </motion.li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 }
 

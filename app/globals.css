@@ -71,6 +71,41 @@ body {
   to   { background-position: 44px 44px; }
 }
 
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* ─── Reduced-motion: disable decorative CSS animations ─────── */
+@media (prefers-reduced-motion: reduce) {
+  .neon-grid, .tt-online-dot, .tt-avatar-pulse, .tt-cursor {
+    animation: none !important;
+  }
+  .tt-scroll-line {
+    animation: none !important;
+  }
+}
+
 /* ─── Custom utilities ──────────────────────────────────────── */
 @layer utilities {
   /* ContactModal animations */
@@ -87,9 +122,39 @@ body {
 @layer components {
 
   /* Layout */
-  .tt-section        { @apply relative px-4 py-40; }
+  .tt-section {
+    @apply relative px-4 py-40;
+    /* Smooth section-to-section blend — fades from page background at the top */
+    &::before {
+      content: "";
+      position: absolute;
+      inset-x: 0;
+      top: 0;
+      height: 100px;
+      background: linear-gradient(to bottom, var(--color-tt-void), transparent);
+      pointer-events: none;
+    }
+  }
   .tt-container      { @apply mx-auto max-w-6xl; }
   .tt-section-header { @apply mb-16 text-center; }
+
+  /* Scroll progress bar */
+  .tt-scroll-progress {
+    @apply pointer-events-none fixed top-0 left-0 right-0 z-[100] h-[3px] origin-left;
+    background: linear-gradient(90deg, var(--color-tt-amber), var(--color-tt-gold), var(--color-tt-amber));
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  /* Terminal blinking block cursor */
+  .tt-cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    vertical-align: text-bottom;
+    background-color: var(--color-tt-ice);
+    animation: blink 1s step-end infinite;
+  }
 
   /* Section tag / eye-brow label */
   .tt-tag     { @apply inline-flex items-center gap-2 rounded-full border border-tt-amber/25 bg-tt-amber/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-tt-amber; }
@@ -106,11 +171,13 @@ body {
   .tt-card-glow { @apply pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-tt-amber/8 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100; }
 
   /* Buttons */
-  .tt-btn-primary { @apply rounded-full bg-gradient-to-r from-tt-amber to-tt-gold px-7 py-3 font-semibold text-tt-void shadow-lg shadow-tt-amber/20 transition-shadow hover:shadow-tt-amber/40; }
+  .tt-btn-primary          { @apply rounded-full bg-gradient-to-r from-tt-amber to-tt-gold px-7 py-3 font-semibold text-tt-void shadow-lg shadow-tt-amber/20 transition-shadow hover:shadow-tt-amber/40; }
+  .tt-btn-primary-therese  { @apply rounded-full bg-gradient-to-r from-tt-orange to-tt-rose px-7 py-3 font-semibold text-tt-void shadow-lg shadow-tt-orange/20 transition-shadow hover:shadow-tt-orange/40; }
   .tt-btn-outline { @apply rounded-full border border-tt-amber/30 px-7 py-3 font-semibold text-tt-cream backdrop-blur transition-colors hover:border-tt-amber/60 hover:bg-tt-amber/5; }
   .tt-btn-send    { @apply flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-tt-amber to-tt-gold px-6 py-3 font-semibold text-tt-void shadow-lg shadow-tt-amber/20 transition-all duration-200 hover:scale-[1.02] hover:shadow-tt-amber/40; }
   .tt-btn-submit  { @apply w-full rounded-xl bg-gradient-to-r from-tt-amber to-tt-gold py-3 text-sm font-semibold text-tt-void shadow-lg shadow-tt-amber/20 transition-all duration-200 hover:scale-[1.01] hover:shadow-tt-amber/40 disabled:opacity-60; }
   .tt-btn-nav     { @apply rounded-full bg-gradient-to-r from-tt-amber to-tt-gold px-4 py-1.5 text-sm font-semibold text-tt-void shadow-sm transition hover:shadow-tt-amber/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tt-amber; }
+  .tt-btn-portfolio-link { @apply flex w-full items-center justify-center gap-2 rounded-xl border border-tt-amber/25 px-6 py-3 text-sm font-semibold text-tt-amber/80 transition-all duration-200 hover:border-tt-amber/60 hover:bg-tt-amber/5 hover:text-tt-amber; }
 
   /* Inline labels */
   .tt-tech-tag       { @apply rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-tt-muted; }
@@ -263,6 +330,55 @@ body {
   /* Ambient background vignette edges */
   .tt-ambient-vignette-top    { @apply absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-tt-void to-transparent; }
   .tt-ambient-vignette-bottom { @apply absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-tt-void to-transparent; }
+
+  /* ─── Developer Selection Screen ──────────────────────────────── */
+  .tt-selection {
+    @apply fixed inset-0 z-40 flex flex-col items-center justify-center px-6 py-12;
+    background-color: #080c12;
+  }
+
+  .tt-selection-eyebrow { @apply mb-3 font-[family-name:var(--font-jetbrains-mono)] text-xs text-tt-blue/70 tracking-widest; }
+  .tt-selection-title   { @apply mb-2 text-center text-3xl font-bold tracking-tight text-tt-cream sm:text-4xl; }
+  .tt-selection-sub     { @apply mb-12 text-center text-sm text-tt-ice/40; }
+  .tt-selection-cards   { @apply flex w-full max-w-2xl flex-col gap-5 sm:flex-row; }
+
+  /* Individual developer card */
+  .tt-dev-card {
+    @apply relative flex flex-1 cursor-pointer flex-col items-center gap-4 rounded-2xl border bg-tt-deep/80 p-8 text-center outline-none backdrop-blur;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .tt-dev-card:focus-visible { @apply ring-2 ring-offset-2 ring-offset-transparent; }
+  .tt-dev-card-tom     { @apply border-tt-amber/20; }
+  .tt-dev-card-tom:focus-visible  { @apply ring-tt-amber; }
+  .tt-dev-card-therese { @apply border-tt-orange/20; }
+  .tt-dev-card-therese:focus-visible { @apply ring-tt-orange; }
+
+  .tt-dev-card-avatar { @apply flex h-20 w-20 items-center justify-center rounded-2xl text-3xl font-bold text-tt-void shadow-xl; }
+  .tt-dev-card-name   { @apply text-xl font-bold text-tt-cream; }
+  .tt-dev-card-role   { @apply text-xs font-semibold uppercase tracking-widest; }
+  .tt-dev-card-role-tom     { @apply text-tt-amber; }
+  .tt-dev-card-role-therese { @apply text-tt-orange; }
+  .tt-dev-card-desc   { @apply text-sm leading-relaxed text-tt-ice/55; }
+  .tt-dev-card-cta    { @apply mt-2 flex items-center gap-2 text-sm font-semibold; }
+  .tt-dev-card-cta-tom     { @apply text-tt-amber; }
+  .tt-dev-card-cta-therese { @apply text-tt-orange; }
+
+  /* Glow overlay on card hover — separate per-person colours */
+  .tt-dev-card-glow-tom     {
+    @apply pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,158,11,0.12) 0%, transparent 70%);
+  }
+  .tt-dev-card-glow-therese {
+    @apply pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(251,146,60,0.12) 0%, transparent 70%);
+  }
+  .group:hover .tt-dev-card-glow-tom,
+  .group:hover .tt-dev-card-glow-therese { @apply opacity-100; }
+
+  /* ─── Person portfolio pages ───────────────────────────────────── */
+  .tt-person-role-badge-tom     { @apply border-tt-amber/30 bg-tt-amber/10 text-tt-amber; }
+  .tt-person-role-badge-therese { @apply border-tt-orange/30 bg-tt-orange/10 text-tt-orange; }
+  .tt-header-back { @apply flex items-center gap-1.5 text-sm text-tt-ice/50 transition-colors hover:text-tt-ice; }
 }
 
 

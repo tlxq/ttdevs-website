@@ -1,11 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useActiveSection } from "../../lib/hooks/useActiveSection";
 
 interface HeaderProps {
   scrollToSection: (id: string) => void;
+  /** When provided, the logo area shows a back-link instead of scroll-to-top */
+  backHref?: string;
 }
 
 const NAV_LINKS = [
@@ -14,7 +17,7 @@ const NAV_LINKS = [
   { label: "Skills", id: "skills" },
 ];
 
-export default function Header({ scrollToSection }: HeaderProps) {
+export default function Header({ scrollToSection, backHref }: HeaderProps) {
   const activeSection = useActiveSection();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -26,14 +29,21 @@ export default function Header({ scrollToSection }: HeaderProps) {
   return (
     <header className="tt-header">
       <div className="tt-header-inner">
-        {/* Logo */}
-        <button
-          onClick={() => scrollTo("hero")}
-          className="tt-logo-btn"
-          aria-label="Back to top"
-        >
-          TTdevs
-        </button>
+        {/* Logo / back link */}
+        {backHref ? (
+          <Link href={backHref} className="tt-header-back" aria-label="Back to TTdevs">
+            <ArrowLeftIcon className="h-4 w-4" aria-hidden="true" />
+            <span>TTdevs</span>
+          </Link>
+        ) : (
+          <button
+            onClick={() => scrollTo("hero")}
+            className="tt-logo-btn"
+            aria-label="Back to top"
+          >
+            TTdevs
+          </button>
+        )}
 
         {/* Desktop nav */}
         <nav aria-label="Main navigation" className="hidden items-center gap-1 md:flex">

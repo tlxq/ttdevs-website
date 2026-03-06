@@ -3,7 +3,9 @@
 import { useState } from "react";
 import type { RecipientKey, SelectedPerson } from "../lib/types";
 import { useSmoothScroll } from "../lib/hooks/useSmoothScroll";
+import { useScrollSnap } from "../lib/hooks/useScrollSnap";
 import AmbientBackground from "../lib/AmbientBackground";
+import ScrollProgressBar from "../lib/components/ScrollProgressBar";
 import Header from "./header/Header";
 import Hero from "./hero/Hero";
 import AboutSection from "./about/AboutSection";
@@ -15,11 +17,14 @@ import Footer from "./footer/Footer";
 
 /**
  * Full portfolio page layout.
- * Owns smooth scroll, modal state, and section wiring so that page.tsx stays minimal.
+ * Owns smooth scroll, scroll snap, modal state, and section wiring so that
+ * page.tsx stays minimal.
  */
 export default function PortfolioLayout() {
   const { lenis, scrollToSection } = useSmoothScroll();
   const [selectedPerson, setSelectedPerson] = useState<SelectedPerson | null>(null);
+
+  useScrollSnap(lenis);
 
   function openModal(recipientKey: RecipientKey, name: string) {
     setSelectedPerson({ recipientKey, name });
@@ -34,6 +39,7 @@ export default function PortfolioLayout() {
   return (
     <>
       <AmbientBackground />
+      <ScrollProgressBar />
 
       <div className="relative z-10 w-full animate-[fadeIn_0.8s_ease-out_forwards]">
         <Header scrollToSection={scrollToSection} />

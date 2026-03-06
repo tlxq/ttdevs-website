@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 import NeonGrid from "./NeonGrid";
 import { useTerminal, type OutputLine } from "../../lib/hooks/useTerminal";
 
@@ -30,9 +32,20 @@ export default function Terminal({ onStart }: TerminalProps) {
         </div>
 
         <div ref={outputRef} className="tt-terminal-output" aria-live="polite" aria-atomic="false">
-          {allLines.map((line) => (
-            <Line key={line.id} line={line} />
+          {allLines.map((line, idx) => (
+            <Line
+              key={line.id}
+              line={line}
+              /* Only the most recent boot line gets the typewriter animation */
+              typewrite={line.type === "boot" && idx === bootLines.length - 1 && booting}
+            />
           ))}
+          {/* Blinking cursor while boot sequence runs */}
+          {booting && (
+            <div className="tt-terminal-line tt-line-boot" aria-hidden="true">
+              <span className="tt-cursor" />
+            </div>
+          )}
         </div>
 
         {!booting && !transitioning && (
@@ -60,9 +73,14 @@ export default function Terminal({ onStart }: TerminalProps) {
   );
 }
 
-// ─── Line renderer ───────────────────────────────────────────────────────────
+// ─── Line renderer ────────────────────────────────────────────────────────────
 
-function Line({ line }: { line: OutputLine }) {
+interface LineProps {
+  line: OutputLine;
+  typewrite?: boolean;
+}
+
+function Line({ line, typewrite = false }: LineProps) {
   if (line.type === "blank") return <div className="tt-terminal-blank" aria-hidden="true" />;
 
   const colorClass =
@@ -71,8 +89,18 @@ function Line({ line }: { line: OutputLine }) {
     line.type === "boot"  ? "tt-line-boot"  :
                             "tt-line-output";
 
-  if (line.text.includes("[  OK  ]")) {
-    const [before, after] = line.text.split("[  OK  ]");
+  if (typewrite) {
+    return <TypewriterLine text={line.text} colorClass={colorClass} />;
+  }
+
+  return <RichLine text={line.text} colorClass={colorClass} />;
+}
+
+// ─── Rich line (command quoting + [OK] highlight) ─────────────────────────────
+
+function RichLine({ text, colorClass }: { text: string; colorClass: string }) {
+  if (text.includes("[  OK  ]")) {
+    const [before, after] = text.split("[  OK  ]");
     return (
       <div className={`tt-terminal-line ${colorClass}`}>
         {before}
@@ -82,7 +110,7 @@ function Line({ line }: { line: OutputLine }) {
     );
   }
 
-  const parts = line.text.split(/("[\w-]+")/g);
+  const parts = text.split(/("[\w-]+")/g);
   if (parts.length > 1) {
     return (
       <div className={`tt-terminal-line ${colorClass}`}>
@@ -97,5 +125,37 @@ function Line({ line }: { line: OutputLine }) {
     );
   }
 
-  return <div className={`tt-terminal-line ${colorClass}`}>{line.text}</div>;
+  return <div className={`tt-terminal-line ${colorClass}`}>{text}</div>;
+}
+
+// ─── Typewriter line (boot sequence only) ────────────────────────────────────
+
+function TypewriterLine({ text, colorClass }: { text: string; colorClass: string }) {
+  const reduced = useReducedMotion();
+  const [len, setLen] = useState(reduced ? text.length : 0);
+  const [done, setDone] = useState(reduced || text.length === 0);
+
+  useEffect(() => {
+    if (reduced || text.length === 0) { setDone(true); return; }
+    setLen(0);
+    setDone(false);
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setLen(i);
+      if (i >= text.length) { clearInterval(id); setDone(true); }
+    }, 11);
+    return () => clearInterval(id);
+  }, [text, reduced]);
+
+  if (!done) {
+    return (
+      <div className={`tt-terminal-line ${colorClass}`}>
+        {text.slice(0, len)}
+        <span className="tt-cursor" aria-hidden="true" />
+      </div>
+    );
+  }
+
+  return <RichLine text={text} colorClass={colorClass} />;
 }
