@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TT Devs Portfolio
 
-## Getting Started
+A high-performance, modern web application designed for Tom and Therese (TT Devs). This project serves as a technical showcase, blending a custom interactive terminal interface with a sophisticated, fluid developer portfolio.
 
-First, run the development server:
+## Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The application is engineered for speed, responsiveness, and a unique user experience. It transitions from a retro-modern CLI environment into a clean, professional landing page, demonstrating expertise in both interactive frontend logic and robust backend integrations.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Core Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Interactive Terminal Interface:** A custom-built CLI entry point featuring command-line simulations, dynamic typing effects, and seamless state transitions.
+- **Fluid UI/UX:** High-performance smooth scrolling and scroll snapping implemented via Lenis for a cinematic browsing experience.
+- **Responsive Architecture:** Fully optimized for all viewports with a "mobile-first" approach and accessibility-first components.
+- **Enterprise-Grade Contact System:** Secure serverless contact form with built-in rate limiting, honeypot protection, and transactional email delivery.
+- **Performance Optimized:** Leveraging Next.js Server Components and optimized asset delivery for near-instant load times.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech Stack
 
-## Learn More
+### Frontend
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript (Strictly Typed)
+- **Styling:** Tailwind CSS v4 (Modern CSS Architecture)
+- **Animation:** Framer Motion (Declarative animations) & Lenis (Smooth scroll)
+- **Typography:** Geist & Mono variants for professional readability.
 
-To learn more about Next.js, take a look at the following resources:
+### Backend & Infrastructure
+- **API Support:** Next.js Route Handlers (Serverless)
+- **Email Delivery:** Resend API integration.
+- **Data & Security:** Environment-driven configuration with rate-limiting and security headers.
+- **Deployment:** Optimized for Vercel/Edge environments.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technical Highlights
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Component Architecture
+The project follows a modular, atomic design pattern. UI primitives are abstracted into a shared library (`app/lib/components`), ensuring consistency and reusability across the terminal and portfolio sections.
 
-## Deploy on Vercel
+### Performance & Motion
+Animations are carefully calibrated using Framer Motion's hardware-accelerated transitions. The integration of Lenis ensures that scroll-based animations remain synchronized with the user's natural input, providing a premium feel without sacrificing performance.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Security Implementation
+The contact API features custom rate-limiting logic based on IP tracking to prevent automated spam. A silent honeypot mechanism further filters out bot submissions without interrupting the user experience for legitimate inquiries.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+Built for performance and scalability by Tom & Therese.
