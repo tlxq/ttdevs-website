@@ -40,24 +40,25 @@ export function PulseProvider({ children }: { children: React.ReactNode }) {
     const interval = setInterval(() => setNow(Date.now()), 30000);
     return () => clearInterval(interval);
   }, []);
+const checkOnline = React.useCallback((timestamp: string) => {
+  if (!timestamp) return false;
+  const lastSeen = new Date(timestamp).getTime();
+  const nowTimestamp = typeof now === 'number' ? now : new Date(now).getTime();
+  const diffMinutes = (nowTimestamp - lastSeen) / (1000 * 60);
+  return diffMinutes < 15; // Be lenient: 15 minutes window
+}, [now]);
 
-  const checkOnline = (timestamp: string) => {
-    if (!timestamp) return false;
-    const lastSeen = new Date(timestamp).getTime();
-    const diffMinutes = (now - lastSeen) / (1000 * 60);
-    return diffMinutes < 15; // Be lenient: 15 minutes window
-  };
+const mapRowToStatus = React.useCallback((row: NodeStatusRow): SystemStatus => ({
+  nodeName: row.node_name,
+  isOnline: checkOnline(row.last_seen),
+  cpuUsage: row.cpu_usage || 0,
+  ramUsage: row.ram_usage || 0,
+  latencyMs: row.latency_ms || 0,
+  lastSeen: row.last_seen,
+}), [checkOnline]);
 
-  const mapRowToStatus = (row: NodeStatusRow): SystemStatus => ({
-    nodeName: row.node_name,
-    isOnline: checkOnline(row.last_seen),
-    cpuUsage: row.cpu_usage || 0,
-    ramUsage: row.ram_usage || 0,
-    latencyMs: row.latency_ms || 0,
-    lastSeen: row.last_seen,
-  });
 
-  const fetchStatus = async () => {
+  const fetchStatus = React.useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from("node_status")
@@ -72,7 +73,7 @@ export function PulseProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [mapRowToStatus]);
 
   useEffect(() => {
     fetchStatus();
@@ -89,7 +90,7 @@ export function PulseProvider({ children }: { children: React.ReactNode }) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [now]); // Re-fetch or re-evaluate when "now" changes
+  }, [fetchStatus]);
 
   // Aggregate status for Tom (tlxq) and Therese (thjox)
   const tomNodes = nodes.filter(n => n.nodeName.toLowerCase().startsWith("tlxq"));
