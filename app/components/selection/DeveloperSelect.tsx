@@ -1,65 +1,79 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import NeonGrid from "../terminal/NeonGrid";
-import DeveloperCard from "./DeveloperCard";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { Button } from "../ui/Button";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
+const EASE = "circOut";
 
 export default function DeveloperSelect() {
-  const reduced = useReducedMotion();
+  const router = useRouter();
 
   return (
-    <div className="tt-selection" role="main" aria-label="Developer selection">
-      {/* Reuse the same neon grid background from the terminal */}
-      <NeonGrid />
-
-      <div className="relative z-10 flex w-full flex-col items-center">
-        {/* Heading */}
+    <div className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-zinc-950 px-6">
+      <div className="relative z-10 w-full max-w-4xl text-center">
         <motion.div
-          initial={reduced ? {} : { opacity: 0, y: -24 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: EASE }}
-          className="mb-10 text-center"
+          transition={{ duration: 0.8, ease: EASE }}
+          className="mb-16"
         >
-          <p className="tt-selection-eyebrow">// system ready — select developer profile</p>
-          <h1 className="tt-selection-title">Choose Your Developer</h1>
-          <p className="tt-selection-sub">Two developers. One team. Pick a portfolio.</p>
+          <p className="mb-4 font-mono text-xs tracking-[0.3em] text-zinc-600 uppercase">
+            Select Developer Profile
+          </p>
+          <h1 className="mb-4 text-4xl font-bold tracking-tight text-white md:text-6xl">
+            The Studio
+          </h1>
         </motion.div>
 
-        {/* Cards */}
-        <div className="tt-selection-cards" role="list">
-          <DeveloperCard
-            variant="tom"
-            name="Tom"
-            role="Frontend Developer"
-            description="React · Next.js · TypeScript · Tailwind CSS. Pixel-perfect interfaces and polished user experiences."
-            initials="T"
-            href="/tom"
-            delay={0.25}
-          />
-          <DeveloperCard
-            variant="therese"
-            name="Therese"
-            role="Backend Developer"
-            description="Node.js · REST APIs · PostgreSQL · Redis. Robust architectures and scalable system design."
-            initials="T"
-            href="/therese"
-            delay={0.42}
-          />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <ProfileCard name="Tom" role="Fullstack Specialist" href="/tom" delay={0.1} />
+          <ProfileCard name="Therese" role="Backend Architect" href="/therese" delay={0.2} />
         </div>
 
-        {/* Footer hint */}
-        <motion.p
-          initial={reduced ? {} : { opacity: 0 }}
+        <motion.div
+          initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-          className="mt-10 text-center text-xs text-tt-ice/30"
-          aria-hidden="true"
+          transition={{ delay: 0.8 }}
+          className="mt-16"
         >
-          Use keyboard ↑↓ or click to select
-        </motion.p>
+          <Button variant="ghost" onClick={() => router.push("/portfolio")}>
+            View Joint Portfolio →
+          </Button>
+        </motion.div>
       </div>
     </div>
+  );
+}
+
+function ProfileCard({
+  name,
+  role,
+  href,
+  delay,
+}: {
+  name: string;
+  role: string;
+  href: string;
+  delay: number;
+}) {
+  const router = useRouter();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.8, ease: EASE }}
+      onClick={() => router.push(href)}
+      className="group relative cursor-pointer overflow-hidden rounded-2xl border border-white/5 bg-zinc-900/50 p-10 transition-all hover:border-white/20"
+    >
+      <div className="relative z-10 text-center">
+        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-zinc-800 text-3xl font-bold text-white transition-transform group-hover:scale-110">
+          {name[0]}
+        </div>
+        <h2 className="mb-2 text-2xl font-bold text-white">{name}</h2>
+        <p className="font-mono text-sm tracking-widest text-zinc-500 uppercase">{role}</p>
+      </div>
+    </motion.div>
   );
 }

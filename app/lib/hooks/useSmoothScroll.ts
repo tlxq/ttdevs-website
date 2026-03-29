@@ -11,6 +11,7 @@ export function useSmoothScroll() {
     if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
 
     const l = new Lenis({ duration: 1.1, smoothWheel: true });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLenis(l);
 
     let raf = 0;
@@ -30,9 +31,11 @@ export function useSmoothScroll() {
     (id: string, offset = -72) => {
       const el = document.getElementById(id);
       if (!el) return;
-      lenis
-        ? lenis.scrollTo(el, { offset })
-        : el.scrollIntoView({ behavior: "smooth" });
+      if (lenis) {
+        lenis.scrollTo(el, { offset });
+      } else {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
     },
     [lenis],
   );
