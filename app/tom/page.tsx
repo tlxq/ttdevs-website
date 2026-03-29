@@ -1,10 +1,12 @@
-import PersonPortfolioLayout from "../components/person-portfolio/PersonPortfolioLayout";
+import { ProfileView } from "../components/features/ProfileView";
+import { PROFILES } from "../lib/data/profiles";
+import { fetchGitHubRepos } from "../lib/github/fetchRepos";
 
 export const metadata = {
-  title: "Tom — Frontend Developer | TTdevs",
-  description: "Tom's developer portfolio. React, Next.js, TypeScript, Tailwind CSS.",
+  title: "Tom | Frontend Specialist",
 };
 
-export default function TomPage() {
-  return <PersonPortfolioLayout person="tom" />;
+export default async function TomPage() {
+  const repos = await fetchGitHubRepos("tlxq"); // Replace with actual GitHub username
+  return <ProfileView profile={PROFILES.tom} backHref="/" repos={repos} />;
 }

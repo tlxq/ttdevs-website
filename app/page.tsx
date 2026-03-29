@@ -1,16 +1,16 @@
-"use client";
+import { fetchGitHubRepos } from "./lib/github/fetchRepos";
+import HomePageClient from "./components/features/HomePageClient";
 
-import { useState } from "react";
-import Terminal from "./components/terminal/Terminal";
-import PortfolioLayout from "./components/PortfolioLayout";
+export default async function HomePage() {
+  // Fetch repos for both developers to inject into Terminal
+  const [reposTom, reposTherese] = await Promise.all([
+    fetchGitHubRepos("tlxq"),
+    fetchGitHubRepos("thjox")
+  ]);
 
-export default function Home() {
-  const [phase, setPhase] = useState<"terminal" | "portfolio">("terminal");
+  const allRepos = [...reposTom, ...reposTherese].sort((a, b) => 
+    new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+  );
 
-  if (phase === "terminal") {
-    return <Terminal onStart={() => setPhase("portfolio")} />;
-  }
-
-  return <PortfolioLayout />;
+  return <HomePageClient repos={allRepos} />;
 }
-

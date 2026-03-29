@@ -18,8 +18,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TTdevs",
-  description: "Our portfolio",
+  title: "TTdevs | Full-stack Developers",
+  description: "Crafting minimalist, high-performance digital experiences.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -38,8 +38,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} antialiased`}>
-        <div className="min-h-screen bg-tt-void">
+      <body className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} antialiased font-sans`}>
+        <div className="min-h-screen bg-black">
           {children}
         </div>
       </body>

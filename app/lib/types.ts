@@ -12,7 +12,4 @@ export interface TeamMember {
   name: string;
   role: string;
   bio: string;
-  avatar: string;
-  /** CSS class name for the avatar gradient, e.g. "tt-gradient-tom" */
-  color: string;
 }

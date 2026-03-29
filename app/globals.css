@@ -1,415 +1,122 @@
 @import "tailwindcss";
 
-/* ─── Design tokens ──────────────────────────────────────────── */
 @theme inline {
-  /* Warm portfolio palette */
-  --color-tt-void:   #0d0e15;
-  --color-tt-deep:   #131420;
-  --color-tt-slate:  #1e2035;
-  --color-tt-amber:  #f59e0b;
-  --color-tt-gold:   #fcd34d;
-  --color-tt-cream:  #f1ede4;
-  --color-tt-muted:  #7a7888;
+  /* Midnight Nebula Palette */
+  --color-nebula-950: #05050a;
+  --color-nebula-900: #0a0a1f;
+  --color-nebula-800: #16163d;
+  --color-nebula-accent: #8b5cf6; /* Violet */
+  --color-nebula-secondary: #ec4899; /* Pink */
+  --color-nebula-cyan: #06b6d4; /* Cyan */
 
-  /* Terminal palette — keep for Terminal components */
-  --color-tt-navy-dark: #1b262c;
-  --color-tt-navy:      #0f4c75;
-  --color-tt-blue:      #3282b8;
-  --color-tt-ice:       #bbe1fa;
+  /* Semantic */
+  --color-background: var(--color-nebula-950);
+  --color-foreground: #f8fafc;
+  --color-muted: #94a3b8;
+  --color-surface: rgba(15, 15, 35, 0.4);
+  --color-border: rgba(255, 255, 255, 0.05);
 
-  /* Semantic status / accent colors */
-  --color-tt-orange:  #fb923c;   /* Therese accent / backend */
-  --color-tt-rose:    #fb7185;   /* Therese accent secondary */
-  --color-tt-success: #4ade80;   /* live / ok */
-  --color-tt-error:   #f87171;   /* error / close dot */
-  --color-tt-warning: #facc15;   /* warn / minimize dot */
+  /* Fonts */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular;
 
-  --color-background: var(--color-tt-void);
-  --color-foreground: var(--color-tt-cream);
-
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-/* ─── Base ───────────────────────────────────────────────────── */
-:root {
-  /* Framer Motion hover shadows — reference these in whileHover boxShadow */
-  --shadow-card-hover:    0 16px 48px rgba(245,158,11,0.14);
-  --shadow-card-hover-lg: 0 16px 48px rgba(245,158,11,0.16);
-
-  --background: var(--color-tt-void);
-  --foreground: var(--color-tt-cream);
-}
-
-html, body { height: 100%; }
-
-body {
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: var(--background);
-  overflow-x: hidden;
-}
-
-/* ─── Keyframes ─────────────────────────────────────────────── */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
-@keyframes neon-grid-drift {
-  from { background-position: 0 0; }
-  to   { background-position: 44px 44px; }
-}
-
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position:  200% 0; }
+  /* Animation */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-10px); }
+  50% { transform: translateY(-10px); }
 }
 
-@keyframes pulse-ring {
-  0%   { transform: scale(1);   opacity: 0.6; }
-  100% { transform: scale(1.7); opacity: 0; }
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.2; filter: blur(80px); }
+  50% { opacity: 0.4; filter: blur(100px); }
 }
 
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+/* ─── Reset & Base ────────────────────────────────────────── */
+:root {
+  --background: var(--color-nebula-950);
+  --foreground: #f8fafc;
 }
 
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50%       { background-position: 100% 50%; }
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ─── Reduced-motion: disable decorative CSS animations ─────── */
-@media (prefers-reduced-motion: reduce) {
-  .neon-grid, .tt-online-dot, .tt-avatar-pulse, .tt-cursor {
-    animation: none !important;
-  }
-  .tt-scroll-line {
-    animation: none !important;
-  }
-}
-
-/* ─── Custom utilities ──────────────────────────────────────── */
+/* ─── Utilities ───────────────────────────────────────────── */
 @layer utilities {
-  /* ContactModal animations */
-  .animate-fadeIn  { animation: fadeIn 0.25s ease-out forwards; }
-  .animate-slideUp { animation: slideUp 0.32s ease-out forwards; }
+  .glass {
+    @apply bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.8)];
+  }
+  
+  .nebula-gradient {
+    background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #05050a 100%);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-nebula-accent via-nebula-secondary to-nebula-cyan;
+  }
 }
 
-/* ─── Design system components ──────────────────────────────── */
-/*
- * Single source of truth for all visual patterns.
- * Change something here and it updates everywhere.
- * Utilities in className="" always override these (lower specificity).
- */
-@layer components {
-
-  /* Layout */
-  .tt-section {
-    @apply relative px-4 py-40;
-    /* Smooth section-to-section blend — fades from page background at the top */
-    &::before {
-      content: "";
-      position: absolute;
-      inset-x: 0;
-      top: 0;
-      height: 100px;
-      background: linear-gradient(to bottom, var(--color-tt-void), transparent);
-      pointer-events: none;
-    }
-  }
-  .tt-container      { @apply mx-auto max-w-6xl; }
-  .tt-section-header { @apply mb-16 text-center; }
-
-  /* Scroll progress bar */
-  .tt-scroll-progress {
-    @apply pointer-events-none fixed top-0 left-0 right-0 z-[100] h-[3px] origin-left;
-    background: linear-gradient(90deg, var(--color-tt-amber), var(--color-tt-gold), var(--color-tt-amber));
-    background-size: 200% 100%;
-    animation: gradient-shift 3s ease infinite;
-  }
-
-  /* Terminal blinking block cursor */
-  .tt-cursor {
-    display: inline-block;
-    width: 0.55em;
-    height: 1em;
-    vertical-align: text-bottom;
-    background-color: var(--color-tt-ice);
-    animation: blink 1s step-end infinite;
-  }
-
-  /* Section tag / eye-brow label */
-  .tt-tag     { @apply inline-flex items-center gap-2 rounded-full border border-tt-amber/25 bg-tt-amber/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-tt-amber; }
-  .tt-tag-dot { @apply h-1.5 w-1.5 rounded-full bg-tt-amber; }
-
-  /* Typography */
-  .tt-heading { @apply mt-4 text-4xl font-bold text-tt-cream md:text-5xl lg:text-6xl; }
-  .tt-subtext { @apply mx-auto mt-4 max-w-2xl text-lg text-tt-muted; }
-  .tt-body    { @apply text-sm leading-relaxed text-tt-muted; }
-
-  /* Card surface */
-  .tt-card      { @apply relative overflow-hidden rounded-3xl border border-white/8 bg-tt-deep/70 p-7 backdrop-blur-sm; }
-  .tt-card-lg   { @apply relative overflow-hidden rounded-3xl border border-white/8 bg-tt-deep/70 p-8 backdrop-blur-sm; }
-  .tt-card-glow { @apply pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-tt-amber/8 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100; }
-
-  /* Buttons */
-  .tt-btn-primary          { @apply rounded-full bg-gradient-to-r from-tt-amber to-tt-gold px-7 py-3 font-semibold text-tt-void shadow-lg shadow-tt-amber/20 transition-shadow hover:shadow-tt-amber/40; }
-  .tt-btn-primary-therese  { @apply rounded-full bg-gradient-to-r from-tt-orange to-tt-rose px-7 py-3 font-semibold text-tt-void shadow-lg shadow-tt-orange/20 transition-shadow hover:shadow-tt-orange/40; }
-  .tt-btn-outline { @apply rounded-full border border-tt-amber/30 px-7 py-3 font-semibold text-tt-cream backdrop-blur transition-colors hover:border-tt-amber/60 hover:bg-tt-amber/5; }
-  .tt-btn-send    { @apply flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-tt-amber to-tt-gold px-6 py-3 font-semibold text-tt-void shadow-lg shadow-tt-amber/20 transition-all duration-200 hover:scale-[1.02] hover:shadow-tt-amber/40; }
-  .tt-btn-submit  { @apply w-full rounded-xl bg-gradient-to-r from-tt-amber to-tt-gold py-3 text-sm font-semibold text-tt-void shadow-lg shadow-tt-amber/20 transition-all duration-200 hover:scale-[1.01] hover:shadow-tt-amber/40 disabled:opacity-60; }
-  .tt-btn-nav     { @apply rounded-full bg-gradient-to-r from-tt-amber to-tt-gold px-4 py-1.5 text-sm font-semibold text-tt-void shadow-sm transition hover:shadow-tt-amber/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tt-amber; }
-  .tt-btn-portfolio-link { @apply flex w-full items-center justify-center gap-2 rounded-xl border border-tt-amber/25 px-6 py-3 text-sm font-semibold text-tt-amber/80 transition-all duration-200 hover:border-tt-amber/60 hover:bg-tt-amber/5 hover:text-tt-amber; }
-
-  /* Inline labels */
-  .tt-tech-tag       { @apply rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-tt-muted; }
-  .tt-role-badge     { @apply mt-1 inline-block rounded-full border border-tt-amber/30 bg-tt-amber/10 px-3 py-0.5 text-xs font-semibold text-tt-amber; }
-  .tt-status-live     { @apply rounded-full border border-tt-success/40 bg-tt-success/10 px-2.5 py-0.5 text-xs font-semibold text-tt-success; }
-  .tt-status-progress { @apply rounded-full border border-tt-amber/40   bg-tt-amber/10   px-2.5 py-0.5 text-xs font-semibold text-tt-amber;   }
-  .tt-status-planned  { @apply rounded-full border border-white/15       bg-white/5        px-2.5 py-0.5 text-xs font-semibold text-tt-muted;   }
-
-  /* Gradients */
-  .tt-gradient-text     { @apply bg-gradient-to-r from-tt-amber to-tt-gold bg-clip-text text-transparent; }
-  .tt-gradient-tom      { @apply bg-gradient-to-br from-tt-amber to-tt-gold; }
-  .tt-gradient-therese  { @apply bg-gradient-to-br from-tt-orange to-tt-rose; }
-
-  /* Glow effects */
-  .tt-icon-glow  { filter: drop-shadow(0 0 18px color-mix(in srgb, var(--color-tt-amber) 70%, transparent)); }
-  .tt-online-dot { @apply h-2 w-2 animate-pulse rounded-full bg-tt-amber; box-shadow: 0 0 10px var(--color-tt-amber); }
-
-  /* Hero scroll indicator */
-  .tt-scroll-line { @apply h-10 w-px origin-top bg-gradient-to-b from-tt-amber/70 to-transparent; }
-
-  /* Skills list row */
-  .tt-skill-row { @apply flex items-center gap-3 rounded-xl border border-white/8 bg-white/4 px-4 py-3 transition-colors hover:border-tt-amber/25 hover:bg-tt-amber/5; }
-
-  /* Terminal window chrome dots */
-  .tt-dot-close    { @apply h-3 w-3 rounded-full bg-tt-error/80; }
-  .tt-dot-minimize { @apply h-3 w-3 rounded-full bg-tt-warning/80; }
-  .tt-dot-maximize { @apply h-3 w-3 rounded-full bg-tt-success/80; }
-
-  /* Structural layout */
-  .tt-header        { @apply sticky top-0 z-40 w-full border-b border-tt-cream/10 bg-tt-void/60 backdrop-blur; }
-  .tt-header-mobile { @apply border-t border-tt-cream/8 bg-tt-void/95 px-4 py-3 md:hidden; }
-  .tt-footer        { @apply border-t border-tt-cream/8 py-10 text-center text-xs text-tt-muted; }
-
-
-  .tt-avatar        { @apply flex items-center justify-center rounded-full  text-2xl font-bold text-tt-void shadow-lg; }
-  .tt-avatar-square { @apply flex items-center justify-center rounded-2xl   text-xl  font-bold text-tt-void shadow-lg; }
-
-  /* Form */
-  .tt-input       { @apply w-full rounded-xl border border-white/12 bg-tt-slate/50 px-4 py-3 text-sm text-tt-cream outline-none placeholder:text-tt-muted/60 focus:border-tt-amber/60 focus:ring-0; }
-  .tt-textarea    { @apply w-full resize-none rounded-xl border border-white/12 bg-tt-slate/50 px-4 py-3 text-sm text-tt-cream outline-none placeholder:text-tt-muted/60 focus:border-tt-amber/60 focus:ring-0; }
-  .tt-form-label  { @apply mb-2 block text-sm font-semibold text-tt-cream/90; }
-  .tt-form-error  { @apply relative z-10 mb-4 rounded-xl border border-tt-error/40 bg-tt-error/15 px-4 py-3 text-sm text-tt-cream; }
-
-  /* Nav links */
-  .tt-nav-link        { @apply rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-200 text-tt-cream/50 hover:bg-tt-cream/10 hover:text-tt-cream; }
-  .tt-nav-link-active { @apply rounded-full px-4 py-1.5 text-sm font-medium bg-tt-amber/15 text-tt-amber; }
-
-  /* Modal */
-  .tt-modal-overlay {
-    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-md;
-  }
-  .tt-modal-panel {
-    @apply relative w-full max-w-xl overflow-hidden rounded-3xl border border-tt-amber/20 bg-tt-void/97 p-8 shadow-[0_18px_60px_rgba(0,0,0,0.65)] md:p-10;
-  }
-
-  /* ─── Header ─────────────────────────────────────────────────── */
-  .tt-logo-btn               { @apply text-base font-bold tracking-tight text-tt-cream transition-opacity hover:opacity-80; }
-  .tt-hamburger              { @apply rounded-lg p-1.5 text-tt-cream/50 transition-colors hover:text-tt-cream md:hidden; }
-  .tt-header-inner           { @apply mx-auto flex max-w-5xl items-center justify-between px-4 py-3; }
-  .tt-nav-link-mobile        { @apply block w-full rounded-xl px-4 py-3 text-left text-sm font-medium transition-colors text-tt-cream/50 hover:text-tt-cream; }
-  .tt-nav-link-mobile-active { @apply block w-full rounded-xl px-4 py-3 text-left text-sm font-medium bg-tt-amber/15 text-tt-amber; }
-
-  /* ─── Hero ───────────────────────────────────────────────────── */
-  .tt-hero             { @apply relative flex min-h-screen items-center justify-center px-4; }
-  .tt-hero-inner       { @apply relative z-10 w-full max-w-4xl text-center; }
-  .tt-hero-logo        { @apply rounded-2xl opacity-90; }
-  .tt-hero-title       { @apply mb-6 text-4xl font-extrabold leading-tight tracking-tight text-balance md:text-6xl lg:text-7xl; }
-  .tt-hero-word        { @apply mr-[0.28em] inline-block text-tt-cream; }
-  .tt-hero-word-accent { @apply mr-[0.28em] inline-block bg-gradient-to-r from-tt-amber to-tt-gold bg-clip-text text-transparent; }
-  .tt-hero-subtitle    { @apply mx-auto mb-10 max-w-2xl text-balance text-lg text-tt-muted md:text-xl; }
-  .tt-hero-ctas        { @apply flex flex-wrap items-center justify-center gap-4; }
-  .tt-scroll-indicator { @apply absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-tt-muted; }
-  .tt-scroll-label     { @apply text-[11px] uppercase tracking-widest; }
-
-  /* ─── Section grids ──────────────────────────────────────────── */
-  .tt-team-grid     { @apply mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2; }
-  .tt-projects-grid { @apply mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3; }
-  .tt-skills-grid   { @apply mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3; }
-  .tt-contact-grid  { @apply mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2; }
-
-  /* ─── Card internals ─────────────────────────────────────────── */
-  .tt-card-name      { @apply text-xl font-bold text-tt-cream; }
-  .tt-card-name-lg   { @apply mb-1 text-2xl font-bold text-tt-cream; }
-  .tt-card-title     { @apply text-base font-bold leading-snug text-tt-cream; }
-  .tt-card-role      { @apply flex items-center gap-1 text-sm font-semibold text-tt-amber; }
-  .tt-card-shimmer   { @apply pointer-events-none absolute -inset-0.5 rounded-3xl bg-gradient-to-r opacity-0 blur transition-opacity duration-500 group-hover:opacity-20; }
-  .tt-card-link      { @apply block h-full rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tt-amber/60; }
-  .tt-card-link-icon { @apply h-4 w-4 text-tt-muted transition-colors group-hover:text-tt-cream; }
-  .tt-tags-row       { @apply mt-5 flex flex-wrap gap-2; }
-
-  /* ─── Avatar extras ──────────────────────────────────────────── */
-  .tt-avatar-badge { @apply absolute -right-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-tt-deep bg-tt-amber; }
-  .tt-avatar-pulse { @apply h-2 w-2 animate-pulse rounded-full bg-tt-void; }
-
-  /* ─── Skills ─────────────────────────────────────────────────── */
-  .tt-skill-category { @apply mb-5 text-xs font-bold uppercase tracking-widest text-tt-muted; }
-  .tt-skill-name     { @apply text-sm font-medium text-tt-cream/80; }
-
-  /* ─── Modal internals ────────────────────────────────────────── */
-  .tt-modal-glow        { @apply pointer-events-none absolute inset-0 opacity-70; }
-  .tt-modal-glow-top    { @apply absolute -top-32 -left-24 h-56 w-56 rounded-full bg-tt-amber/12 blur-3xl; }
-  .tt-modal-glow-bottom { @apply absolute right-0 -bottom-40 h-72 w-72 rounded-full bg-tt-amber/8 blur-3xl; }
-  .tt-modal-glow-line   { @apply absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-tt-amber/40 to-transparent; }
-  .tt-modal-close       { @apply absolute right-5 top-5 z-10 text-tt-cream/60 transition-all duration-200 hover:rotate-90 hover:text-tt-cream; }
-  .tt-modal-success     { @apply relative z-10 py-8 text-center; }
-  .tt-modal-success-title { @apply mb-2 text-3xl font-bold text-tt-cream; }
-  .tt-modal-success-msg   { @apply text-sm text-tt-cream/80; }
-  .tt-modal-header    { @apply relative z-10 mb-6; }
-  .tt-modal-label     { @apply mb-3 inline-flex items-center gap-2 rounded-full border border-tt-amber/25 bg-tt-deep/60 px-3 py-1 text-xs font-medium text-tt-cream/80 backdrop-blur; }
-  .tt-modal-heading   { @apply mb-2 text-3xl font-bold text-tt-cream md:text-4xl; }
-  .tt-modal-subtext   { @apply text-sm text-tt-cream/75; }
-  .tt-modal-form      { @apply relative z-10 space-y-5; }
-
-  /* ─── Terminal ───────────────────────────────────────────────── */
-  .tt-terminal            { @apply fixed inset-0 z-50 flex flex-col transition-opacity duration-700; }
-  .tt-terminal-inner      { @apply relative z-10 flex h-full flex-col p-4 text-sm sm:p-8 sm:text-base; font-family: var(--font-jetbrains-mono), monospace; }
-  .tt-terminal-titlebar   { @apply mb-5 flex items-center gap-2; }
-  .tt-terminal-title      { @apply ml-3 text-xs text-tt-ice/40 tracking-widest uppercase; }
-  .tt-terminal-output     { @apply flex-1 overflow-y-auto pb-4; }
-  .tt-terminal-prompt-row { @apply flex items-center gap-3 border-t border-tt-blue/20 pt-4; }
-  .tt-terminal-prompt     { @apply shrink-0 select-none text-tt-blue; }
-  .tt-terminal-input      { @apply min-w-0 flex-1 bg-transparent text-tt-ice caret-tt-ice outline-none; }
-  .tt-terminal-line       { @apply leading-7 whitespace-pre-wrap break-words; }
-  .tt-terminal-blank      { @apply h-[1.4em]; }
-  .tt-terminal-cmd        { @apply font-semibold text-tt-ice; }
-  /* Terminal line type colors */
-  .tt-line-error  { @apply text-tt-error; }
-  .tt-line-input  { @apply text-tt-ice; }
-  .tt-line-boot   { @apply text-tt-blue/90; }
-  .tt-line-output { @apply text-tt-ice/80; }
-  .tt-line-ok     { @apply text-tt-success; }
-
-  /* Skill icon colors (matches SKILL_GROUPS color field) */
-  .tt-icon-frontend { @apply text-tt-amber; }
-  .tt-icon-backend  { @apply text-tt-orange; }
-  .tt-icon-tools    { @apply text-tt-gold; }
-
-  /* Project card — left-side glow (different position from tt-card-glow) */
-  .tt-card-glow-left { @apply pointer-events-none absolute -top-12 -left-12 h-40 w-40 rounded-full bg-tt-amber/8 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100; }
-
-  /* Misc card content */
-  .tt-card-bio { @apply mb-6 grow text-sm leading-relaxed text-tt-muted; }
-
-  /* Modal success icon */
-  .tt-modal-success-icon {
-    @apply mx-auto mb-4 h-20 w-20 text-tt-cream;
-    filter: drop-shadow(0 0 18px color-mix(in srgb, var(--color-tt-amber) 70%, transparent));
-  }
-
-  /* Ambient background vignette edges */
-  .tt-ambient-vignette-top    { @apply absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-tt-void to-transparent; }
-  .tt-ambient-vignette-bottom { @apply absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-tt-void to-transparent; }
-
-  /* ─── Developer Selection Screen ──────────────────────────────── */
-  .tt-selection {
-    @apply fixed inset-0 z-40 flex flex-col items-center justify-center px-6 py-12;
-    background-color: #080c12;
-  }
-
-  .tt-selection-eyebrow { @apply mb-3 font-[family-name:var(--font-jetbrains-mono)] text-xs text-tt-blue/70 tracking-widest; }
-  .tt-selection-title   { @apply mb-2 text-center text-3xl font-bold tracking-tight text-tt-cream sm:text-4xl; }
-  .tt-selection-sub     { @apply mb-12 text-center text-sm text-tt-ice/40; }
-  .tt-selection-cards   { @apply flex w-full max-w-2xl flex-col gap-5 sm:flex-row; }
-
-  /* Individual developer card */
-  .tt-dev-card {
-    @apply relative flex flex-1 cursor-pointer flex-col items-center gap-4 rounded-2xl border bg-tt-deep/80 p-8 text-center outline-none backdrop-blur;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  .tt-dev-card:focus-visible { @apply ring-2 ring-offset-2 ring-offset-transparent; }
-  .tt-dev-card-tom     { @apply border-tt-amber/20; }
-  .tt-dev-card-tom:focus-visible  { @apply ring-tt-amber; }
-  .tt-dev-card-therese { @apply border-tt-orange/20; }
-  .tt-dev-card-therese:focus-visible { @apply ring-tt-orange; }
-
-  .tt-dev-card-avatar { @apply flex h-20 w-20 items-center justify-center rounded-2xl text-3xl font-bold text-tt-void shadow-xl; }
-  .tt-dev-card-name   { @apply text-xl font-bold text-tt-cream; }
-  .tt-dev-card-role   { @apply text-xs font-semibold uppercase tracking-widest; }
-  .tt-dev-card-role-tom     { @apply text-tt-amber; }
-  .tt-dev-card-role-therese { @apply text-tt-orange; }
-  .tt-dev-card-desc   { @apply text-sm leading-relaxed text-tt-ice/55; }
-  .tt-dev-card-cta    { @apply mt-2 flex items-center gap-2 text-sm font-semibold; }
-  .tt-dev-card-cta-tom     { @apply text-tt-amber; }
-  .tt-dev-card-cta-therese { @apply text-tt-orange; }
-
-  /* Glow overlay on card hover — separate per-person colours */
-  .tt-dev-card-glow-tom     {
-    @apply pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,158,11,0.12) 0%, transparent 70%);
-  }
-  .tt-dev-card-glow-therese {
-    @apply pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(251,146,60,0.12) 0%, transparent 70%);
-  }
-  .group:hover .tt-dev-card-glow-tom,
-  .group:hover .tt-dev-card-glow-therese { @apply opacity-100; }
-
-  /* ─── Person portfolio pages ───────────────────────────────────── */
-  .tt-person-role-badge-tom     { @apply border-tt-amber/30 bg-tt-amber/10 text-tt-amber; }
-  .tt-person-role-badge-therese { @apply border-tt-orange/30 bg-tt-orange/10 text-tt-orange; }
-  .tt-header-back { @apply flex items-center gap-1.5 text-sm text-tt-ice/50 transition-colors hover:text-tt-ice; }
-
-  /* About — person page variant */
-  .tt-about-person-card { @apply relative mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/8 bg-tt-deep/70 p-8 backdrop-blur-sm md:p-12; }
-  .tt-about-stat        { @apply rounded-xl border border-white/8 bg-white/4 px-3 py-2; }
-  .tt-about-stat-label  { @apply block text-xs font-semibold uppercase tracking-widest text-tt-muted; }
-  .tt-about-stat-value  { @apply mt-0.5 block text-sm font-bold text-tt-cream; }
-  .tt-role-badge-therese { @apply border-tt-orange/30 bg-tt-orange/10 text-tt-orange; }
-  .tt-card-role-therese  { @apply text-tt-orange; }
-  .tt-btn-send-therese   { @apply from-tt-orange to-tt-rose shadow-tt-orange/20 hover:shadow-tt-orange/40; }
+/* ─── Smooth Scroll (Lenis) ───────────────────────────────── */
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
-
-/* ─── Terminal background ────────────────────────────────────── */
-.neon-grid {
-  background-color: #080c12;
-  background-image:
-    linear-gradient(rgba(50, 130, 184, 0.13) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(50, 130, 184, 0.13) 1px, transparent 1px);
-  background-size: 44px 44px;
-  animation: neon-grid-drift 14s linear infinite;
+/* ─── Scrollbar Styling (Global) ────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-.neon-grid::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse 80% 55% at 50% 38%,
-    rgba(50, 130, 184, 0.07) 0%,
-    transparent 70%
-  );
-  pointer-events: none;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-nebula-accent);
+}
+
+/* ─── Terminal Specific Scrollbar ───────────────────────────── */
+.scrollbar-hide::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-hide::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.2); /* Nebula accent low opacity */
+  border-radius: 2px;
+}
+
+.scrollbar-hide::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}
+
+/* Firefox support */
+.scrollbar-hide {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.2) transparent;
+}
+
+/* ─── Terminal ──────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}

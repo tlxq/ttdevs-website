@@ -1,96 +1,40 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { ArrowLeftIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useActiveSection } from "../../lib/hooks/useActiveSection";
+import { Button } from "../ui/Button";
 
 interface HeaderProps {
-  scrollToSection: (id: string) => void;
-  /** When provided, the logo area shows a back-link instead of scroll-to-top */
   backHref?: string;
+  scrollToSection?: (id: string) => void;
 }
 
-const NAV_LINKS = [
-  { label: "About", id: "about" },
-  { label: "Projects", id: "projects" },
-  { label: "Skills", id: "skills" },
-];
-
-export default function Header({ scrollToSection, backHref }: HeaderProps) {
-  const activeSection = useActiveSection();
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  function scrollTo(id: string) {
-    setMenuOpen(false);
-    scrollToSection(id);
-  }
-
+export default function Header({ backHref, scrollToSection }: HeaderProps) {
   return (
-    <header className="tt-header">
-      <div className="tt-header-inner">
-        {/* Logo / back link */}
-        {backHref ? (
-          <Link href={backHref} className="tt-header-back" aria-label="Back to TTdevs">
-            <ArrowLeftIcon className="h-4 w-4" aria-hidden="true" />
-            <span>TTdevs</span>
+    <header className="fixed top-0 z-50 w-full border-b border-white/5 bg-zinc-950/80 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+        <div className="flex items-center gap-8">
+          <Link href="/" className="text-xl font-bold tracking-tighter text-white hover:text-zinc-400 transition-colors">
+            TTDEVS
           </Link>
-        ) : (
-          <button
-            onClick={() => scrollTo("hero")}
-            className="tt-logo-btn"
-            aria-label="Back to top"
-          >
-            TTdevs
-          </button>
-        )}
-
-        {/* Desktop nav */}
-        <nav aria-label="Main navigation" className="hidden items-center gap-1 md:flex">
-          {NAV_LINKS.map(({ label, id }) => (
-            <button
-              key={id}
-              onClick={() => scrollTo(id)}
-              aria-current={activeSection === id ? "true" : undefined}
-              className={activeSection === id ? "tt-nav-link-active" : "tt-nav-link"}
-            >
-              {label}
-            </button>
-          ))}
-        </nav>
-
-        {/* Right side */}
-        <div className="flex items-center gap-3">
-          <button onClick={() => scrollTo("contact")} className="tt-btn-nav">
-            Contact us
-          </button>
-          <button
-            className="tt-hamburger"
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-          >
-            {menuOpen ? <XMarkIcon className="h-5 w-5" /> : <Bars3Icon className="h-5 w-5" />}
-          </button>
         </div>
-      </div>
 
-      {/* Mobile dropdown */}
-      {menuOpen && (
-        <nav aria-label="Mobile navigation" className="tt-header-mobile">
-          {NAV_LINKS.map(({ label, id }) => (
-            <button
-              key={id}
-              onClick={() => scrollTo(id)}
-              aria-current={activeSection === id ? "true" : undefined}
-              className={activeSection === id ? "tt-nav-link-mobile-active" : "tt-nav-link-mobile"}
-            >
-              {label}
-            </button>
-          ))}
+        <nav className="hidden md:flex items-center gap-8">
+          {scrollToSection ? (
+            <>
+              <button onClick={() => scrollToSection("about")} className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">About</button>
+              <button onClick={() => scrollToSection("projects")} className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Projects</button>
+              <button onClick={() => scrollToSection("skills")} className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Skills</button>
+              <Button size="sm" onClick={() => scrollToSection("contact")}>Contact</Button>
+            </>
+          ) : (
+            backHref && (
+              <Link href={backHref}>
+                <Button variant="ghost" size="sm">← Back</Button>
+              </Link>
+            )
+          )}
         </nav>
-      )}
+      </div>
     </header>
   );
 }
-

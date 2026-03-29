@@ -1,10 +1,12 @@
-import PersonPortfolioLayout from "../components/person-portfolio/PersonPortfolioLayout";
+import { ProfileView } from "../components/features/ProfileView";
+import { PROFILES } from "../lib/data/profiles";
+import { fetchGitHubRepos } from "../lib/github/fetchRepos";
 
 export const metadata = {
-  title: "Therese — Backend Developer | TTdevs",
-  description: "Therese's developer portfolio. Node.js, REST APIs, PostgreSQL, system architecture.",
+  title: "Therese | Backend Architect",
 };
 
-export default function TheresePage() {
-  return <PersonPortfolioLayout person="therese" />;
+export default async function TheresePage() {
+  const repos = await fetchGitHubRepos("thjox"); // Replace with actual GitHub username
+  return <ProfileView profile={PROFILES.therese} backHref="/" repos={repos} />;
 }
