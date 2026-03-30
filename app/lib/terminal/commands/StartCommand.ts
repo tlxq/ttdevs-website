@@ -7,7 +7,9 @@ export class StartCommand implements ITerminalCommand {
   execute(): CommandResult {
     return {
       lines: [
-        { text: "Launching portfolio...", type: "output" },
+        { text: "Accessing tt family's Dev Studio...", type: "accent" },
+        { text: "Syncing with Texas & Gösta... [  OK  ]", type: "cyan" },
+        { text: "Welcome to the studio. Human access granted.", type: "secondary" },
       ],
       action: "START",
     };

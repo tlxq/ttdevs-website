@@ -6,6 +6,7 @@ import { ProjectsCommand } from "./commands/ProjectsCommand";
 import { StartCommand } from "./commands/StartCommand";
 import { ClearCommand } from "./commands/ClearCommand";
 import { PulseCommand } from "./commands/PulseCommand";
+import { CatCommand } from "./commands/CatCommand";
 import { GitHubRepo } from "../github/fetchRepos";
 import { SystemStatus } from "../pulse/PulseContext";
 
@@ -19,11 +20,16 @@ export class TerminalEngine {
     this.registerCommand(new PulseCommand(pulseNodes));
     this.registerCommand(new StartCommand());
     this.registerCommand(new ClearCommand());
+    this.registerCommand(new CatCommand());
     this.registerCommand(new HelpCommand(this.commands));
   }
 
   registerCommand(cmd: ITerminalCommand) {
     this.commands.set(cmd.name.toLowerCase(), cmd);
+  }
+
+  getCommandNames(): string[] {
+    return Array.from(this.commands.keys());
   }
 
   process(input: string): CommandResult {

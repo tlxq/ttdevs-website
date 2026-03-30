@@ -7,11 +7,16 @@ export class HelpCommand implements ITerminalCommand {
   constructor(private commands: Map<string, ITerminalCommand>) {}
 
   execute(): CommandResult {
-    const lines: CommandResult["lines"] = [{ text: "Available commands:", type: "output" as const }];
+    const lines: CommandResult["lines"] = [
+      { text: "─── AVAILABLE COMMANDS ────────────────────────────────────────", type: "accent" as const },
+      { text: "", type: "blank" as const }
+    ];
     this.commands.forEach(cmd => {
-      lines.push({ text: `  ${cmd.name.padEnd(8, " ")} — ${cmd.description}`, type: "output" as const });
+      lines.push({ text: `  ${cmd.name.padEnd(10, " ")} — ${cmd.description}`, type: "cyan" as const });
     });
     lines.push({ text: "", type: "blank" as const });
+    lines.push({ text: "Tip: Use [TAB] to auto-complete commands.", type: "secondary" as const });
+    lines.push({ text: "────────────────────────────────────────────────────────────────", type: "accent" as const });
     return { lines };
   }
 }

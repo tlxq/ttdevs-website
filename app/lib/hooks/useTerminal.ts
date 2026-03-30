@@ -90,7 +90,7 @@ export function useTerminal(onStart: () => void, repos: GitHubRepo[] = []) {
       ]);
       setInput("");
       setTransitioning(true);
-      setTimeout(onStart, 900);
+      setTimeout(onStart, 1200);
       return;
     }
 
@@ -99,5 +99,16 @@ export function useTerminal(onStart: () => void, repos: GitHubRepo[] = []) {
     setInput("");
   }, [input, onStart, engine]);
 
-  return { bootLines, booting, history, input, setInput, submit, inputRef, outputRef, transitioning };
+  return { 
+    bootLines, 
+    booting, 
+    history, 
+    input, 
+    setInput, 
+    submit, 
+    inputRef, 
+    outputRef, 
+    transitioning,
+    getCommandNames: () => engine.getCommandNames()
+  };
 }

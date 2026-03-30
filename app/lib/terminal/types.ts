@@ -1,4 +1,4 @@
-export type LineType = "boot" | "input" | "output" | "error" | "blank";
+export type LineType = "boot" | "input" | "output" | "error" | "blank" | "accent" | "secondary" | "cyan";
 
 export interface OutputLine {
   id: number;
