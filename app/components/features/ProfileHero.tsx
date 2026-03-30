@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Button } from "../ui/Button";
 import { Profile } from "../../lib/data/profiles";
-import { SystemStatusBar } from "../ui/SystemStatusBar";
 
 interface HeroProps {
   profile: Profile;
