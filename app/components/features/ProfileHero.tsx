@@ -19,9 +19,8 @@ export function ProfileHero({ profile, scrollToSection }: HeroProps) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
-          <SystemStatusBar />
-          
-          <motion.span 
+          <motion.span
+ 
             className="mb-6 inline-block px-6 py-2 rounded-full border border-nebula-accent/20 bg-nebula-accent/5 text-[10px] font-bold tracking-[0.3em] uppercase text-nebula-accent font-mono backdrop-blur-sm"
             animate={{ boxShadow: ["0 0 20px rgba(139,92,246,0)", "0 0 20px rgba(139,92,246,0.2)", "0 0 20px rgba(139,92,246,0)"] }}
             transition={{ duration: 4, repeat: Infinity }}
