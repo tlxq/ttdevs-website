@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Card } from "../ui/Card";
-import { Profile } from "../../lib/data/profiles";
+import { Profile, PROFILES } from "../../lib/data/profiles";
 
 interface AboutProps {
   profile: Profile;
@@ -39,12 +39,12 @@ export function AboutSection({ profile }: AboutProps) {
               {profile.id === "joint" && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12 pt-12 border-t border-white/5">
                   <div>
-                    <h3 className="text-white font-bold mb-2">Tom // Frontend</h3>
-                    <p className="text-sm text-zinc-500">Master of interfaces and motion design.</p>
+                    <h3 className="text-white font-bold mb-2">Tom // {PROFILES.tom.role}</h3>
+                    <p className="text-sm text-zinc-500">{PROFILES.tom.bio}</p>
                   </div>
                   <div>
-                    <h3 className="text-white font-bold mb-2">Therese // Backend</h3>
-                    <p className="text-sm text-zinc-500">Architect of scalable systems and APIs.</p>
+                    <h3 className="text-white font-bold mb-2">Therese // {PROFILES.therese.role}</h3>
+                    <p className="text-sm text-zinc-500">{PROFILES.therese.bio}</p>
                   </div>
                 </div>
               )}

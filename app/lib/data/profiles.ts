@@ -21,21 +21,19 @@ export interface Profile {
   projects: Project[];
   skills: Skill[];
   recipientKey: "tom" | "therese";
+  imageUrl?: string;
 }
 
 export const PROFILES: Record<string, Profile> = {
   joint: {
     id: "joint",
     name: "TTdevs",
-    role: "Full-stack Developer Duo",
+    role: "Software Development Duo",
     bio: "We merge cutting-edge technology with refined design to create high-performance digital environments.",
-    aboutTitle: "The Ecosystem",
+    aboutTitle: "Who We Are",
     aboutText: "A two-person collective dedicated to building sustainable, high-performance digital environments.",
     recipientKey: "tom",
-    projects: [
-      { title: "TTdevs v3", tag: "Next.js 16 // Framer", desc: "Minimalist studio portfolio with real-time CLI engine." },
-      { title: "EPA-appen", tag: "React Native // Node", desc: "Mobile ecosystem for car enthusiasts with real-time tracking." }
-    ],
+    projects: [],
     skills: [
       { name: "React / Next.js", category: "Frontend", level: 98 },
       { name: "Node.js / Bun", category: "Backend", level: 92 },
@@ -46,14 +44,13 @@ export const PROFILES: Record<string, Profile> = {
   tom: {
     id: "tom",
     name: "Tom",
-    role: "Frontend Specialist",
-    bio: "Focused on high-performance interfaces and polished motion design.",
-    aboutTitle: "Frontend Artistry",
+    role: "Interface Engineer",
+    bio: "Designing and building intuitive, high-performance web interfaces.",
+    aboutTitle: "Interface Artistry",
     aboutText: "Expert in crafting pixel-perfect, interactive user interfaces with a focus on accessibility and speed.",
+    imageUrl: "/tom-profile.webp",
     recipientKey: "tom",
-    projects: [
-      { title: "Visual Engine", tag: "Three.js // GLSL", desc: "A custom shader-based background system for modern web apps." }
-    ],
+    projects: [],
     skills: [
       { name: "React", category: "Frontend", level: 99 },
       { name: "Framer Motion", category: "Animation", level: 95 },
@@ -63,14 +60,13 @@ export const PROFILES: Record<string, Profile> = {
   therese: {
     id: "therese",
     name: "Therese",
-    role: "Backend Architect",
-    bio: "Building robust system architectures and scalable API ecosystems.",
+    role: "Systems Engineer",
+    bio: "Architecting secure, scalable, and efficient backend foundations.",
     aboutTitle: "Systems Design",
     aboutText: "Specialist in database modeling, cloud infrastructure, and highly available backends.",
+    imageUrl: "/therese-profile.webp",
     recipientKey: "therese",
-    projects: [
-      { title: "Scalable API", tag: "Go // Kubernetes", desc: "A high-throughput API layer serving millions of requests." }
-    ],
+    projects: [],
     skills: [
       { name: "Node.js", category: "Backend", level: 96 },
       { name: "PostgreSQL", category: "Database", level: 94 },
