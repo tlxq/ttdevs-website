@@ -28,7 +28,7 @@ function ProjectsSectionComponent({ profile, repos }: ProjectsProps) {
           <span className="text-nebula-accent text-xs font-bold tracking-widest uppercase font-mono mb-4 block">
             {hasRepos ? "Live Ecosystem" : "Selected Works"}
           </span>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white italic">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white italic pr-4">
             Engineered <span className="text-gradient">Growth</span>
           </h2>
         </motion.div>
