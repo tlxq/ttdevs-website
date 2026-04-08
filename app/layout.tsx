@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { PulseProvider } from "./lib/pulse/PulseContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,9 +40,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} antialiased font-sans`}>
-        <div className="min-h-screen bg-black">
-          {children}
-        </div>
+        <PulseProvider>
+          <div className="min-h-screen bg-black">
+            {children}
+          </div>
+        </PulseProvider>
       </body>
     </html>
   );

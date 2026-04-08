@@ -1,26 +1,50 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import Terminal from "../terminal/Terminal";
+import { useEffect, useState, useCallback } from "react";
+import { AnimatePresence } from "framer-motion";
 import { GitHubRepo } from "../../lib/github/fetchRepos";
-import { PulseProvider } from "../../lib/pulse/PulseContext";
+import { ProfileView } from "./ProfileView";
+import { PROFILES } from "../../lib/data/profiles";
+import LoadingScreen from "../ui/LoadingScreen";
 
 interface HomePageClientProps {
   repos: GitHubRepo[];
 }
 
 export default function HomePageClient({ repos }: HomePageClientProps) {
-  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  const [showLoader, setShowLoader] = useState(false);
 
-  const handleStart = () => {
-    router.push("/portfolio");
-  };
+  useEffect(() => {
+    // Check if user has already seen the loader in this session
+    const hasSeenLoader = sessionStorage.getItem("hasSeenLoader");
+    
+    if (!hasSeenLoader) {
+      setShowLoader(true);
+      // We'll set the session storage when the loader completes
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const handleLoadingComplete = useCallback(() => {
+    sessionStorage.setItem("hasSeenLoader", "true");
+    setIsLoading(false);
+  }, []);
 
   return (
-    <PulseProvider>
+    <>
+      <AnimatePresence mode="wait">
+        {showLoader && isLoading && (
+          <LoadingScreen key="loader" onComplete={handleLoadingComplete} />
+        )}
+      </AnimatePresence>
+
       <main className="bg-zinc-950 min-h-screen">
-        <Terminal onStart={handleStart} repos={repos} />
+        {!isLoading && (
+          <ProfileView profile={PROFILES.joint} repos={repos} />
+        )}
       </main>
-    </PulseProvider>
+    </>
   );
 }

@@ -2,62 +2,71 @@
 
 import { motion } from "framer-motion";
 import { usePulse } from "./pulse/PulseContext";
+import React, { useMemo } from "react";
 
-export default function AmbientBackground() {
+function AmbientBackgroundComponent() {
   const { activityIntensity } = usePulse();
 
+  // Memoize values that don't need to change every render to stabilize animations
+  const intensity = Math.round(activityIntensity * 10) / 10; // Stepped intensity to reduce tiny re-renders
+
   return (
-    <div className="fixed inset-0 -z-10 nebula-gradient overflow-hidden">
-      {/* Dynamic Nebula Glows */}
+    <div className="fixed inset-0 -z-10 nebula-gradient overflow-hidden pointer-events-none" aria-hidden="true">
+      {/* Dynamic Nebula Glows - Optimized with will-change and simpler transitions */}
       <motion.div
-        className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full bg-nebula-accent/20 blur-[120px]"
+        className="absolute -top-[10%] -left-[5%] w-[60%] h-[60%] rounded-full bg-nebula-accent/15 blur-[100px] will-change-transform"
         animate={{
-          scale: [1, 1 + activityIntensity * 0.5, 1],
-          opacity: [0.3, 0.3 + activityIntensity * 0.4, 0.3],
-          x: [0, 30, 0],
-          y: [0, 50, 0],
+          scale: [1, 1 + intensity * 0.2, 1],
+          opacity: [0.2, 0.2 + intensity * 0.3, 0.2],
+          x: [0, 20, 0],
+          y: [0, 30, 0],
         }}
         transition={{ 
-          duration: 15 / (1 + activityIntensity), 
+          duration: 20, 
           repeat: Infinity, 
-          ease: "easeInOut" 
+          ease: "linear" 
         }}
       />
       
       <motion.div
-        className="absolute bottom-[-10%] -right-[5%] w-[60%] h-[60%] rounded-full bg-nebula-secondary/10 blur-[100px]"
+        className="absolute bottom-[-5%] -right-[5%] w-[50%] h-[50%] rounded-full bg-nebula-secondary/10 blur-[80px] will-change-transform"
         animate={{
-          scale: [1, 1 + activityIntensity * 0.3, 1],
-          opacity: [0.2, 0.2 + activityIntensity * 0.3, 0.2],
-          x: [0, -40, 0],
-          y: [0, -30, 0],
+          scale: [1, 1 + intensity * 0.15, 1],
+          opacity: [0.15, 0.15 + intensity * 0.2, 0.15],
+          x: [0, -20, 0],
+          y: [0, -15, 0],
         }}
         transition={{ 
-          duration: 18 / (1 + activityIntensity), 
+          duration: 25, 
           repeat: Infinity, 
-          ease: "easeInOut", 
+          ease: "linear", 
           delay: 2 
         }}
       />
 
       <motion.div
-        className="absolute top-[30%] right-[10%] w-[40%] h-[40%] rounded-full bg-nebula-cyan/10 blur-[110px]"
+        className="absolute top-[40%] right-[15%] w-[30%] h-[30%] rounded-full bg-nebula-cyan/5 blur-[90px] will-change-transform"
         animate={{
-          scale: [1, 1 + activityIntensity * 0.4, 1],
-          opacity: [0.1, 0.1 + activityIntensity * 0.3, 0.1],
+          opacity: [0.05, 0.1 + intensity * 0.2, 0.05],
         }}
         transition={{ 
-          duration: 20 / (1 + activityIntensity), 
+          duration: 15, 
           repeat: Infinity, 
-          ease: "easeInOut", 
-          delay: 5 
+          ease: "linear"
         }}
       />
 
-      {/* Subtle Star Noise (Overlay) */}
-      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
+      {/* Subtle Star Noise (Static Overlay) */}
+      <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay" 
+           style={{ 
+             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+             backgroundRepeat: 'repeat'
+           }} 
       />
     </div>
   );
 }
+
+// Wrap in React.memo to prevent re-renders when parent (RootLayout) re-renders 
+// unless the Pulse data actually changes
+export default React.memo(AmbientBackgroundComponent);

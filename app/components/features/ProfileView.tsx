@@ -10,7 +10,6 @@ import { ProjectsSection } from "./ProjectsSection";
 import { SkillsSection } from "./SkillsSection";
 import { ContactSection } from "./ContactSection";
 import ContactModal from "./ContactModal";
-import { GhostTerminal } from "./GhostTerminal";
 import type { SelectedPerson } from "../../lib/types";
 import { GitHubRepo } from "../../lib/github/fetchRepos";
 
@@ -41,8 +40,6 @@ export function ProfileView({ profile, backHref, repos = [] }: ProfileViewProps)
       <ProjectsSection profile={profile} repos={repos} />
       <SkillsSection profile={profile} />
       <ContactSection onContactClick={openModal} />
-
-      <GhostTerminal repos={repos} />
 
       {selectedPerson && (
         <ContactModal person={selectedPerson} onClose={closeModal} />

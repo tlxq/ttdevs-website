@@ -5,13 +5,14 @@ import { Card } from "../ui/Card";
 import { Profile } from "../../lib/data/profiles";
 import { GitHubRepo } from "../../lib/github/fetchRepos";
 import { StarIcon, CodeBracketIcon } from "@heroicons/react/24/outline";
+import React from "react";
 
 interface ProjectsProps {
   profile: Profile;
   repos?: GitHubRepo[];
 }
 
-export function ProjectsSection({ profile, repos }: ProjectsProps) {
+function ProjectsSectionComponent({ profile, repos }: ProjectsProps) {
   const hasRepos = repos && repos.length > 0;
   const isJoint = profile.id === "joint";
 
@@ -125,3 +126,5 @@ export function ProjectsSection({ profile, repos }: ProjectsProps) {
     </section>
   );
 }
+
+export const ProjectsSection = React.memo(ProjectsSectionComponent);

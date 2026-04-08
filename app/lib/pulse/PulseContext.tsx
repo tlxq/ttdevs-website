@@ -58,7 +58,27 @@ const mapRowToStatus = React.useCallback((row: NodeStatusRow): SystemStatus => (
 }), [checkOnline]);
 
 
+  const lastFetchTime = React.useRef(0);
+  const fetchTimeout = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const fetchStatus = React.useCallback(async () => {
+    const now = Date.now();
+    const timeSinceLastFetch = now - lastFetchTime.current;
+    
+    // Throttle: If we fetched less than 2 seconds ago, schedule a fetch instead
+    if (timeSinceLastFetch < 2000) {
+      if (fetchTimeout.current) return; // Already scheduled
+      
+      fetchTimeout.current = setTimeout(() => {
+        lastFetchTime.current = Date.now();
+        fetchTimeout.current = null;
+        fetchStatus();
+      }, 2000 - timeSinceLastFetch);
+      return;
+    }
+
+    lastFetchTime.current = now;
+
     try {
       const { data, error } = await supabase
         .from("node_status")
@@ -89,6 +109,7 @@ const mapRowToStatus = React.useCallback((row: NodeStatusRow): SystemStatus => (
 
     return () => {
       supabase.removeChannel(channel);
+      if (fetchTimeout.current) clearTimeout(fetchTimeout.current);
     };
   }, [fetchStatus]);
 

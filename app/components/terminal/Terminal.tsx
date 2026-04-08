@@ -6,11 +6,12 @@ import { useTerminal, type OutputLine } from "../../lib/hooks/useTerminal";
 import { GitHubRepo } from "../../lib/github/fetchRepos";
 
 interface TerminalProps {
-  onStart: () => void;
+  onStart?: () => void;
   repos?: GitHubRepo[];
+  className?: string;
 }
 
-export default function Terminal({ onStart, repos = [] }: TerminalProps) {
+export default function Terminal({ onStart = () => {}, repos = [], className = "" }: TerminalProps) {
   const { 
     bootLines, booting, history, input, setInput, submit, 
     inputRef, outputRef, transitioning, getCommandNames 
@@ -33,28 +34,19 @@ export default function Terminal({ onStart, repos = [] }: TerminalProps) {
     <div
       role="region"
       aria-label="Interactive terminal. Type help for available commands."
-      className={["fixed inset-0 z-50 flex flex-col bg-nebula-950 font-mono transition-opacity duration-700", transitioning ? "opacity-0" : "opacity-100"].join(" ")}
+      className={["flex flex-col bg-zinc-950 font-mono transition-opacity duration-700 h-full w-full", transitioning ? "opacity-0" : "opacity-100", className].join(" ")}
     >
-      <div className="fixed inset-0 -z-10 nebula-gradient opacity-20" />
+      <div className="absolute inset-0 -z-10 nebula-gradient opacity-10" />
       
-      <div className="relative z-10 flex h-full flex-col p-6 text-sm md:p-12 md:text-base max-w-5xl mx-auto w-full">
+      <div className="relative z-10 flex h-full flex-col p-4 text-xs md:p-8 md:text-sm w-full overflow-hidden">
         {/* Chrome dots */}
-        <div className="mb-8 flex items-center justify-between" aria-hidden="true">
+        <div className="mb-6 flex items-center justify-between" aria-hidden="true">
           <div className="flex items-center gap-2">
-            <div className="h-3 w-3 rounded-full bg-nebula-accent/40" />
-            <div className="h-3 w-3 rounded-full bg-nebula-secondary/40" />
-            <div className="h-3 w-3 rounded-full bg-nebula-cyan/40" />
-            <span className="ml-4 text-[10px] uppercase tracking-[0.3em] text-nebula-accent/60">TTDEVS // NEBULA_OS</span>
+            <div className="h-2 w-2 rounded-full bg-rose-500/40" />
+            <div className="h-2 w-2 rounded-full bg-amber-500/40" />
+            <div className="h-2 w-2 rounded-full bg-emerald-500/40" />
+            <span className="ml-3 text-[9px] uppercase tracking-[0.2em] text-zinc-500 font-bold">TTDEVS // NEBULA_OS</span>
           </div>
-          
-          {!booting && (
-            <button 
-              onClick={onStart}
-              className="text-[10px] uppercase tracking-[0.2em] text-nebula-cyan/40 hover:text-nebula-cyan transition-colors border border-nebula-cyan/20 px-3 py-1 rounded-full backdrop-blur-sm"
-            >
-              Enter Studio →
-            </button>
-          )}
         </div>
 
         <div ref={outputRef} className="flex-1 overflow-y-auto pb-4 scrollbar-hide">
@@ -67,13 +59,13 @@ export default function Terminal({ onStart, repos = [] }: TerminalProps) {
           ))}
           {booting && (
             <div className="text-nebula-accent/50" aria-hidden="true">
-              <span className="inline-block w-2 h-5 bg-nebula-accent animate-blink" />
+              <span className="inline-block w-1.5 h-4 bg-nebula-accent animate-blink" />
             </div>
           )}
         </div>
 
         {!booting && !transitioning && (
-          <div className="flex items-center gap-3 border-t border-white/5 pt-8">
+          <div className="flex items-center gap-2 border-t border-white/5 pt-4">
             <span className="shrink-0 select-none text-nebula-accent font-bold" aria-hidden="true">
               $
             </span>
@@ -83,7 +75,7 @@ export default function Terminal({ onStart, repos = [] }: TerminalProps) {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="min-w-0 flex-1 bg-transparent text-white outline-none caret-nebula-accent"
+              className="min-w-0 flex-1 bg-transparent text-white outline-none caret-nebula-cyan"
               aria-label="Terminal command input"
               autoComplete="off"
               autoCorrect="off"
@@ -91,9 +83,6 @@ export default function Terminal({ onStart, repos = [] }: TerminalProps) {
               spellCheck={false}
               autoFocus
             />
-            <span className="text-[10px] text-white/20 uppercase tracking-widest hidden md:block">
-              [TAB] to complete
-            </span>
           </div>
         )}
       </div>

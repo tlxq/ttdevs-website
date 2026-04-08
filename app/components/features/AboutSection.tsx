@@ -3,12 +3,13 @@
 import { motion } from "framer-motion";
 import { Card } from "../ui/Card";
 import { Profile, PROFILES } from "../../lib/data/profiles";
+import React from "react";
 
 interface AboutProps {
   profile: Profile;
 }
 
-export function AboutSection({ profile }: AboutProps) {
+function AboutSectionComponent({ profile }: AboutProps) {
   return (
     <section id="about" className="relative px-4 py-32">
       <div className="mx-auto max-w-6xl">
@@ -55,3 +56,5 @@ export function AboutSection({ profile }: AboutProps) {
     </section>
   );
 }
+
+export const AboutSection = React.memo(AboutSectionComponent);

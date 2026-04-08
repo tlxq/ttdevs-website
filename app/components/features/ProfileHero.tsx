@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "../ui/Button";
 import { Profile } from "../../lib/data/profiles";
+import React from "react";
 
 import Image from "next/image";
 
@@ -11,7 +13,7 @@ interface HeroProps {
   scrollToSection: (id: string) => void;
 }
 
-export function ProfileHero({ profile, scrollToSection }: HeroProps) {
+function ProfileHeroComponent({ profile, scrollToSection }: HeroProps) {
   const isJoint = profile.id === "joint";
 
   // Joint Profile Layout (Centered Stack)
@@ -50,14 +52,24 @@ export function ProfileHero({ profile, scrollToSection }: HeroProps) {
             <div className="absolute inset-0 bg-nebula-accent/10 blur-[120px] rounded-full scale-150 opacity-50" />
             
             <div className="flex -space-x-16 md:-space-x-24 relative z-10">
-              <div className="relative h-64 w-64 md:h-[400px] md:w-[350px] rounded-[40px] overflow-hidden border border-white/10 glass rotate-[-4deg] shadow-2xl transition-transform hover:rotate-0 hover:scale-105 duration-700">
-                <Image src="/tom-profile.webp" alt="Tom" fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#05050a]/40 to-transparent" />
-              </div>
-              <div className="relative h-64 w-64 md:h-[400px] md:w-[350px] rounded-[40px] overflow-hidden border border-white/10 glass rotate-[4deg] mt-12 md:mt-20 shadow-2xl transition-transform hover:rotate-0 hover:scale-105 duration-700">
-                <Image src="/therese-profile.webp" alt="Therese" fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#05050a]/40 to-transparent" />
-              </div>
+              <Link href="/tom" className="group">
+                <div className="relative h-64 w-64 md:h-[400px] md:w-[350px] rounded-[40px] overflow-hidden border border-white/10 glass rotate-[-4deg] shadow-2xl transition-all hover:rotate-0 hover:scale-105 duration-700 hover:z-20 hover:border-nebula-accent/30">
+                  <Image src="/tom-profile.webp" alt="Tom" fill className="object-cover" priority />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#05050a]/40 to-transparent group-hover:from-nebula-accent/10" />
+                  <div className="absolute inset-0 flex items-end justify-center p-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-xs font-mono tracking-widest text-nebula-accent bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-nebula-accent/20">VIEW TOM'S SPACE</span>
+                  </div>
+                </div>
+              </Link>
+              <Link href="/therese" className="group">
+                <div className="relative h-64 w-64 md:h-[400px] md:w-[350px] rounded-[40px] overflow-hidden border border-white/10 glass rotate-[4deg] mt-12 md:mt-20 shadow-2xl transition-all hover:rotate-0 hover:scale-105 duration-700 hover:z-20 hover:border-nebula-accent/30">
+                  <Image src="/therese-profile.webp" alt="Therese" fill className="object-cover" priority />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#05050a]/40 to-transparent group-hover:from-nebula-accent/10" />
+                  <div className="absolute inset-0 flex items-end justify-center p-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-xs font-mono tracking-widest text-nebula-accent bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-nebula-accent/20">VIEW THERESE'S SPACE</span>
+                  </div>
+                </div>
+              </Link>
             </div>
           </motion.div>
 
@@ -73,10 +85,17 @@ export function ProfileHero({ profile, scrollToSection }: HeroProps) {
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-6">
-              <Button onClick={() => scrollToSection("projects")} size="lg" variant="primary">
-                Explore Portfolio
-              </Button>
-              <Button onClick={() => scrollToSection("contact")} size="lg" variant="outline">
+              <Link href="/tom">
+                <Button size="lg" variant="primary">
+                  Explore Tom
+                </Button>
+              </Link>
+              <Link href="/therese">
+                <Button size="lg" variant="outline">
+                  Explore Therese
+                </Button>
+              </Link>
+              <Button onClick={() => scrollToSection("contact")} size="lg" variant="ghost">
                 Get in Touch
               </Button>
             </div>
@@ -168,3 +187,5 @@ export function ProfileHero({ profile, scrollToSection }: HeroProps) {
     </section>
   );
 }
+
+export const ProfileHero = React.memo(ProfileHeroComponent);

@@ -2,12 +2,13 @@
 
 import { motion } from "framer-motion";
 import { Profile } from "../../lib/data/profiles";
+import React from "react";
 
 interface SkillsProps {
   profile: Profile;
 }
 
-export function SkillsSection({ profile }: SkillsProps) {
+function SkillsSectionComponent({ profile }: SkillsProps) {
   return (
     <section id="skills" className="px-4 py-32">
       <div className="mx-auto max-w-6xl">
@@ -47,3 +48,5 @@ export function SkillsSection({ profile }: SkillsProps) {
     </section>
   );
 }
+
+export const SkillsSection = React.memo(SkillsSectionComponent);
