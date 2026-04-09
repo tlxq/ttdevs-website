@@ -1,5 +1,5 @@
-import { fetchGitHubRepos } from "./lib/github/fetchRepos";
-import HomePageClient from "./components/features/HomePageClient";
+import { fetchGitHubRepos } from "../lib/github/fetchRepos";
+import HomePageClient from "../components/features/HomePageClient";
 
 export default async function HomePage() {
   // Fetch repos for both developers to inject into Terminal

@@ -6,6 +6,7 @@ import { Profile } from "../../lib/data/profiles";
 import { GitHubRepo } from "../../lib/github/fetchRepos";
 import { StarIcon, CodeBracketIcon } from "@heroicons/react/24/outline";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 interface ProjectsProps {
   profile: Profile;
@@ -13,6 +14,7 @@ interface ProjectsProps {
 }
 
 function ProjectsSectionComponent({ profile, repos }: ProjectsProps) {
+  const t = useTranslations("Projects");
   const hasRepos = repos && repos.length > 0;
   const isJoint = profile.id === "joint";
 
@@ -26,10 +28,10 @@ function ProjectsSectionComponent({ profile, repos }: ProjectsProps) {
           className="mb-20 text-center"
         >
           <span className="text-nebula-accent text-xs font-bold tracking-widest uppercase font-mono mb-4 block">
-            {hasRepos ? "Live Ecosystem" : "Selected Works"}
+            {hasRepos ? t("liveEcosystem") : t("selectedWorks")}
           </span>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white italic">
-            Engineered <span className="text-gradient inline-block px-4 italic">Growth</span>
+            {t("engineered")} <span className="text-gradient inline-block px-4 italic">{t("growth")}</span>
           </h2>
         </motion.div>
 
@@ -50,7 +52,7 @@ function ProjectsSectionComponent({ profile, repos }: ProjectsProps) {
                         <CodeBracketIcon className="h-6 w-6 text-nebula-cyan opacity-50" />
                         {isJoint && (
                           <span className="text-[10px] font-mono text-nebula-accent/60 uppercase">
-                            by {repo.owner.login}
+                            {t("by")} {repo.owner.login}
                           </span>
                         )}
                       </div>
@@ -64,7 +66,7 @@ function ProjectsSectionComponent({ profile, repos }: ProjectsProps) {
                       {repo.name}
                     </h3>
                     <p className="text-zinc-400 text-sm leading-relaxed mb-8 line-clamp-3">
-                      {repo.description || "Experimental repository part of the TTdevs digital ecosystem."}
+                      {repo.description || t("defaultDescription")}
                     </p>
                   </div>
                   
@@ -78,7 +80,7 @@ function ProjectsSectionComponent({ profile, repos }: ProjectsProps) {
                       rel="noopener noreferrer"
                       className="text-xs font-bold text-white hover:text-nebula-secondary transition-colors inline-flex items-center gap-2"
                     >
-                      View Code
+                      {t("viewCode")}
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
@@ -111,7 +113,7 @@ function ProjectsSectionComponent({ profile, repos }: ProjectsProps) {
                   
                   <div className="mt-auto">
                     <button className="text-xs font-bold text-white hover:text-nebula-secondary transition-colors inline-flex items-center gap-2">
-                      Learn More
+                      {t("learnMore")}
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>

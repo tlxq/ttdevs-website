@@ -1,0 +1,56 @@
+{
+  "Header": {
+    "about": "About",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact",
+    "terminal": "Terminal"
+  },
+  "Common": {
+    "back": "Back",
+    "systemStatus": "System Status",
+    "online": "ONLINE",
+    "offline": "OFFLINE",
+    "active": "ACTIVE",
+    "away": "AWAY"
+  },
+  "Projects": {
+    "liveEcosystem": "Live Ecosystem",
+    "selectedWorks": "Selected Works",
+    "engineered": "Engineered",
+    "growth": "Growth",
+    "defaultDescription": "Experimental repository part of the TTdevs digital ecosystem.",
+    "viewCode": "View Code",
+    "learnMore": "Learn More",
+    "by": "by"
+  },
+  "Contact": {
+    "title1": "Let's build",
+    "title2": "something together.",
+    "description": "Ready to start your next digital project? Reach out and let's discuss your vision.",
+    "inquiry": "Inquiry",
+    "inquiryDescription": "Select a developer to start a direct conversation or inquire about our joint services.",
+    "contactTom": "Contact Tom",
+    "contactTherese": "Contact Therese"
+  },
+  "Profiles": {
+    "joint": {
+      "role": "Software Development Duo",
+      "bio": "We merge cutting-edge technology with refined design to create high-performance digital environments.",
+      "aboutTitle": "Who We Are",
+      "aboutText": "A two-person collective dedicated to building sustainable, high-performance digital environments."
+    },
+    "tom": {
+      "role": "Interface Engineer",
+      "bio": "Designing and building intuitive, high-performance web interfaces.",
+      "aboutTitle": "Interface Artistry",
+      "aboutText": "Expert in crafting pixel-perfect, interactive user interfaces with a focus on accessibility and speed."
+    },
+    "therese": {
+      "role": "Systems Engineer",
+      "bio": "Architecting secure, scalable, and efficient backend foundations.",
+      "aboutTitle": "Systems Design",
+      "aboutText": "Specialist in database modeling, cloud infrastructure, and highly available backends."
+    }
+  }
+}

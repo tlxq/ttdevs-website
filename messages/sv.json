@@ -1,0 +1,56 @@
+{
+  "Header": {
+    "about": "Om oss",
+    "projects": "Projekt",
+    "skills": "Färdigheter",
+    "contact": "Kontakt",
+    "terminal": "Terminal"
+  },
+  "Common": {
+    "back": "Tillbaka",
+    "systemStatus": "Systemstatus",
+    "online": "ONLINE",
+    "offline": "OFFLINE",
+    "active": "AKTIV",
+    "away": "BORTA"
+  },
+  "Projects": {
+    "liveEcosystem": "Aktivt Ekosystem",
+    "selectedWorks": "Utvalda Arbeten",
+    "engineered": "Konstruerad",
+    "growth": "Tillväxt",
+    "defaultDescription": "Experimentellt projekt som är en del av TTdevs digitala ekosystem.",
+    "viewCode": "Visa Kod",
+    "learnMore": "Läs Mer",
+    "by": "av"
+  },
+  "Contact": {
+    "title1": "Låt oss bygga",
+    "title2": "något tillsammans.",
+    "description": "Redo att starta ditt nästa digitala projekt? Hör av dig så diskuterar vi din vision.",
+    "inquiry": "Förfrågan",
+    "inquiryDescription": "Välj en utvecklare för att starta en direkt konversation eller fråga om våra gemensamma tjänster.",
+    "contactTom": "Kontakta Tom",
+    "contactTherese": "Kontakta Therese"
+  },
+  "Profiles": {
+    "joint": {
+      "role": "Mjukvaruutvecklings-duo",
+      "bio": "Vi förenar banbrytande teknologi med raffinerad design för att skapa högpresterande digitala miljöer.",
+      "aboutTitle": "Vilka Vi Är",
+      "aboutText": "Ett tvåpersonerskollektiv dedikerat till att bygga hållbara, högpresterande digitala miljöer."
+    },
+    "tom": {
+      "role": "Gränssnittsingenjör",
+      "bio": "Designar och bygger intuitiva, högpresterande webbgränssnitt.",
+      "aboutTitle": "Gränssnittskonstnär",
+      "aboutText": "Expert på att skapa pixel-perfekta, interaktiva användargränssnitt med fokus på tillgänglighet och hastighet."
+    },
+    "therese": {
+      "role": "Systemingenjör",
+      "bio": "Arkitekterar säkra, skalbara och effektiva backend-grunder.",
+      "aboutTitle": "Systemdesign",
+      "aboutText": "Specialist på databasmodellering, molninfrastruktur och högtillgängliga backends."
+    }
+  }
+}

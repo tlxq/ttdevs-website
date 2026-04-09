@@ -1,6 +1,6 @@
-import { ProfileView } from "../components/features/ProfileView";
-import { PROFILES } from "../lib/data/profiles";
-import { fetchGitHubRepos } from "../lib/github/fetchRepos";
+import { ProfileView } from "../../components/features/ProfileView";
+import { PROFILES } from "../../lib/data/profiles";
+import { fetchGitHubRepos } from "../../lib/github/fetchRepos";
 
 export const metadata = {
   title: "Therese | Backend Architect",
