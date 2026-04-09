@@ -8,6 +8,7 @@ import { ProfileHero } from "./ProfileHero";
 import { AboutSection } from "./AboutSection";
 import { ProjectsSection } from "./ProjectsSection";
 import { SkillsSection } from "./SkillsSection";
+import { InterestsSection } from "./InterestsSection";
 import { ContactSection } from "./ContactSection";
 import ContactModal from "./ContactModal";
 import type { SelectedPerson } from "../../lib/types";
@@ -39,6 +40,7 @@ export function ProfileView({ profile, backHref, repos = [] }: ProfileViewProps)
       <AboutSection profile={profile} />
       <ProjectsSection profile={profile} repos={repos} />
       <SkillsSection profile={profile} />
+      {profile.interests && <InterestsSection profile={profile} />}
       <ContactSection onContactClick={openModal} />
 
       {selectedPerson && (

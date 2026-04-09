@@ -41,10 +41,26 @@
       "aboutText": "Ett tvåpersonerskollektiv dedikerat till att bygga hållbara, högpresterande digitala miljöer."
     },
     "tom": {
-      "role": "Gränssnittsingenjör",
-      "bio": "Designar och bygger intuitiva, högpresterande webbgränssnitt.",
-      "aboutTitle": "Gränssnittskonstnär",
-      "aboutText": "Expert på att skapa pixel-perfekta, interaktiva användargränssnitt med fokus på tillgänglighet och hastighet."
+      "role": "Junior Fullstack-utvecklare",
+      "bio": "Fullstack-utvecklare fokuserad på TypeScript, React och backend-utveckling. Utöver utbildningen har jag praktisk erfarenhet av att sätta upp Linux-miljöer och integrera realtidsdata i egna projekt.",
+      "aboutTitle": "Teknisk Noggrannhet & Modernitet",
+      "aboutText": "Jag söker en LIA-plats (v.35–48) i ett team som värdesätter teknisk noggrannhet och moderna utvecklingsflöden. Mitt fokus ligger på att bygga typsäkra och skalbara applikationer.",
+      "liaStatus": "Söker LIA: v.35–48",
+      "interests": {
+        "title": "Utanför koden",
+        "football": {
+          "label": "Hammarby Fotboll",
+          "desc": "Passionerad supporter som uppskattar gemenskapen kring sporten."
+        },
+        "gym": {
+          "label": "Gym & Träning",
+          "desc": "För att bibehålla fokus och energi i vardagen."
+        },
+        "cats": {
+          "label": "Katter",
+          "desc": "Stolt ägare till en Bengal och en Devon Rex som gärna håller mig sällskap."
+        }
+      }
     },
     "therese": {
       "role": "Systemingenjör",

@@ -121,13 +121,25 @@ function ProfileHeroComponent({ profile, scrollToSection }: HeroProps) {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="text-center lg:text-left order-2 lg:order-1"
         >
-          <motion.span
-            className="mb-6 inline-block px-6 py-2 rounded-full border border-nebula-accent/20 bg-nebula-accent/5 text-[10px] font-bold tracking-[0.3em] uppercase text-nebula-accent font-mono backdrop-blur-sm"
-            animate={{ boxShadow: ["0 0 20px rgba(139,92,246,0)", "0 0 20px rgba(139,92,246,0.2)", "0 0 20px rgba(139,92,246,0)"] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          >
-            {t("role")}
-          </motion.span>
+          <div className="flex flex-col items-center lg:items-start gap-4 mb-6">
+            <motion.span
+              className="inline-block px-6 py-2 rounded-full border border-nebula-accent/20 bg-nebula-accent/5 text-[10px] font-bold tracking-[0.3em] uppercase text-nebula-accent font-mono backdrop-blur-sm"
+              animate={{ boxShadow: ["0 0 20px rgba(139,92,246,0)", "0 0 20px rgba(139,92,246,0.2)", "0 0 20px rgba(139,92,246,0)"] }}
+              transition={{ duration: 4, repeat: Infinity }}
+            >
+              {t("role")}
+            </motion.span>
+            
+            {profile.id === "tom" && (
+              <motion.span
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="inline-block px-4 py-1.5 rounded-lg border border-nebula-secondary/30 bg-nebula-secondary/10 text-[9px] font-bold tracking-widest uppercase text-nebula-secondary font-mono backdrop-blur-sm"
+              >
+                {t("liaStatus")}
+              </motion.span>
+            )}
+          </div>
           
           <h1 className="text-6xl md:text-8xl font-bold tracking-tighter mb-8 text-white leading-[0.9] text-balance">
             <span className="text-gradient">{profile.name}</span>

@@ -7,8 +7,12 @@ export interface Project {
 
 export interface Skill {
   name: string;
-  category: "Frontend" | "Backend" | "Fullstack" | "Tools" | "Database" | "Styling" | "Animation";
+  category: "Frontend" | "Backend" | "Fullstack" | "Tools" | "Database" | "Styling" | "Animation" | "DevOps";
   level: number;
+}
+
+export interface Interest {
+  id: string;
 }
 
 export interface Profile {
@@ -20,6 +24,7 @@ export interface Profile {
   aboutText: string;
   projects: Project[];
   skills: Skill[];
+  interests?: Interest[];
   recipientKey: "tom" | "therese";
   imageUrl?: string;
 }
@@ -44,17 +49,22 @@ export const PROFILES: Record<string, Profile> = {
   tom: {
     id: "tom",
     name: "Tom",
-    role: "Interface Engineer",
-    bio: "Designing and building intuitive, high-performance web interfaces.",
+    role: "Junior Fullstack-utvecklare",
+    bio: "Fullstack-utvecklare fokuserad på TypeScript, React och backend-utveckling.",
     aboutTitle: "Interface Artistry",
     aboutText: "Expert in crafting pixel-perfect, interactive user interfaces with a focus on accessibility and speed.",
     imageUrl: "/tom-profile.webp",
     recipientKey: "tom",
     projects: [],
     skills: [
-      { name: "React", category: "Frontend", level: 99 },
-      { name: "Framer Motion", category: "Animation", level: 95 },
-      { name: "Tailwind CSS", category: "Styling", level: 98 }
+      { name: "React, Next.js, TypeScript, Tailwind CSS", category: "Frontend", level: 95 },
+      { name: "Node.js, Supabase, PostgreSQL, REST APIs", category: "Backend", level: 90 },
+      { name: "Docker, Git, Linux, Bash, CI/CD", category: "DevOps", level: 85 }
+    ],
+    interests: [
+      { id: "football" },
+      { id: "gym" },
+      { id: "cats" }
     ]
   },
   therese: {

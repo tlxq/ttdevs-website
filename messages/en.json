@@ -41,10 +41,26 @@
       "aboutText": "A two-person collective dedicated to building sustainable, high-performance digital environments."
     },
     "tom": {
-      "role": "Interface Engineer",
-      "bio": "Designing and building intuitive, high-performance web interfaces.",
-      "aboutTitle": "Interface Artistry",
-      "aboutText": "Expert in crafting pixel-perfect, interactive user interfaces with a focus on accessibility and speed."
+      "role": "Junior Fullstack Developer",
+      "bio": "Fullstack developer focused on TypeScript, React, and backend integration. Beyond education, I have practical experience in setting up Linux environments and integrating real-time data into personal projects.",
+      "aboutTitle": "Technical Precision & Modernity",
+      "aboutText": "I am seeking an internship (LIA v.35–48) in a team that values technical accuracy and modern development workflows. My focus is on building type-safe and scalable applications.",
+      "liaStatus": "Seeking Internship: v.35–48",
+      "interests": {
+        "title": "Outside of Code",
+        "football": {
+          "label": "Hammarby Football",
+          "desc": "Passionate supporter who appreciates the community around the sport."
+        },
+        "gym": {
+          "label": "Gym & Training",
+          "desc": "To maintain focus and energy in everyday life."
+        },
+        "cats": {
+          "label": "Cats",
+          "desc": "Proud owner of a Bengal and a Devon Rex who often keep me company."
+        }
+      }
     },
     "therese": {
       "role": "Systems Engineer",
